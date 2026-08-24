@@ -1,0 +1,2311 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dora Radar · 開源趨勢與 AI 智能體探索觀測站</title>
+<!-- Custom SVG Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%23c084fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='48' height='48' rx='12' fill='%230d1117'/%3E%3Crect x='2' y='2' width='44' height='44' rx='10' fill='%23161b22' stroke='url(%23g)' stroke-width='1.5'/%3E%3Ccircle cx='24' cy='24' r='14' stroke='%2330363d' stroke-width='1.5' fill='none' stroke-dasharray='2 3'/%3E%3Ccircle cx='24' cy='24' r='8' stroke='url(%23g)' stroke-width='1.5' fill='none'/%3E%3Ccircle cx='24' cy='24' r='3.5' fill='%2338bdf8'/%3E%3Ccircle cx='33' cy='15' r='2' fill='%2338bdf8'/%3E%3C/svg%3E">
+<!-- Chart.js local static resource with CDN fallback -->
+<script src="/static/chart.min.js"></script>
+<script>
+  if (typeof Chart === 'undefined') {
+    document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js"><\\/script>');
+  }
+</script>
+<!-- Marked.js local static resource for Markdown rendering -->
+<script src="/static/marked.min.js"></script>
+<script>
+  if (typeof marked === 'undefined') {
+    document.write('<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\\/script>');
+  }
+</script>
+<style>
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  --border-color: #30363d;
+  --border-hover: #58a6ff;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  --accent-blue: #58a6ff;
+  --accent-green: #3fb950;
+  --accent-purple: #bc8cff;
+  --accent-orange: #d29922;
+  --accent-red: #f85149;
+  --critical: #f85149;
+  --high: #d29922;
+  --medium: #e3b341;
+  --low: #8b949e;
+  --card-radius: 10px;
+}
+
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  caret-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+input, textarea, select {
+  caret-color: var(--accent-blue);
+  user-select: auto;
+  -webkit-user-select: auto;
+}
+
+.markdown-box, .repo-desc, table td {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* Header */
+.header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo-radar-box {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo-radar-box:hover {
+  transform: scale(1.06);
+}
+
+.logo-radar-svg {
+  overflow: visible;
+}
+
+.radar-rotor {
+  transform-origin: 24px 24px;
+  animation: sweepRotate 4s linear infinite;
+}
+
+@keyframes sweepRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.radar-blip {
+  animation: blipGlow 2.5s ease-in-out infinite;
+}
+
+.blip-1 { animation-delay: 0s; }
+.blip-2 { animation-delay: 0.8s; }
+.blip-3 { animation-delay: 1.6s; }
+
+@keyframes blipGlow {
+  0%, 100% { opacity: 0.3; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+.logo-title {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.2;
+}
+
+.brand-gradient {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.version-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace;
+  vertical-align: middle;
+}
+
+.logo-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  letter-spacing: -0.1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stat-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: var(--bg-tertiary);
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.stat-badge .num {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-action:hover {
+  background: #30363d;
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.btn-primary {
+  background: #238636;
+  border-color: rgba(240, 246, 252, 0.1);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #2ea043;
+  border-color: rgba(240, 246, 252, 0.2);
+  color: #fff;
+}
+
+/* Tabs */
+.tabs-container {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tabs {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  padding: 12px 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  color: var(--accent-blue);
+  border-bottom-color: var(--accent-blue);
+}
+
+/* Filter Bar */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  padding: 14px 28px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-wrapper {
+  flex: 1;
+  min-width: 240px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 36px 8px 14px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.search-input:focus {
+  border-color: var(--accent-blue);
+}
+
+.search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  display: none;
+}
+
+.search-clear.visible { display: block; }
+
+.filter-select {
+  padding: 8px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-select:focus {
+  border-color: var(--accent-blue);
+}
+
+/* Main Content */
+.main {
+  padding: 24px 28px;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+/* Summary Cards */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+  padding: 16px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.summary-card:hover {
+  border-color: #444c56;
+}
+
+.summary-card.primary {
+  border-color: rgba(88, 166, 255, 0.3);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, rgba(88, 166, 255, 0.05) 100%);
+}
+
+.summary-card.critical {
+  border-color: rgba(248, 81, 73, 0.3);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, rgba(248, 81, 73, 0.05) 100%);
+}
+
+.card-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.card-value {
+  font-size: 26px;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.card-value.critical { color: var(--critical); }
+.card-value.high { color: var(--accent-orange); }
+.card-value.medium { color: var(--medium); }
+.card-value.low { color: var(--text-secondary); }
+.card-value.blue { color: var(--accent-blue); }
+.card-value.green { color: var(--accent-green); }
+
+/* Repo List & Cards */
+.repo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.repo-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.repo-card:hover {
+  border-color: var(--border-hover);
+  background: #1c2128;
+  transform: translateY(-1px);
+}
+
+.repo-rank {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 32px;
+  text-align: center;
+  padding-top: 2px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.repo-rank.top1 { color: #f1e05a; }
+.repo-rank.top2 { color: #e6edf3; }
+.repo-rank.top3 { color: #d29922; }
+
+.repo-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.repo-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.repo-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.repo-name:hover {
+  text-decoration: underline;
+}
+
+.repo-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.repo-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.meta-item strong {
+  color: var(--text-primary);
+}
+
+.lang-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.relevance-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.relevance-badge.critical {
+  background: rgba(248, 81, 73, 0.15);
+  color: var(--critical);
+  border: 1px solid rgba(248, 81, 73, 0.3);
+}
+
+.relevance-badge.high {
+  background: rgba(210, 153, 34, 0.15);
+  color: var(--accent-orange);
+  border: 1px solid rgba(210, 153, 34, 0.3);
+}
+
+.relevance-badge.medium {
+  background: rgba(227, 179, 65, 0.15);
+  color: var(--medium);
+  border: 1px solid rgba(227, 179, 65, 0.3);
+}
+
+.relevance-badge.low {
+  background: rgba(139, 148, 158, 0.15);
+  color: var(--text-secondary);
+  border: 1px solid rgba(139, 148, 158, 0.25);
+}
+
+.repo-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 1px 8px;
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-history {
+  padding: 4px 10px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--accent-blue);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-history:hover {
+  background: #30363d;
+  border-color: var(--accent-blue);
+}
+
+/* Charts Grid */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.chart-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+  padding: 20px;
+}
+
+.chart-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-backdrop.active { display: flex; }
+
+.modal-content {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.modal-close:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #1f6feb;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.toast.visible { display: block; }
+
+/* Section Title */
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 20px 0 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Loading & Empty */
+.loading, .empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+
+/* Report Card & Modern Markdown Typography */
+.report-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  margin-top: 10px;
+}
+
+.report-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  z-index: 10;
+}
+
+.report-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(22, 27, 34, 0.85);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.report-top-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.report-badge-source {
+  font-size: 11px;
+  padding: 3px 8px;
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.view-toggle-group {
+  display: inline-flex;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.view-toggle-btn {
+  padding: 5px 14px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.view-toggle-btn:hover {
+  color: var(--text-primary);
+}
+
+.view-toggle-btn.active {
+  background: #30363d;
+  color: #38bdf8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.report-content {
+  padding: 28px;
+  color: var(--text-primary);
+  line-height: 1.75;
+  font-size: 14.5px;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.report-content h1 {
+  font-size: 21px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.report-content h2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 26px 0 12px 0;
+  color: #e6edf3;
+  display: flex;
+  align-items: center;
+  border-left: 3px solid #38bdf8;
+  padding-left: 10px;
+}
+
+.report-content h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 18px 0 8px 0;
+  color: #58a6ff;
+}
+
+.report-content p {
+  margin-bottom: 12px;
+  color: #c9d1d9;
+}
+
+.report-content strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.report-content a {
+  color: #58a6ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.report-content a:hover {
+  text-decoration: underline;
+}
+
+.report-content hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #30363d 30%, #30363d 70%, transparent);
+  margin: 24px 0;
+}
+
+.report-content ul, .report-content ol {
+  margin: 10px 0 16px 22px;
+  color: #c9d1d9;
+}
+
+.report-content li {
+  margin-bottom: 6px;
+}
+
+.report-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+.report-content th {
+  background: #1c2128;
+  padding: 10px 14px;
+  text-align: left;
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.report-content td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+  color: #e6edf3;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace;
+}
+
+.report-content tr:last-child td {
+  border-bottom: none;
+}
+
+.report-content tr:hover td {
+  background: rgba(88, 166, 255, 0.04);
+}
+
+.report-content blockquote {
+  border-left: 3px solid #bc8cff;
+  background: rgba(188, 140, 255, 0.05);
+  padding: 12px 18px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+  color: #d2a8ff;
+}
+
+.report-raw-box {
+  background: #090d13;
+  padding: 24px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #7ee787;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* Quick Filter Pills */
+.quick-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0 28px 14px 28px;
+  background: var(--bg-primary);
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+.pill-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: #58a6ff;
+  transform: translateY(-1px);
+}
+
+.pill-btn.active {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.pill-btn.new-pill.active {
+  background: rgba(244, 63, 94, 0.15);
+  color: #fb7185;
+  border-color: #f43f5e;
+  box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+}
+
+.pill-btn.breakout-pill.active {
+  background: rgba(234, 179, 8, 0.15);
+  color: #facc15;
+  border-color: #eab308;
+  box-shadow: 0 0 10px rgba(234, 179, 8, 0.2);
+}
+
+.pill-btn.streak-pill.active {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+  border-color: #f97316;
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+}
+
+/* Card Badges */
+.badge-new {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 800;
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(192, 132, 252, 0.2));
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.5);
+  letter-spacing: 0.4px;
+  animation: pulseNew 2.5s infinite;
+}
+
+@keyframes pulseNew {
+  0%, 100% { box-shadow: 0 0 0 rgba(244, 63, 94, 0); }
+  50% { box-shadow: 0 0 8px rgba(244, 63, 94, 0.4); }
+}
+
+.badge-streak {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.badge-growth {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  background: rgba(234, 179, 8, 0.15);
+  color: #facc15;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.badge-channel {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 500;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header { padding: 12px 16px; }
+  .tabs-container { padding: 0 16px; }
+  .filter-bar { padding: 12px 16px 8px 16px; }
+  .quick-filters { padding: 0 16px 12px 16px; }
+  .main { padding: 16px; }
+  .charts-grid { grid-template-columns: 1fr; }
+  .header-right .stat-badge { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-wrap">
+      <div class="logo-radar-box" title="Dora Radar Intelligence Station">
+        <svg class="logo-radar-svg" width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="doraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="50%" stop-color="#818cf8" />
+              <stop offset="100%" stop-color="#c084fc" />
+            </linearGradient>
+            <linearGradient id="radarBeam" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+            </linearGradient>
+            <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="blipGlowFilter" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- Frame Background -->
+          <rect x="2" y="2" width="44" height="44" rx="12" fill="#161b22" stroke="url(#doraGrad)" stroke-width="1.5"/>
+          <!-- Concentric Orbit Rings -->
+          <circle cx="24" cy="24" r="16" stroke="#30363d" stroke-width="1" stroke-dasharray="2 3"/>
+          <circle cx="24" cy="24" r="9.5" stroke="url(#doraGrad)" stroke-width="1.2" stroke-opacity="0.5"/>
+          <!-- Rotating Radar Sweep Beam -->
+          <g class="radar-rotor">
+            <path d="M 24 24 L 38 10 A 20 20 0 0 0 24 4 Z" fill="url(#radarBeam)"/>
+          </g>
+          <!-- Grid Axis Lines -->
+          <line x1="24" y1="5" x2="24" y2="43" stroke="#30363d" stroke-width="1" stroke-opacity="0.7"/>
+          <line x1="5" y1="24" x2="43" y2="24" stroke="#30363d" stroke-width="1" stroke-opacity="0.7"/>
+          <!-- Glowing Center Core -->
+          <circle cx="24" cy="24" r="6" fill="url(#coreGlow)"/>
+          <circle cx="24" cy="24" r="3.2" fill="#38bdf8" filter="url(#blipGlowFilter)"/>
+          <!-- Active Hotspot Radar Blips -->
+          <circle cx="34" cy="14" r="2.2" fill="#38bdf8" class="radar-blip blip-1" filter="url(#blipGlowFilter)"/>
+          <circle cx="13" cy="32" r="1.8" fill="#c084fc" class="radar-blip blip-2"/>
+          <circle cx="32" cy="34" r="1.6" fill="#3fb950" class="radar-blip blip-3"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-title">
+          <span>DORA</span> <span class="brand-gradient">RADAR</span>
+          <span class="version-tag">PRO v2.5</span>
+        </div>
+        <div class="logo-sub">GitHub 開源趨勢雷達 · AI 智能體自我進化觀測站</div>
+      </div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="stat-badge">
+      <span class="live-dot"></span>
+      <span id="headerTodayDate">-</span>
+    </div>
+    <button class="btn-action btn-primary" onclick="triggerScrape()">⚡ 即時採集</button>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs-container">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="daily" onclick="switchTab('daily')">📡 今日熱門雷達</button>
+    <button class="tab-btn" data-tab="weekly" onclick="switchTab('weekly')">📅 週度彙總統計</button>
+    <button class="tab-btn" data-tab="monthly" onclick="switchTab('monthly')">📆 月度趨勢走向</button>
+    <button class="tab-btn" data-tab="trends" onclick="switchTab('trends')">🔥 開源生態洞察</button>
+    <button class="tab-btn" data-tab="insights" onclick="switchTab('insights')">💡 Dora 智囊觀點</button>
+  </div>
+</div>
+
+<!-- Filter Bar -->
+<div class="filter-bar" id="filterBar">
+  <div class="search-wrapper">
+    <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜尋專案名稱、描述或關鍵字..." onkeyup="handleSearchDebounced()">
+    <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+  </div>
+  
+  <select class="filter-select" id="relevanceFilter" onchange="applyFilters()">
+    <option value="">所有相關性</option>
+    <option value="critical">🔴 Critical (核心相關)</option>
+    <option value="high">🟠 High (高度相關)</option>
+    <option value="medium">🟡 Medium (中度相關)</option>
+    <option value="low">⚪ Low (一般熱門)</option>
+  </select>
+
+  <select class="filter-select" id="languageFilter" onchange="applyFilters()">
+    <option value="">所有程式語言</option>
+  </select>
+
+  <select class="filter-select" id="sortOrder" onchange="applyFilters()">
+    <option value="today">⭐ 今日新增 Star ↓</option>
+    <option value="total">📊 總 Star 數 ↓</option>
+    <option value="growth">⚡ 爆發成長率 ↓</option>
+    <option value="streak">🔥 連續上榜天數 ↓</option>
+    <option value="name">🔤 專案名稱 A-Z</option>
+  </select>
+</div>
+
+<!-- Quick Lifecycle Filter Pills -->
+<div class="quick-filters" id="quickFiltersBar">
+  <button class="pill-btn active" id="filterPillAll" onclick="setLifecycleFilter('all')">🌐 全部專案 (<span id="countAll">-</span>)</button>
+  <button class="pill-btn new-pill" id="filterPillNew" onclick="setLifecycleFilter('new')">✨ 今日首發新面孔 (<span id="countNew">-</span>)</button>
+  <button class="pill-btn breakout-pill" id="filterPillBreakout" onclick="setLifecycleFilter('breakout')">🚀 爆發潛力黑馬 (<span id="countBreakout">-</span>)</button>
+  <button class="pill-btn streak-pill" id="filterPillStreak" onclick="setLifecycleFilter('streak')">🔥 連續霸榜常客 (<span id="countStreak">-</span>)</button>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+  <!-- Summary Cards -->
+  <div class="summary-grid" id="summaryCards">
+    <div class="summary-card primary">
+      <div class="card-label">📊 總記錄筆數</div>
+      <div class="card-value blue" id="statTotal">-</div>
+    </div>
+    <div class="summary-card">
+      <div class="card-label">📅 追蹤天數</div>
+      <div class="card-value green" id="statDays">-</div>
+    </div>
+    <div class="summary-card critical">
+      <div class="card-label">🔴 Critical (AI Agent)</div>
+      <div class="card-value critical" id="statCritical">-</div>
+    </div>
+    <div class="summary-card">
+      <div class="card-label">🟠 High (Skills/Infra)</div>
+      <div class="card-value high" id="statHigh">-</div>
+    </div>
+    <div class="summary-card">
+      <div class="card-label">🟡 Medium</div>
+      <div class="card-value medium" id="statMedium">-</div>
+    </div>
+    <div class="summary-card">
+      <div class="card-label">⚪ Low</div>
+      <div class="card-value low" id="statLow">-</div>
+    </div>
+  </div>
+
+  <!-- Content Container -->
+  <div id="contentArea">
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      <div>載入即時分析數據中...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Project History Modal -->
+<div class="modal-backdrop" id="historyModal" onclick="closeModalOnBackdrop(event)">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeHistoryModal()">✕</button>
+    <div id="modalBody">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <div>載入專案歷史軌跡...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toastMessage">已更新</div>
+
+<script>
+// ============================================================
+// GLOBAL STATE & HELPERS
+// ============================================================
+const API_BASE = window.location.origin;
+let currentTab = 'daily';
+let allDailyData = [];
+let allWeeklyData = [];
+let allMonthlyData = [];
+let languagesList = [];
+let latestInsightData = null;
+let globalStats = null;
+let risingStarsData = [];
+let visibleCount = 25;
+const PAGE_SIZE = 25;
+let searchDebounceTimer = null;
+let activeModalChart = null;
+let activeTrendChart1 = null;
+let activeTrendChart2 = null;
+
+function esc(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toastMessage');
+  toast.textContent = msg;
+  toast.classList.add('visible');
+  setTimeout(() => toast.classList.remove('visible'), 3000);
+}
+
+// ============================================================
+// INITIALIZATION
+// ============================================================
+document.addEventListener('DOMContentLoaded', async () => {
+  const now = new Date();
+  document.getElementById('headerTodayDate').textContent = now.toLocaleDateString('zh-TW', {
+    year: 'numeric', month: 'short', day: 'numeric', weekday: 'short'
+  });
+
+  await loadLanguages();
+  await loadStats();
+  await loadData();
+});
+
+async function loadLanguages() {
+  try {
+    const res = await fetch(`${API_BASE}/api/languages`);
+    if (res.ok) {
+      languagesList = await res.json();
+      const select = document.getElementById('languageFilter');
+      select.innerHTML = '<option value="">所有程式語言</option>' + 
+        languagesList.map(l => `<option value="${esc(l.name)}">${esc(l.name)} (${l.count})</option>`).join('');
+    }
+  } catch (e) {
+    console.warn('Failed to load languages', e);
+  }
+}
+
+async function loadStats() {
+  try {
+    const res = await fetch(`${API_BASE}/api/daily/stats`);
+    if (res.ok) {
+      globalStats = await res.json();
+      document.getElementById('statTotal').textContent = globalStats.total_records || 0;
+      document.getElementById('statDays').textContent = globalStats.unique_dates || 0;
+      const dist = globalStats.relevance_distribution || {};
+      document.getElementById('statCritical').textContent = dist.critical || 0;
+      document.getElementById('statHigh').textContent = dist.high || 0;
+      document.getElementById('statMedium').textContent = dist.medium || 0;
+      document.getElementById('statLow').textContent = dist.low || 0;
+    }
+  } catch (e) {
+    console.warn('Failed to load stats', e);
+  }
+}
+
+// ============================================================
+// DATA LOADING
+// ============================================================
+async function loadData() {
+  showLoading();
+  try {
+    if (currentTab === 'daily') {
+      const resp = await fetch(`${API_BASE}/api/daily?limit=150`);
+      if (!resp.ok) throw new Error(`API error: ${resp.status}`);
+      allDailyData = await resp.json();
+    } else if (currentTab === 'weekly') {
+      const resp = await fetch(`${API_BASE}/api/weekly?limit=150`);
+      if (!resp.ok) throw new Error(`API error: ${resp.status}`);
+      allWeeklyData = await resp.json();
+    } else if (currentTab === 'monthly') {
+      const resp = await fetch(`${API_BASE}/api/monthly?limit=150`);
+      if (!resp.ok) throw new Error(`API error: ${resp.status}`);
+      allMonthlyData = await resp.json();
+    } else if (currentTab === 'trends') {
+      const [risingRes, statsRes] = await Promise.all([
+        fetch(`${API_BASE}/api/trends/rising-stars?limit=25`),
+        fetch(`${API_BASE}/api/daily/stats`)
+      ]);
+      if (risingRes.ok) risingStarsData = await risingRes.json();
+      if (statsRes.ok) globalStats = await statsRes.json();
+    } else if (currentTab === 'insights') {
+      const resp = await fetch(`${API_BASE}/api/ai/latest-insight`);
+      if (resp.ok) latestInsightData = await resp.json();
+    }
+    renderCurrentTab();
+  } catch (err) {
+    showError(err.message);
+  }
+}
+
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+function switchTab(tab) {
+  // Cleanup charts before tab switch to prevent leaks
+  if (activeTrendChart1) { activeTrendChart1.destroy(); activeTrendChart1 = null; }
+  if (activeTrendChart2) { activeTrendChart2.destroy(); activeTrendChart2 = null; }
+
+  currentTab = tab;
+  visibleCount = PAGE_SIZE;
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+  });
+
+  const filterBar = document.getElementById('filterBar');
+  const sortSelect = document.getElementById('sortOrder');
+
+  if (tab === 'insights' || tab === 'trends') {
+    filterBar.style.display = 'none';
+  } else {
+    filterBar.style.display = 'flex';
+  }
+
+  if (tab === 'weekly') {
+    sortSelect.innerHTML = `
+      <option value="total">📊 總 Star 數 ↓</option>
+      <option value="peak">🔥 最高單日 Star ↓</option>
+      <option value="avg">📈 平均單日 Star ↓</option>
+    `;
+    sortSelect.value = 'total';
+  } else if (tab === 'monthly') {
+    sortSelect.innerHTML = `
+      <option value="total">📊 總 Star 數 ↓</option>
+      <option value="peak">🔥 最高單日 Star ↓</option>
+      <option value="appearances">📈 上榜次數 ↓</option>
+    `;
+    sortSelect.value = 'total';
+  } else {
+    sortSelect.innerHTML = `
+      <option value="today">⭐ 今日新增 Star ↓</option>
+      <option value="total">📊 總 Star 數 ↓</option>
+      <option value="name">🔤 專案名稱 A-Z</option>
+    `;
+    sortSelect.value = 'today';
+  }
+
+  loadData();
+}
+
+// ============================================================
+// FILTERING & SORTING (WITH LIFECYCLE SUPPORT)
+// ============================================================
+let currentLifecycleFilter = 'all'; // 'all', 'new', 'breakout', 'streak'
+
+function setLifecycleFilter(filter) {
+  currentLifecycleFilter = filter;
+  document.querySelectorAll('.pill-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  if (filter === 'all') document.getElementById('filterPillAll')?.classList.add('active');
+  if (filter === 'new') document.getElementById('filterPillNew')?.classList.add('active');
+  if (filter === 'breakout') document.getElementById('filterPillBreakout')?.classList.add('active');
+  if (filter === 'streak') document.getElementById('filterPillStreak')?.classList.add('active');
+  renderCurrentTab();
+}
+
+function updateLifecycleCounts(data) {
+  if (!data) return;
+  const allCount = data.length;
+  const newCount = data.filter(r => r.is_new).length;
+  const breakoutCount = data.filter(r => (r.growth_rate >= 10.0 || (r.total_stars < 3000 && (r.today_stars || 0) > 100))).length;
+  const streakCount = data.filter(r => ((r.consecutive_days || 1) >= 2)).length;
+
+  const elAll = document.getElementById('countAll');
+  const elNew = document.getElementById('countNew');
+  const elBreakout = document.getElementById('countBreakout');
+  const elStreak = document.getElementById('countStreak');
+
+  if (elAll) elAll.innerText = allCount;
+  if (elNew) elNew.innerText = newCount;
+  if (elBreakout) elBreakout.innerText = breakoutCount;
+  if (elStreak) elStreak.innerText = streakCount;
+}
+
+function getFilteredAndSorted(data) {
+  let filtered = [...data];
+  const search = document.getElementById('searchInput').value.toLowerCase().trim();
+  const relevance = document.getElementById('relevanceFilter').value;
+  const language = document.getElementById('languageFilter').value;
+  const sortVal = document.getElementById('sortOrder').value;
+
+  // 1. Lifecycle Filter
+  if (currentLifecycleFilter === 'new') {
+    filtered = filtered.filter(r => r.is_new);
+  } else if (currentLifecycleFilter === 'breakout') {
+    filtered = filtered.filter(r => (r.growth_rate >= 10.0 || (r.total_stars < 3000 && (r.today_stars || 0) > 100)));
+  } else if (currentLifecycleFilter === 'streak') {
+    filtered = filtered.filter(r => ((r.consecutive_days || 1) >= 2));
+  }
+
+  // 2. Search Filter
+  if (search) {
+    filtered = filtered.filter(r => 
+      (r.repo_name && r.repo_name.toLowerCase().includes(search)) ||
+      (r.description && r.description.toLowerCase().includes(search)) ||
+      (r.description_zh && r.description_zh.toLowerCase().includes(search)) ||
+      (r.desc_zh && r.desc_zh.toLowerCase().includes(search)) ||
+      (r.relevance_tags && r.relevance_tags.some(t => t.toLowerCase().includes(search))) ||
+      (r.reasons && r.reasons.some(t => t.toLowerCase().includes(search))) ||
+      (r.channels && r.channels.some(c => c.toLowerCase().includes(search)))
+    );
+  }
+
+  // 3. Relevance Filter
+  if (relevance) {
+    filtered = filtered.filter(r => (r.relevance_level || r.relevance) === relevance);
+  }
+
+  // 4. Language Filter
+  if (language) {
+    filtered = filtered.filter(r => r.language === language);
+  }
+
+  // 5. Sorting
+  if (sortVal === 'today') {
+    filtered.sort((a, b) => ((b.today_stars_num ?? b.today_stars) || 0) - ((a.today_stars_num ?? a.today_stars) || 0));
+  } else if (sortVal === 'total') {
+    filtered.sort((a, b) => ((b.total_stars_num ?? b.total_stars) || 0) - ((a.total_stars_num ?? a.total_stars) || 0));
+  } else if (sortVal === 'growth') {
+    filtered.sort((a, b) => (b.growth_rate || 0) - (a.growth_rate || 0));
+  } else if (sortVal === 'streak') {
+    filtered.sort((a, b) => (b.consecutive_days || 1) - (a.consecutive_days || 1));
+  } else if (sortVal === 'peak') {
+    filtered.sort((a, b) => (b.peak_today_stars || 0) - (a.peak_today_stars || 0));
+  } else if (sortVal === 'avg') {
+    filtered.sort((a, b) => (b.avg_daily_stars || 0) - (a.avg_daily_stars || 0));
+  } else if (sortVal === 'appearances') {
+    filtered.sort((a, b) => (b.total_appearances || 0) - (a.total_appearances || 0));
+  } else if (sortVal === 'name') {
+    filtered.sort((a, b) => (a.repo_name || a.name || '').localeCompare(b.repo_name || b.name || ''));
+  }
+
+  return filtered;
+}
+
+function handleSearchDebounced() {
+  clearTimeout(searchDebounceTimer);
+  searchDebounceTimer = setTimeout(() => {
+    const input = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('searchClear');
+    clearBtn.classList.toggle('visible', !!input.value.trim());
+    renderCurrentTab();
+  }, 250);
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchClear').classList.remove('visible');
+  renderCurrentTab();
+}
+
+function applyFilters() {
+  renderCurrentTab();
+}
+
+function loadMore() {
+  visibleCount += PAGE_SIZE;
+  renderCurrentTab();
+}
+
+// ============================================================
+// RENDERING
+// ============================================================
+function renderCurrentTab() {
+  const quickFiltersBar = document.getElementById('quickFiltersBar');
+  if (currentTab === 'insights' || currentTab === 'trends') {
+    if (quickFiltersBar) quickFiltersBar.style.display = 'none';
+  } else {
+    if (quickFiltersBar) quickFiltersBar.style.display = 'flex';
+  }
+
+  if (currentTab === 'daily') {
+    updateLifecycleCounts(allDailyData);
+    const items = getFilteredAndSorted(allDailyData);
+    renderDaily(items);
+  } else if (currentTab === 'weekly') {
+    updateLifecycleCounts(allWeeklyData);
+    const items = getFilteredAndSorted(allWeeklyData);
+    renderWeekly(items);
+  } else if (currentTab === 'monthly') {
+    updateLifecycleCounts(allMonthlyData);
+    const items = getFilteredAndSorted(allMonthlyData);
+    renderMonthly(items);
+  } else if (currentTab === 'trends') {
+    renderTrends();
+  } else if (currentTab === 'insights') {
+    renderInsights();
+  }
+}
+
+function renderDaily(repos) {
+  if (!repos.length) {
+    document.getElementById('contentArea').innerHTML = `
+      <div class="empty-state">
+        <div style="font-size:40px;margin-bottom:12px;">📭</div>
+        <div>無符合條件的每日熱門專案</div>
+      </div>`;
+    return;
+  }
+
+  const grouped = {};
+  repos.forEach(r => {
+    const d = r.date;
+    if (!grouped[d]) grouped[d] = [];
+    grouped[d].push(r);
+  });
+
+  const dates = Object.keys(grouped).sort().reverse();
+  let html = '';
+
+  dates.forEach(date => {
+    const dateRepos = grouped[date];
+    const dateStr = new Date(date + 'T00:00:00').toLocaleDateString('zh-TW', {
+      year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'
+    });
+
+    html += `<div class="section-title">
+      <div>📅 ${dateStr} <span style="color:var(--text-secondary);font-size:13px;font-weight:400;">(共 ${dateRepos.length} 個專案)</span></div>
+    </div>`;
+
+    html += '<div class="repo-list">';
+    const visible = dateRepos.slice(0, visibleCount);
+    visible.forEach((repo, idx) => {
+      html += renderRepoCard(idx + 1, repo);
+    });
+
+    if (dateRepos.length > visibleCount) {
+      html += `<div style="text-align:center;padding:16px;">
+        <button class="btn-action" onclick="loadMore()">載入更多（尚有 ${dateRepos.length - visibleCount} 項）</button>
+      </div>`;
+    }
+    html += '</div>';
+  });
+
+  document.getElementById('contentArea').innerHTML = html;
+}
+
+function renderWeekly(repos) {
+  if (!repos.length) {
+    document.getElementById('contentArea').innerHTML = `<div class="empty-state"><div style="font-size:40px;">📭</div><div>尚無每週統整資料</div></div>`;
+    return;
+  }
+
+  const grouped = {};
+  repos.forEach(r => {
+    const ws = r.week_start;
+    if (!grouped[ws]) grouped[ws] = [];
+    grouped[ws].push(r);
+  });
+
+  const weeks = Object.keys(grouped).sort().reverse();
+  let html = '';
+
+  weeks.forEach(weekStart => {
+    const weekRepos = grouped[weekStart];
+    const weekEnd = weekRepos[0]?.week_end || '';
+    html += `<div class="section-title">
+      <div>📅 週次彙總：${weekStart} ~ ${weekEnd} <span style="color:var(--text-secondary);font-size:13px;font-weight:400;">(${weekRepos.length} 個去重專案)</span></div>
+    </div>`;
+
+    html += '<div class="repo-list">';
+    const visible = weekRepos.slice(0, visibleCount);
+    visible.forEach((repo, idx) => {
+      html += renderRepoCard(idx + 1, {
+        ...repo,
+        today_stars: repo.peak_today_stars,
+      }, 'peak');
+    });
+
+    if (weekRepos.length > visibleCount) {
+      html += `<div style="text-align:center;padding:16px;">
+        <button class="btn-action" onclick="loadMore()">載入更多（尚有 ${weekRepos.length - visibleCount} 項）</button>
+      </div>`;
+    }
+    html += '</div>';
+  });
+
+  document.getElementById('contentArea').innerHTML = html;
+}
+
+function renderMonthly(repos) {
+  if (!repos.length) {
+    document.getElementById('contentArea').innerHTML = `<div class="empty-state"><div style="font-size:40px;">📭</div><div>尚無每月趨勢資料</div></div>`;
+    return;
+  }
+
+  const grouped = {};
+  repos.forEach(r => {
+    const ms = r.month_start;
+    if (!grouped[ms]) grouped[ms] = [];
+    grouped[ms].push(r);
+  });
+
+  const months = Object.keys(grouped).sort().reverse();
+  let html = '';
+
+  months.forEach(monthStart => {
+    const monthRepos = grouped[monthStart];
+    html += `<div class="section-title">
+      <div>📆 月度彙總：${monthStart} <span style="color:var(--text-secondary);font-size:13px;font-weight:400;">(${monthRepos.length} 個專案)</span></div>
+    </div>`;
+
+    html += '<div class="repo-list">';
+    const visible = monthRepos.slice(0, visibleCount);
+    visible.forEach((repo, idx) => {
+      html += renderRepoCard(idx + 1, {
+        ...repo,
+        today_stars: repo.peak_today_stars,
+      }, 'monthly');
+    });
+
+    if (monthRepos.length > visibleCount) {
+      html += `<div style="text-align:center;padding:16px;">
+        <button class="btn-action" onclick="loadMore()">載入更多（尚有 ${monthRepos.length - visibleCount} 項）</button>
+      </div>`;
+    }
+    html += '</div>';
+  });
+
+  document.getElementById('contentArea').innerHTML = html;
+}
+
+function renderRepoCard(index, repo, mode = 'daily') {
+  const repoName = repo.repo_name || repo.name || '';
+  const repoUrl = repo.repo_url || repo.url || (repoName ? `https://github.com/${repoName}` : '#');
+  const zhDesc = repo.description_zh || repo.desc_zh || '';
+  const rawDesc = repo.description || repo.desc || '';
+  const primaryDesc = zhDesc || rawDesc || '無專案說明';
+  const showEnSub = zhDesc && rawDesc && zhDesc !== rawDesc;
+  const relevance = repo.relevance_level || repo.relevance || 'low';
+  const tags = repo.relevance_tags || repo.reasons || [];
+  
+  const isNew = repo.is_new === true;
+  const consecutive = repo.consecutive_days || 1;
+  const growthRate = repo.growth_rate || 0;
+  const channels = repo.channels || [];
+
+  let totalStars = repo.total_stars_num ?? repo.total_stars ?? 0;
+  if (typeof totalStars === 'string') totalStars = parseInt(totalStars.replace(/,/g, '')) || 0;
+
+  let todayStars = repo.today_stars_num ?? repo.today_stars ?? repo.peak_today_stars ?? 0;
+  if (typeof todayStars === 'string') todayStars = parseInt(todayStars.replace(/,/g, '')) || 0;
+
+  let forks = repo.forks ?? 0;
+  if (typeof forks === 'string') forks = parseInt(String(forks).replace(/,/g, '')) || 0;
+
+  const rankClass = index === 1 ? 'top1' : index === 2 ? 'top2' : index === 3 ? 'top3' : '';
+  const langColor = repo.language_color || (repo.language === 'Python' ? '#3572A5' : repo.language === 'Rust' ? '#dea584' : repo.language === 'TypeScript' ? '#3178c6' : '#8b949e');
+  const langName = repo.language && repo.language !== 'Unknown' ? repo.language : '';
+
+  const relevanceMap = {
+    critical: '🔴 Critical',
+    high: '🟠 High',
+    medium: '🟡 Medium',
+    low: '⚪ Low'
+  };
+
+  return `
+    <div class="repo-card">
+      <div class="repo-rank ${rankClass}">#${index}</div>
+      <div class="repo-info">
+        <div class="repo-title-row">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <a class="repo-name" href="${esc(repoUrl)}" target="_blank" rel="noreferrer">
+              ${esc(repoName)} ↗
+            </a>
+            ${isNew ? `<span class="badge-new">✨ NEW 首次上榜</span>` : ''}
+            ${consecutive >= 2 ? `<span class="badge-streak">🔥 連續 ${consecutive} 天</span>` : ''}
+            ${growthRate >= 10.0 ? `<span class="badge-growth">🚀 +${growthRate}% 爆發</span>` : ''}
+            ${channels.filter(c => c !== 'All').map(c => `<span class="badge-channel">${esc(c)}</span>`).join('')}
+          </div>
+          <button class="btn-history" onclick="openHistoryModal('${esc(repoName)}')">📈 歷程分析</button>
+        </div>
+        
+        <div class="repo-desc">${esc(primaryDesc)}</div>
+        ${showEnSub ? `<div class="repo-desc-en" style="color:var(--text-muted);font-size:12px;margin-top:2px;">${esc(rawDesc)}</div>` : ''}
+        
+        <div class="repo-meta">
+          ${langName ? `<span class="meta-item"><span class="lang-dot" style="background-color:${langColor}"></span> ${esc(langName)}</span>` : ''}
+          <span class="meta-item">⭐ <strong>${totalStars.toLocaleString()}</strong></span>
+          <span class="meta-item">🔥 今日 +<strong>${todayStars.toLocaleString()}</strong></span>
+          ${forks ? `<span class="meta-item">🍴 <strong>${forks.toLocaleString()}</strong></span>` : ''}
+          ${repo.total_appearances ? `<span class="meta-item">📊 上榜 <strong>${repo.total_appearances}</strong> 次</span>` : ''}
+          <span class="relevance-badge ${esc(relevance)}">${relevanceMap[relevance] || '⚪ Low'}</span>
+        </div>
+        
+        ${renderTags(tags)}
+      </div>
+    </div>
+  `;
+}
+
+function renderTags(tags) {
+  if (!tags || !tags.length) return '';
+  return `<div class="repo-tags">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>`;
+}
+
+// ============================================================
+// TRENDS & CHARTS TAB
+// ============================================================
+function renderTrends() {
+  const dist = globalStats?.relevance_distribution || { critical: 0, high: 0, medium: 0, low: 0 };
+  const total = (dist.critical || 0) + (dist.high || 0) + (dist.medium || 0) + (dist.low || 0) || 1;
+  
+  const pctCrit = Math.round((dist.critical / total) * 100);
+  const pctHigh = Math.round((dist.high / total) * 100);
+  const pctMed = Math.round((dist.medium / total) * 100);
+  const pctLow = Math.round((dist.low / total) * 100);
+
+  let html = `
+    <!-- Top Visual Summary Cards -->
+    <div style="margin-bottom: 24px;">
+      <div class="section-title" style="margin-top:0;">
+        <div>🤖 AI Agent 與開發工具相關性洞察 (共 ${total} 筆)</div>
+      </div>
+      
+      <!-- Progress Bar Segment -->
+      <div style="height: 12px; width: 100%; border-radius: 6px; background: var(--bg-tertiary); overflow: hidden; display: flex; margin-bottom: 14px;">
+        <div style="width: ${pctCrit}%; background: #f85149;" title="Critical: ${dist.critical} (${pctCrit}%)"></div>
+        <div style="width: ${pctHigh}%; background: #d29922;" title="High: ${dist.high} (${pctHigh}%)"></div>
+        <div style="width: ${pctMed}%; background: #e3b341;" title="Medium: ${dist.medium} (${pctMed}%)"></div>
+        <div style="width: ${pctLow}%; background: #8b949e;" title="Low: ${dist.low} (${pctLow}%)"></div>
+      </div>
+
+      <div class="summary-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="summary-card critical">
+          <div class="card-label">🔴 Critical (核心 Agent)</div>
+          <div class="card-value critical">${dist.critical || 0}</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">佔比 ${pctCrit}% · 智能體/自主系統</div>
+        </div>
+        <div class="summary-card">
+          <div class="card-label">🟠 High (Skills / Infra)</div>
+          <div class="card-value high">${dist.high || 0}</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">佔比 ${pctHigh}% · 技能與模型基礎</div>
+        </div>
+        <div class="summary-card">
+          <div class="card-label">🟡 Medium (工具 / 介面)</div>
+          <div class="card-value medium">${dist.medium || 0}</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">佔比 ${pctMed}% · 輔助工程套件</div>
+        </div>
+        <div class="summary-card">
+          <div class="card-label">⚪ Low (一般通用熱門)</div>
+          <div class="card-value low">${dist.low || 0}</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">佔比 ${pctLow}% · 一般社群開源</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-title">📊 程式語言分佈 (開源生態)</div>
+        <div style="position: relative; height: 220px; width: 100%;">
+          <canvas id="languageChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">🤖 相關性分佈長條圖</div>
+        <div style="position: relative; height: 220px; width: 100%;">
+          <canvas id="relevanceChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section-title">
+      <div>🌟 持續上升新星 (連續多日上榜的熱門專案)</div>
+    </div>
+    <div class="repo-list" id="risingStarsList">
+      ${risingStarsData.length > 0 ? 
+        risingStarsData.map((repo, idx) => renderRepoCard(idx + 1, {
+          ...repo,
+          today_stars: repo.peak_today_stars
+        })).join('') : 
+        '<div class="empty-state">尚無多日連續上榜的專案</div>'
+      }
+    </div>
+  `;
+
+  document.getElementById('contentArea').innerHTML = html;
+
+  // Safe Chart Initialization
+  setTimeout(() => {
+    try {
+      initLanguageChart();
+      initRelevanceChart();
+    } catch (e) {
+      console.warn("Chart initialization skipped/failed", e);
+    }
+  }, 50);
+}
+
+async function initLanguageChart() {
+  const canvas = document.getElementById('languageChart');
+  if (!canvas) return;
+
+  if (!languagesList || !languagesList.length) {
+    await loadLanguages();
+  }
+
+  const validLangs = (languagesList || []).slice(0, 7);
+  if (!validLangs.length) {
+    canvas.parentElement.innerHTML = '<div style="color:var(--text-secondary);text-align:center;padding:40px 0;">尚無程式語言資料</div>';
+    return;
+  }
+
+  if (typeof Chart === 'undefined') {
+    const totalCount = validLangs.reduce((acc, cur) => acc + (cur.count || 0), 0) || 1;
+    let fallbackHtml = '<div style="display:flex;flex-direction:column;gap:8px;padding-top:10px;">';
+    validLangs.forEach(l => {
+      const pct = Math.round((l.count / totalCount) * 100);
+      fallbackHtml += `
+        <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;">
+          <span style="display:flex;align-items:center;gap:6px;">
+            <span style="width:10px;height:10px;border-radius:50%;background:${esc(l.color || '#58a6ff')};display:inline-block;"></span>
+            ${esc(l.name)}
+          </span>
+          <span style="color:var(--text-secondary);font-family:monospace;">${l.count} 個 (${pct}%)</span>
+        </div>
+        <div style="height:6px;width:100%;background:var(--bg-tertiary);border-radius:3px;overflow:hidden;">
+          <div style="height:100%;width:${pct}%;background:${esc(l.color || '#58a6ff')};"></div>
+        </div>
+      `;
+    });
+    fallbackHtml += '</div>';
+    canvas.parentElement.innerHTML = fallbackHtml;
+    return;
+  }
+
+  const labels = validLangs.map(l => l.name);
+  const data = validLangs.map(l => l.count);
+  const colors = validLangs.map(l => l.color || '#58a6ff');
+
+  if (activeTrendChart1) {
+    activeTrendChart1.destroy();
+    activeTrendChart1 = null;
+  }
+
+  activeTrendChart1 = new Chart(canvas, {
+    type: 'doughnut',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: data,
+        backgroundColor: colors,
+        borderColor: '#161b22',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 400 },
+      plugins: {
+        legend: { position: 'right', labels: { color: '#e6edf3', boxWidth: 12, padding: 10 } }
+      }
+    }
+  });
+}
+
+async function initRelevanceChart() {
+  const canvas = document.getElementById('relevanceChart');
+  if (!canvas) return;
+
+  if (!globalStats) {
+    await loadStats();
+  }
+
+  const dist = globalStats?.relevance_distribution || { critical: 0, high: 0, medium: 0, low: 0 };
+  const critical = dist.critical || 0;
+  const high = dist.high || 0;
+  const medium = dist.medium || 0;
+  const low = dist.low || 0;
+
+  if (typeof Chart === 'undefined') {
+    const total = critical + high + medium + low || 1;
+    const items = [
+      { label: '🔴 Critical (Agent)', count: critical, color: '#f85149' },
+      { label: '🟠 High (Skills)', count: high, color: '#d29922' },
+      { label: '🟡 Medium (Tools)', count: medium, color: '#e3b341' },
+      { label: '⚪ Low (General)', count: low, color: '#8b949e' }
+    ];
+    let fallbackHtml = '<div style="display:flex;flex-direction:column;gap:8px;padding-top:10px;">';
+    items.forEach(it => {
+      const pct = Math.round((it.count / total) * 100);
+      fallbackHtml += `
+        <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;">
+          <span>${it.label}</span>
+          <span style="color:var(--text-secondary);font-family:monospace;font-weight:600;">${it.count} 筆 (${pct}%)</span>
+        </div>
+        <div style="height:6px;width:100%;background:var(--bg-tertiary);border-radius:3px;overflow:hidden;">
+          <div style="height:100%;width:${pct}%;background:${it.color};"></div>
+        </div>
+      `;
+    });
+    fallbackHtml += '</div>';
+    canvas.parentElement.innerHTML = fallbackHtml;
+    return;
+  }
+
+  if (activeTrendChart2) {
+    activeTrendChart2.destroy();
+    activeTrendChart2 = null;
+  }
+
+  activeTrendChart2 = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: ['Critical 🔴', 'High 🟠', 'Medium 🟡', 'Low ⚪'],
+      datasets: [{
+        label: '專案數量',
+        data: [critical, high, medium, low],
+        backgroundColor: ['#f85149', '#d29922', '#e3b341', '#8b949e'],
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 400 },
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: { ticks: { color: '#8b949e' }, grid: { display: false } },
+        y: { ticks: { color: '#8b949e' }, grid: { color: '#30363d' } }
+      }
+    }
+  });
+}
+
+// ============================================================
+// DORA AI INSIGHTS TAB
+// ============================================================
+let reportViewMode = 'visual'; // 'visual' or 'raw'
+
+function renderInsights() {
+  if (!latestInsightData) {
+    document.getElementById('contentArea').innerHTML = `
+      <div class="empty-state">
+        <div style="font-size:40px;margin-bottom:12px;">💡</div>
+        <div>載入 Dora AI 觀點報告中...</div>
+      </div>`;
+    return;
+  }
+
+  const date = latestInsightData.date || '';
+  const trends = latestInsightData.trends || {};
+  const top3 = (latestInsightData.top3 && latestInsightData.top3.length > 0) ? latestInsightData.top3 : (latestInsightData.top_picks ? latestInsightData.top_picks.slice(0, 3) : []);
+  const report = latestInsightData.markdown_report || '';
+
+  // Render markdown to HTML safely
+  let renderedReportHtml = '';
+  try {
+    if (typeof marked !== 'undefined') {
+      renderedReportHtml = marked.parse(report);
+    } else {
+      renderedReportHtml = parseMarkdownBasic(report);
+    }
+  } catch (e) {
+    renderedReportHtml = `<pre style="white-space:pre-wrap;">${esc(report)}</pre>`;
+  }
+
+  let html = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h2 style="font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px;">
+          <span>💡 Dora 每日智囊洞察與進化建議</span>
+          <span class="report-badge-source">HERMES AGENT</span>
+        </h2>
+        <div style="color:var(--text-secondary);font-size:13px;margin-top:2px;">分析日期：${date} · 由 Hermes Agent Dora 全自主監控與生成</div>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn-action" onclick="copyReport()">📋 複製 Telegram 報告</button>
+      </div>
+    </div>
+
+    <!-- Summary Metrics -->
+    <div class="summary-grid">
+      <div class="summary-card critical">
+        <div class="card-label">🤖 Agent 相關專案</div>
+        <div class="card-value critical">${trends.agent_count || 0} 個</div>
+      </div>
+      <div class="summary-card high">
+        <div class="card-label">📋 Skills 模組化專案</div>
+        <div class="card-value high">${trends.skill_count || 0} 個</div>
+      </div>
+      <div class="summary-card">
+        <div class="card-label">🔍 今日監控專案數</div>
+        <div class="card-value blue">${latestInsightData.total_repos || 0} 個</div>
+      </div>
+    </div>
+
+    <!-- TOP 3 Section -->
+    <div class="section-title">
+      <div>🏆 今日最值得研究 TOP 3 專案</div>
+    </div>
+    <div class="repo-list" style="margin-bottom:28px;">
+      ${top3.map((r, i) => renderRepoCard(i + 1, r)).join('')}
+    </div>
+
+    <!-- Report Section -->
+    <div class="section-title">
+      <div>📄 完整監控報告內容</div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-top-bar">
+        <div class="report-top-left">
+          <span style="font-weight:700;font-size:13px;color:var(--text-primary);">📊 每日監控日報全文</span>
+          <span class="report-badge-source">AI GENERATED</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="view-toggle-group">
+            <button class="view-toggle-btn ${reportViewMode === 'visual' ? 'active' : ''}" onclick="setReportMode('visual')">🎨 視覺化圖文排版</button>
+            <button class="view-toggle-btn ${reportViewMode === 'raw' ? 'active' : ''}" onclick="setReportMode('raw')">📄 Markdown 原始碼</button>
+          </div>
+          <button class="btn-action" style="padding:4px 10px;font-size:12px;" onclick="copyReport()">📋 複製</button>
+        </div>
+      </div>
+
+      <div id="reportVisualBox" class="report-content" style="${reportViewMode === 'visual' ? '' : 'display:none;'}">
+        ${renderedReportHtml}
+      </div>
+
+      <div id="reportRawBox" class="report-raw-box" style="${reportViewMode === 'raw' ? '' : 'display:none;'}">
+${esc(report)}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('contentArea').innerHTML = html;
+}
+
+function setReportMode(mode) {
+  reportViewMode = mode;
+  const visualBox = document.getElementById('reportVisualBox');
+  const rawBox = document.getElementById('reportRawBox');
+  if (visualBox && rawBox) {
+    visualBox.style.display = (mode === 'visual') ? 'block' : 'none';
+    rawBox.style.display = (mode === 'raw') ? 'block' : 'none';
+  }
+  document.querySelectorAll('.view-toggle-btn').forEach((btn, idx) => {
+    btn.classList.toggle('active', (idx === 0 && mode === 'visual') || (idx === 1 && mode === 'raw'));
+  });
+}
+
+function parseMarkdownBasic(md) {
+  if (!md) return '';
+  let html = esc(md);
+  
+  // Headers
+  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+  
+  // Bold & Italic
+  html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
+  html = html.replace(/_(.*?)_/gim, '<em>$1</em>');
+  
+  // Links
+  html = html.replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" rel="noreferrer">$1 ↗</a>');
+  
+  // Horizontal rules
+  html = html.replace(/^---$/gim, '<hr>');
+  
+  // Lists
+  html = html.replace(/^- (.*$)/gim, '<li>$1</li>');
+  
+  // Paragraphs
+  html = html.replace(/\n\n/gim, '</p><p>');
+  return `<p>${html}</p>`;
+}
+
+function copyReport() {
+  if (latestInsightData && latestInsightData.markdown_report) {
+    navigator.clipboard.writeText(latestInsightData.markdown_report);
+    showToast('✅ 已複製 Telegram 格式報告至剪貼簿！');
+  }
+}
+
+// ============================================================
+// PROJECT DETAIL MODAL (TIMELINE & GROWTH)
+// ============================================================
+async function openHistoryModal(repoFullName) {
+  const modal = document.getElementById('historyModal');
+  const body = document.getElementById('modalBody');
+  modal.classList.add('active');
+
+  body.innerHTML = `
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      <div>正在載入 <strong>${esc(repoFullName)}</strong> 的 53 天軌跡...</div>
+    </div>
+  `;
+
+  const [owner, name] = repoFullName.split('/');
+  try {
+    const res = await fetch(`${API_BASE}/api/repo/${encodeURIComponent(owner)}/${encodeURIComponent(name)}/history`);
+    if (!res.ok) throw new Error('無法取得歷史資料');
+    const data = await res.json();
+    renderModalContent(data);
+  } catch (err) {
+    body.innerHTML = `
+      <div class="empty-state">
+        <div style="font-size:32px;">⚠️</div>
+        <div>載入歷史失敗：${err.message}</div>
+      </div>
+    `;
+  }
+}
+
+function renderModalContent(data) {
+  const body = document.getElementById('modalBody');
+  const timeline = data.timeline || [];
+  const zhDesc = data.description_zh || '';
+  const rawDesc = data.description || '';
+  const primaryDesc = zhDesc || rawDesc || '無專案說明';
+  const hasBoth = zhDesc && rawDesc && zhDesc !== rawDesc;
+
+  let html = `
+    <div style="margin-bottom: 20px;">
+      <h2 style="font-size: 20px; font-weight: 700; color: var(--accent-blue);">
+        <a href="${esc(data.repo_url)}" target="_blank" style="color: inherit; text-decoration: none;">${esc(data.repo_name)} ↗</a>
+      </h2>
+      <div style="color: var(--text-primary); font-size: 14px; margin-top: 6px; font-weight: 500;">
+        ${esc(primaryDesc)}
+      </div>
+      ${hasBoth ? `
+        <div style="color: var(--text-secondary); font-size: 12px; margin-top: 3px; font-style: italic;">
+          ${esc(rawDesc)}
+        </div>
+      ` : ''}
+    </div>
+
+    <div class="summary-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 20px;">
+      <div class="summary-card">
+        <div class="card-label">⭐ 總 Stars</div>
+        <div class="card-value blue">${(data.total_stars || 0).toLocaleString()}</div>
+      </div>
+      <div class="summary-card">
+        <div class="card-label">📊 累積上榜</div>
+        <div class="card-value green">${data.total_appearances || 1} 天</div>
+      </div>
+      <div class="summary-card">
+        <div class="card-label">🔥 累積熱度</div>
+        <div class="card-value high">+${(data.cumulative_trending_stars || 0).toLocaleString()}</div>
+      </div>
+      <div class="summary-card">
+        <div class="card-label">🍴 Forks</div>
+        <div class="card-value">${(data.forks || 0).toLocaleString()}</div>
+      </div>
+    </div>
+
+    <div class="chart-card" style="margin-bottom: 20px;">
+      <div class="chart-title">📈 Star 每日熱門度增長軌跡</div>
+      <div style="height: 220px; width: 100%; position: relative;">
+        <canvas id="modalGrowthChart"></canvas>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <div>📅 上榜歷史詳細紀錄</div>
+    </div>
+    <div style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
+        <thead style="background: var(--bg-tertiary); color: var(--text-secondary); sticky: top;">
+          <tr>
+            <th style="padding: 8px 12px;">日期</th>
+            <th style="padding: 8px 12px;">當日新增 Star</th>
+            <th style="padding: 8px 12px;">總 Star 數</th>
+            <th style="padding: 8px 12px;">AI 分類</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${timeline.map(t => `
+            <tr style="border-top: 1px solid var(--border-color);">
+              <td style="padding: 8px 12px; font-family: monospace;">${esc(t.date)}</td>
+              <td style="padding: 8px 12px; color: var(--accent-green); font-weight: 600;">+${t.today_stars.toLocaleString()}</td>
+              <td style="padding: 8px 12px;">${t.total_stars.toLocaleString()}</td>
+              <td style="padding: 8px 12px;"><span class="relevance-badge ${esc(t.relevance_level)}">${esc(t.relevance_level)}</span></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  body.innerHTML = html;
+
+  // Render modal chart
+  setTimeout(() => {
+    const ctx = document.getElementById('modalGrowthChart');
+    if (!ctx || typeof Chart === 'undefined') return;
+    if (activeModalChart) {
+      activeModalChart.destroy();
+      activeModalChart = null;
+    }
+
+    activeModalChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: timeline.map(t => t.date),
+        datasets: [{
+          label: '當日新增 Star',
+          data: timeline.map(t => t.today_stars),
+          borderColor: '#58a6ff',
+          backgroundColor: 'rgba(88, 166, 255, 0.15)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#58a6ff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 300 },
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: '#8b949e' }, grid: { display: false } },
+          y: { ticks: { color: '#8b949e' }, grid: { color: '#30363d' } }
+        }
+      }
+    });
+  }, 50);
+}
+
+function closeHistoryModal() {
+  document.getElementById('historyModal').classList.remove('active');
+  if (activeModalChart) {
+    activeModalChart.destroy();
+    activeModalChart = null;
+  }
+}
+
+function closeModalOnBackdrop(e) {
+  if (e.target === document.getElementById('historyModal')) {
+    closeHistoryModal();
+  }
+}
+
+// ============================================================
+// ACTIONS: ON-DEMAND SCRAPE
+// ============================================================
+async function triggerScrape() {
+  showToast('🔄 正在觸發即時採集任務...');
+  try {
+    const res = await fetch(`${API_BASE}/api/scrape/trigger`, { method: 'POST' });
+    const data = await res.json();
+    showToast(data.message || '採集任務已送出');
+    setTimeout(() => {
+      loadStats();
+      loadData();
+      showToast('✅ 數據已更新');
+    }, 6000);
+  } catch (e) {
+    showToast('❌ 觸發失敗：' + e.message);
+  }
+}
+
+// ============================================================
+// UI HELPERS
+// ============================================================
+function showLoading() {
+  document.getElementById('contentArea').innerHTML = `
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      <div>載入資料中...</div>
+    </div>
+  `;
+}
+
+function showError(msg) {
+  document.getElementById('contentArea').innerHTML = `
+    <div class="empty-state">
+      <div style="font-size:40px;margin-bottom:12px;">⚠️</div>
+      <div>載入失敗：${esc(msg)}</div>
+      <div style="margin-top:8px;font-size:13px;">請確認後端服務正常運行</div>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>

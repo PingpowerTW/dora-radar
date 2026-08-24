@@ -1,0 +1,576 @@
+{
+  "date": "2026-08-24",
+  "updated_at": "2026-08-24T13:36:57.725212",
+  "top_picks": [
+    {
+      "name": "openai/codex",
+      "url": "https://github.com/openai/codex",
+      "desc": "Lightweight coding agent that runs in your terminal",
+      "total_stars": "115,937",
+      "today_stars": "2,715",
+      "forks": "17,683",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "channel": "All",
+      "channels": [
+        "All",
+        "Rust"
+      ],
+      "desc_zh": "在您的終端機中運行的輕量級編碼代理",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 2.34,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 coding agent",
+        "🛠 terminal"
+      ],
+      "today_stars_num": 2715,
+      "total_stars_num": 115937,
+      "description_zh": "在您的終端機中運行的輕量級編碼代理"
+    },
+    {
+      "name": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills",
+      "desc": "Skills for Real Engineers. Straight from my .agents directory.",
+      "total_stars": "234,215",
+      "today_stars": "2,447",
+      "forks": "19,975",
+      "language": "Shell",
+      "language_color": "#89e051",
+      "channel": "All",
+      "channels": [
+        "All"
+      ],
+      "desc_zh": "真正工程師的技能。直接來自我的 .agents 目錄。",
+      "is_new": false,
+      "consecutive_days": 5,
+      "growth_rate": 1.04,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "📋 skill"
+      ],
+      "today_stars_num": 2447,
+      "total_stars_num": 234215,
+      "description_zh": "真正工程師的技能。直接來自我的 .agents 目錄。"
+    },
+    {
+      "name": "Alishahryar1/free-claude-code",
+      "url": "https://github.com/Alishahryar1/free-claude-code",
+      "desc": "Use Claude Code, Codex, Pi, and OpenCode for free (1.3B+ free tokens) from your terminal, app, IDE, or phone like OpenClaw (voice supported + ToS friendly)",
+      "total_stars": "48,143",
+      "today_stars": "1,081",
+      "forks": "7,904",
+      "language": "Python",
+      "language_color": "#3572A5",
+      "channel": "All",
+      "channels": [
+        "All",
+        "Python"
+      ],
+      "desc_zh": "從您的終端、應用程式、IDE 或 OpenClaw 等手機（支援語音 + ToS 友善）免費使用 Claude Code、Codex、Pi 和 OpenCode（1.3B+ 免費代幣）",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 2.25,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 claude code",
+        "🛠 terminal",
+        "🛠 voice"
+      ],
+      "today_stars_num": 1081,
+      "total_stars_num": 48143,
+      "description_zh": "從您的終端、應用程式、IDE 或 OpenClaw 等手機（支援語音 + ToS 友善）免費使用 Claude Code、Codex、Pi 和 OpenCode（1.3B+ 免費代幣）"
+    },
+    {
+      "name": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "desc": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
+      "total_stars": "108,980",
+      "today_stars": "668",
+      "forks": "6,018",
+      "language": "JavaScript",
+      "language_color": "#f1e05a",
+      "channel": "JavaScript",
+      "channels": [
+        "JavaScript"
+      ],
+      "desc_zh": "讓你的人工智慧代理像房間裡最懶的高級開發人員一樣思考。最好的程式碼是你從未寫過的程式碼。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.61,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 ai agent"
+      ],
+      "today_stars_num": 668,
+      "total_stars_num": 108980,
+      "description_zh": "讓你的人工智慧代理像房間裡最懶的高級開發人員一樣思考。最好的程式碼是你從未寫過的程式碼。"
+    },
+    {
+      "name": "diegosouzapw/OmniRoute",
+      "url": "https://github.com/diegosouzapw/OmniRoute",
+      "desc": "Never stop coding. Free MIT AI gateway: one endpoint, 350 providers (90+ free), 1200+ models Kimi, Claude, GPT, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline &amp; Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by 450+ contributors",
+      "total_stars": "53,983",
+      "today_stars": "597",
+      "forks": "7,384",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "永遠不要停止編碼。免費 MIT AI 閘道：一個端點、350 個供應商（90 多個免費）、1200 多個型號 Kimi、Claude、GPT、Gemini、GLM、DeepSeek、MiniMax。適用於 Claude Code、Codex、Cursor、OpenCode、Cline 和 Copilot。配額感知自動回退、RTK+Caveman 壓縮可節省 15-95% 的令牌、MCP/A2A、桌上型/PWA。由 450 多名貢獻者構建",
+      "is_new": false,
+      "consecutive_days": 1,
+      "growth_rate": 1.11,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 mcp",
+        "🤖 claude code",
+        "🤖 cursor",
+        "🤖 copilot",
+        "🔧 model",
+        "🛠 cli"
+      ],
+      "today_stars_num": 597,
+      "total_stars_num": 53983,
+      "description_zh": "永遠不要停止編碼。免費 MIT AI 閘道：一個端點、350 個供應商（90 多個免費）、1200 多個型號 Kimi、Claude、GPT、Gemini、GLM、DeepSeek、MiniMax。適用於 Claude Code、Codex、Cursor、OpenCode、Cline 和 Copilot。配額感知自動回退、RTK+Caveman 壓縮可節省 15-95% 的令牌、MCP/A2A、桌上型/PWA。由 450 多名貢獻者構建"
+    },
+    {
+      "name": "n8n-io/n8n",
+      "url": "https://github.com/n8n-io/n8n",
+      "desc": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+      "total_stars": "202,190",
+      "today_stars": "476",
+      "forks": "60,332",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "具有原生 AI 功能的公平程式碼工作流程自動化平台。將視覺化建置與自訂程式碼、自架或雲端、400 多個整合結合。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.24,
+      "relevance": "high",
+      "reasons": [
+        "📋 workflow"
+      ],
+      "today_stars_num": 476,
+      "total_stars_num": 202190,
+      "description_zh": "具有原生 AI 功能的公平程式碼工作流程自動化平台。將視覺化建置與自訂程式碼、自架或雲端、400 多個整合結合。"
+    },
+    {
+      "name": "NousResearch/hermes-agent",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "desc": "The agent that grows with you",
+      "total_stars": "235,175",
+      "today_stars": "454",
+      "forks": "47,393",
+      "language": "Python",
+      "language_color": "#3572A5",
+      "channel": "All",
+      "channels": [
+        "All",
+        "Python"
+      ],
+      "desc_zh": "與您共同成長的代理商",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 0.19,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 hermes"
+      ],
+      "today_stars_num": 454,
+      "total_stars_num": 235175,
+      "description_zh": "與您共同成長的代理商"
+    },
+    {
+      "name": "affaan-m/ECC",
+      "url": "https://github.com/affaan-m/ECC",
+      "desc": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+      "total_stars": "242,654",
+      "today_stars": "427",
+      "forks": "36,727",
+      "language": "JavaScript",
+      "language_color": "#f1e05a",
+      "channel": "All",
+      "channels": [
+        "All",
+        "JavaScript"
+      ],
+      "desc_zh": "代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。",
+      "is_new": false,
+      "consecutive_days": 3,
+      "growth_rate": 0.18,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 claude code",
+        "🤖 cursor",
+        "📋 skill",
+        "📋 memory"
+      ],
+      "today_stars_num": 427,
+      "total_stars_num": 242654,
+      "description_zh": "代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。"
+    }
+  ],
+  "new_repos": [
+    {
+      "name": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "desc": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
+      "total_stars": "108,980",
+      "today_stars": "668",
+      "forks": "6,018",
+      "language": "JavaScript",
+      "language_color": "#f1e05a",
+      "channel": "JavaScript",
+      "channels": [
+        "JavaScript"
+      ],
+      "desc_zh": "讓你的人工智慧代理像房間裡最懶的高級開發人員一樣思考。最好的程式碼是你從未寫過的程式碼。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.61,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 ai agent"
+      ],
+      "today_stars_num": 668,
+      "total_stars_num": 108980,
+      "description_zh": "讓你的人工智慧代理像房間裡最懶的高級開發人員一樣思考。最好的程式碼是你從未寫過的程式碼。"
+    },
+    {
+      "name": "n8n-io/n8n",
+      "url": "https://github.com/n8n-io/n8n",
+      "desc": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+      "total_stars": "202,190",
+      "today_stars": "476",
+      "forks": "60,332",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "具有原生 AI 功能的公平程式碼工作流程自動化平台。將視覺化建置與自訂程式碼、自架或雲端、400 多個整合結合。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.24,
+      "relevance": "high",
+      "reasons": [
+        "📋 workflow"
+      ],
+      "today_stars_num": 476,
+      "total_stars_num": 202190,
+      "description_zh": "具有原生 AI 功能的公平程式碼工作流程自動化平台。將視覺化建置與自訂程式碼、自架或雲端、400 多個整合結合。"
+    },
+    {
+      "name": "byoungd/up",
+      "url": "https://github.com/byoungd/up",
+      "desc": "An advanced guide which might benefit you a lot 🎉 . 韩先凯的人生进阶指南 离谱的人生/人生进阶 离谱的英语学习指南/英语学习教程/英语学习/学英语",
+      "total_stars": "61,140",
+      "today_stars": "405",
+      "forks": "6,194",
+      "language": "JavaScript",
+      "language_color": "#f1e05a",
+      "channel": "JavaScript",
+      "channels": [
+        "JavaScript"
+      ],
+      "desc_zh": "高級指南可能會讓您受益匪淺🎉。 韓先凱的人生進階指南 離譜的人生/人生進階 離譜的英語學習指南/英語學習教程/英語學習/學英語",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.66,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 405,
+      "total_stars_num": 61140,
+      "description_zh": "高級指南可能會讓您受益匪淺🎉。 韓先凱的人生進階指南 離譜的人生/人生進階 離譜的英語學習指南/英語學習教程/英語學習/學英語"
+    },
+    {
+      "name": "anomalyco/opencode",
+      "url": "https://github.com/anomalyco/opencode",
+      "desc": "The open source coding agent.",
+      "total_stars": "200,748",
+      "today_stars": "368",
+      "forks": "25,963",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "開源編碼代理。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.18,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 coding agent"
+      ],
+      "today_stars_num": 368,
+      "total_stars_num": 200748,
+      "description_zh": "開源編碼代理。"
+    },
+    {
+      "name": "Wei-Shaw/sub2api",
+      "url": "https://github.com/Wei-Shaw/sub2api",
+      "desc": "Sub2API 一站式开源中转服务，让 Claude、Openai 、Gemini、Grok订阅统一接入，支持拼车共享，更高效分摊成本，原生工具无缝使用。",
+      "total_stars": "39,068",
+      "today_stars": "269",
+      "forks": "8,073",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "Go",
+      "channels": [
+        "Go"
+      ],
+      "desc_zh": "Sub2API一站式開源中轉服務，讓Claude、Openai、Gemini、Grok訂閱統一接入，支援共乘共享，更有效率分配成本，原創工具無縫使用。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.69,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 269,
+      "total_stars_num": 39068,
+      "description_zh": "Sub2API一站式開源中轉服務，讓Claude、Openai、Gemini、Grok訂閱統一接入，支援共乘共享，更有效率分配成本，原創工具無縫使用。"
+    },
+    {
+      "name": "can1357/oh-my-pi",
+      "url": "https://github.com/can1357/oh-my-pi",
+      "desc": "⌥ Coding agent with the IDE wired in",
+      "total_stars": "26,891",
+      "today_stars": "229",
+      "forks": "2,621",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "⌥ 連接 IDE 的編碼代理",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.85,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 coding agent"
+      ],
+      "today_stars_num": 229,
+      "total_stars_num": 26891,
+      "description_zh": "⌥ 連接 IDE 的編碼代理"
+    },
+    {
+      "name": "AnmolSaini16/mapcn",
+      "url": "https://github.com/AnmolSaini16/mapcn",
+      "desc": "Beautiful map components. 100% Free, Zero config, one command setup.",
+      "total_stars": "11,838",
+      "today_stars": "216",
+      "forks": "694",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "漂亮的地圖組件。 100% 免費，零配置，一命令設定。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 1.82,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 216,
+      "total_stars_num": 11838,
+      "description_zh": "漂亮的地圖組件。 100% 免費，零配置，一命令設定。"
+    },
+    {
+      "name": "bookorbit/bookorbit",
+      "url": "https://github.com/bookorbit/bookorbit",
+      "desc": "BookOrbit: Your Reading Space",
+      "total_stars": "3,069",
+      "today_stars": "204",
+      "forks": "197",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "BookOrbit：您的閱讀空間",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 6.65,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 204,
+      "total_stars_num": 3069,
+      "description_zh": "BookOrbit：您的閱讀空間"
+    },
+    {
+      "name": "debpalash/VoiceStudio",
+      "url": "https://github.com/debpalash/VoiceStudio",
+      "desc": "VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription &amp; audiobook creation in 646 languages.",
+      "total_stars": "11,444",
+      "today_stars": "193",
+      "forks": "1,805",
+      "language": "Python",
+      "language_color": "#3572A5",
+      "channel": "Python",
+      "channels": [
+        "Python"
+      ],
+      "desc_zh": "VoiceStudio 是 ElevenLabs 的開源、完全在地化替代方案 — 提供 646 種語言的語音克隆、語音設計、視訊配音、聽寫、轉錄和有聲讀物創作。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 1.69,
+      "relevance": "high",
+      "reasons": [
+        "🛠 video",
+        "🛠 design",
+        "🛠 audio",
+        "🛠 voice"
+      ],
+      "today_stars_num": 193,
+      "total_stars_num": 11444,
+      "description_zh": "VoiceStudio 是 ElevenLabs 的開源、完全在地化替代方案 — 提供 646 種語言的語音克隆、語音設計、視訊配音、聽寫、轉錄和有聲讀物創作。"
+    },
+    {
+      "name": "heygen-com/hyperframes",
+      "url": "https://github.com/heygen-com/hyperframes",
+      "desc": "Write HTML. Render video. Built for agents.",
+      "total_stars": "42,352",
+      "today_stars": "176",
+      "forks": "4,057",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "編寫 HTML。渲染影片。專為代理商打造。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.42,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🛠 video"
+      ],
+      "today_stars_num": 176,
+      "total_stars_num": 42352,
+      "description_zh": "編寫 HTML。渲染影片。專為代理商打造。"
+    }
+  ],
+  "trends": {
+    "agent_count": 37,
+    "skill_count": 10,
+    "new_count": 85
+  },
+  "top3": [
+    {
+      "name": "openai/codex",
+      "url": "https://github.com/openai/codex",
+      "desc": "Lightweight coding agent that runs in your terminal",
+      "total_stars": "115,937",
+      "today_stars": "2,715",
+      "forks": "17,683",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "channel": "All",
+      "channels": [
+        "All",
+        "Rust"
+      ],
+      "desc_zh": "在您的終端機中運行的輕量級編碼代理",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 2.34,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 coding agent",
+        "🛠 terminal"
+      ],
+      "today_stars_num": 2715,
+      "total_stars_num": 115937,
+      "description_zh": "在您的終端機中運行的輕量級編碼代理"
+    },
+    {
+      "name": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills",
+      "desc": "Skills for Real Engineers. Straight from my .agents directory.",
+      "total_stars": "234,215",
+      "today_stars": "2,447",
+      "forks": "19,975",
+      "language": "Shell",
+      "language_color": "#89e051",
+      "channel": "All",
+      "channels": [
+        "All"
+      ],
+      "desc_zh": "真正工程師的技能。直接來自我的 .agents 目錄。",
+      "is_new": false,
+      "consecutive_days": 5,
+      "growth_rate": 1.04,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "📋 skill"
+      ],
+      "today_stars_num": 2447,
+      "total_stars_num": 234215,
+      "description_zh": "真正工程師的技能。直接來自我的 .agents 目錄。"
+    },
+    {
+      "name": "Alishahryar1/free-claude-code",
+      "url": "https://github.com/Alishahryar1/free-claude-code",
+      "desc": "Use Claude Code, Codex, Pi, and OpenCode for free (1.3B+ free tokens) from your terminal, app, IDE, or phone like OpenClaw (voice supported + ToS friendly)",
+      "total_stars": "48,143",
+      "today_stars": "1,081",
+      "forks": "7,904",
+      "language": "Python",
+      "language_color": "#3572A5",
+      "channel": "All",
+      "channels": [
+        "All",
+        "Python"
+      ],
+      "desc_zh": "從您的終端、應用程式、IDE 或 OpenClaw 等手機（支援語音 + ToS 友善）免費使用 Claude Code、Codex、Pi 和 OpenCode（1.3B+ 免費代幣）",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 2.25,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 claude code",
+        "🛠 terminal",
+        "🛠 voice"
+      ],
+      "today_stars_num": 1081,
+      "total_stars_num": 48143,
+      "description_zh": "從您的終端、應用程式、IDE 或 OpenClaw 等手機（支援語音 + ToS 友善）免費使用 Claude Code、Codex、Pi 和 OpenCode（1.3B+ 免費代幣）"
+    }
+  ],
+  "markdown_report": "# 📊 每日 GitHub 開源雷達與趨勢報告\n**日期：** 2026-08-24 (Monday)\n**來源：** GitHub Trending 多語言子榜 (Python, TS, JS, Rust, Go, C++, Jupyter)\n**去重總計：** ✅ 本日監控 133 個不重複專案\n\n---\n\n## 💡 Dora 的精選推薦 (對 Hermes 自我進化最有價值)\n\n### 1. 🔴 [openai/codex](https://github.com/openai/codex) 🔥 連續 2 天\n- **Stars:** 115,937 (今日 +2,715)\n- **分類:** CRITICAL | **語言:** Rust\n- **簡介:** 在您的終端機中運行的輕量級編碼代理\n\n### 2. 🔴 [mattpocock/skills](https://github.com/mattpocock/skills) 🔥 連續 5 天\n- **Stars:** 234,215 (今日 +2,447)\n- **分類:** CRITICAL | **語言:** Shell\n- **簡介:** 真正工程師的技能。直接來自我的 .agents 目錄。\n\n### 3. 🔴 [Alishahryar1/free-claude-code](https://github.com/Alishahryar1/free-claude-code) 🔥 連續 2 天\n- **Stars:** 48,143 (今日 +1,081)\n- **分類:** CRITICAL | **語言:** Python\n- **簡介:** 從您的終端、應用程式、IDE 或 OpenClaw 等手機（支援語音 + ToS 友善）免費使用 Claude Code、Codex、Pi 和 OpenCode（1.3B+ 免費代幣）\n\n### 4. 🔴 [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) ✨ NEW\n- **Stars:** 108,980 (今日 +668)\n- **分類:** CRITICAL | **語言:** JavaScript\n- **簡介:** 讓你的人工智慧代理像房間裡最懶的高級開發人員一樣思考。最好的程式碼是你從未寫過的程式碼。\n\n### 5. 🔴 [diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute) 🔥 連續 1 天\n- **Stars:** 53,983 (今日 +597)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** 永遠不要停止編碼。免費 MIT AI 閘道：一個端點、350 個供應商（90 多個免費）、1200 多個型號 Kimi、Claude、GPT、Gemini、GLM、DeepSeek、MiniMax。適用於 Claude Code、Codex、Cursor、OpenCode、Cline 和 Copilot。配額感知自動回退、RTK+Caveman 壓縮可節省 15-95% 的令牌、MCP/A2A、桌上型/PWA。由 450 多名貢獻者構建\n\n### 6. 🟠 [n8n-io/n8n](https://github.com/n8n-io/n8n) ✨ NEW\n- **Stars:** 202,190 (今日 +476)\n- **分類:** HIGH | **語言:** TypeScript\n- **簡介:** 具有原生 AI 功能的公平程式碼工作流程自動化平台。將視覺化建置與自訂程式碼、自架或雲端、400 多個整合結合。\n\n### 7. 🔴 [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) 🔥 連續 2 天\n- **Stars:** 235,175 (今日 +454)\n- **分類:** CRITICAL | **語言:** Python\n- **簡介:** 與您共同成長的代理商\n\n### 8. 🔴 [affaan-m/ECC](https://github.com/affaan-m/ECC) 🔥 連續 3 天\n- **Stars:** 242,654 (今日 +427)\n- **分類:** CRITICAL | **語言:** JavaScript\n- **簡介:** 代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。\n\n---\n\n## ✨ 今日首發新面孔 (首次上榜，共 85 個)\n\n| # | 新進專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|----------|------|----------|----------|--------|\n| 1 | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | JavaScript | 108,980 | +668 | 🔴 critical |\n| 2 | [n8n-io/n8n](https://github.com/n8n-io/n8n) | TypeScript | 202,190 | +476 | 🟠 high |\n| 3 | [byoungd/up](https://github.com/byoungd/up) | JavaScript | 61,140 | +405 | ⚪ low |\n| 4 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | TypeScript | 200,748 | +368 | 🔴 critical |\n| 5 | [Wei-Shaw/sub2api](https://github.com/Wei-Shaw/sub2api) | Go | 39,068 | +269 | ⚪ low |\n| 6 | [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) | TypeScript | 26,891 | +229 | 🔴 critical |\n| 7 | [AnmolSaini16/mapcn](https://github.com/AnmolSaini16/mapcn) | TypeScript | 11,838 | +216 | ⚪ low |\n| 8 | [bookorbit/bookorbit](https://github.com/bookorbit/bookorbit) | TypeScript | 3,069 | +204 | ⚪ low |\n| 9 | [debpalash/VoiceStudio](https://github.com/debpalash/VoiceStudio) | Python | 11,444 | +193 | 🟠 high |\n| 10 | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) | TypeScript | 42,352 | +176 | 🔴 critical |\n\n---\n\n## 📈 今日 GitHub Trending 全覽 TOP 20\n\n| # | 專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|------|------|----------|----------|--------|\n| 1 | [openai/codex](https://github.com/openai/codex) | Rust | 115,937 | +2,715 | 🔴 critical |\n| 2 | [mattpocock/skills](https://github.com/mattpocock/skills) | Shell | 234,215 | +2,447 | 🔴 critical |\n| 3 | [Alishahryar1/free-claude-code](https://github.com/Alishahryar1/free-claude-code) | Python | 48,143 | +1,081 | 🔴 critical |\n| 4 | [AprilNEA/OpenLogi](https://github.com/AprilNEA/OpenLogi) | Rust | 15,152 | +1,009 | ⚪ low |\n| 5 | [basecamp/omarchy](https://github.com/basecamp/omarchy) | Shell | 29,353 | +750 | ⚪ low |\n| 6 | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | JavaScript | 108,980 | +668 | 🔴 critical |\n| 7 | [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev) | HTML | 134,581 | +615 | ⚪ low |\n| 8 | [diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute) | TypeScript | 53,983 | +597 | 🔴 critical |\n| 9 | [n8n-io/n8n](https://github.com/n8n-io/n8n) | TypeScript | 202,190 | +476 | 🟠 high |\n| 10 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | Python | 235,175 | +454 | 🔴 critical |\n| 11 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | JavaScript | 242,654 | +427 | 🔴 critical |\n| 12 | [virgiliojr94/book-to-skill](https://github.com/virgiliojr94/book-to-skill) | Python | 24,819 | +417 | 🔴 critical |\n| 13 | [block/buzz](https://github.com/block/buzz) | Rust | 30,219 | +410 | ⚪ low |\n| 14 | [byoungd/up](https://github.com/byoungd/up) | JavaScript | 61,140 | +405 | ⚪ low |\n| 15 | [freestylefly/awesome-gpt-image-2](https://github.com/freestylefly/awesome-gpt-image-2) | JavaScript | 13,643 | +401 | 🟠 high |\n| 16 | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | JavaScript | 79,772 | +394 | 🟠 high |\n| 17 | [makeplane/plane](https://github.com/makeplane/plane) | TypeScript | 57,587 | +390 | ⚪ low |\n| 18 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | TypeScript | 200,748 | +368 | 🔴 critical |\n| 19 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | Python | 142,794 | +361 | 🔴 critical |\n| 20 | [PostHog/posthog](https://github.com/PostHog/posthog) | Python | 38,791 | +293 | 🔴 critical |\n\n---\n\n## 🔍 Dora 的觀察與建議\n\n### 趨勢分析\n\n- **🤖 Agent 熱潮持續升溫：** 今日 37 個專案直接與 AI Agent 相關\n- **✨ 新血湧入：** 今日共有 85 個專案為首次進入觀測站雷達\n- **📋 Skill 機制成為共識：** 10 個專案聚焦於 Skills/能力模組化\n\n### 值得深入研究的 TOP 3\n\n1. **[openai/codex](https://github.com/openai/codex)** — 在您的終端機中運行的輕量級編碼代理\n2. **[mattpocock/skills](https://github.com/mattpocock/skills)** — 真正工程師的技能。直接來自我的 .agents 目錄。\n3. **[Alishahryar1/free-claude-code](https://github.com/Alishahryar1/free-claude-code)** — 從您的終端、應用程式、IDE 或 OpenClaw 等手機（支援語音 + ToS 友善）免費使用 Claude Code、Codex、Pi 和 OpenCode（1.3B+ 免費代幣）\n\n---\n\n*報告由 Hermes Agent Dora 自動生成 | 下次執行: 明日同一時間*\n",
+  "total_repos": 133
+}
