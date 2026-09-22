@@ -117,6 +117,8 @@ body {
   word-wrap: normal;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
   vertical-align: middle;
 }
 
@@ -1522,7 +1524,7 @@ input, textarea, select {
   <div class="search-wrapper">
     <span class="material-symbols-outlined search-icon-prefix">search</span>
     <input type="text" class="search-input" id="searchInput" placeholder="搜尋專案名稱、描述或關鍵字..." onkeyup="handleSearchDebounced()">
-    <button class="search-clear" id="searchClear" onclick="clearSearch()"><span class="material-symbols-outlined" style="font-size:16px;">close</span></button>
+    <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="清除搜尋關鍵字"><span class="material-symbols-outlined" style="font-size:16px;">close</span></button>
   </div>
   
   <select class="filter-select" id="relevanceFilter" onchange="applyFilters()">
@@ -1610,7 +1612,7 @@ input, textarea, select {
 <!-- Project History Modal -->
 <div class="modal-backdrop" id="historyModal" onclick="closeModalOnBackdrop(event)">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeHistoryModal()"><span class="material-symbols-outlined" style="font-size:18px;">close</span></button>
+    <button class="modal-close" onclick="closeHistoryModal()" aria-label="關閉歷史軌跡視窗"><span class="material-symbols-outlined" style="font-size:18px;">close</span></button>
     <div id="modalBody">
       <div class="loading">
         <div class="loading-spinner"></div>
@@ -2906,12 +2908,13 @@ function copyReport() {
 async function openHistoryModal(repoFullName) {
   const modal = document.getElementById('historyModal');
   const body = document.getElementById('modalBody');
+  document.body.style.overflow = 'hidden';
   modal.classList.add('active');
 
   body.innerHTML = `
     <div class="loading">
       <div class="loading-spinner"></div>
-      <div>正在載入 <strong>${esc(repoFullName)}</strong> 的 53 天軌跡...</div>
+      <div>正在載入 <strong>${esc(repoFullName)}</strong> 的歷史軌跡...</div>
     </div>
   `;
 
@@ -3044,6 +3047,7 @@ function renderModalContent(data) {
 }
 
 function closeHistoryModal() {
+  document.body.style.overflow = '';
   document.getElementById('historyModal').classList.remove('active');
   if (activeModalChart) {
     activeModalChart.destroy();
@@ -3056,6 +3060,16 @@ function closeModalOnBackdrop(e) {
     closeHistoryModal();
   }
 }
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' || e.keyCode === 27) {
+    const modal = document.getElementById('historyModal');
+    if (modal && modal.classList.contains('active')) {
+      closeHistoryModal();
+    }
+  }
+});
 
 // ============================================================
 // ACTIONS: ON-DEMAND SCRAPE
