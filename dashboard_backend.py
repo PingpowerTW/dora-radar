@@ -85,6 +85,7 @@ async def async_supabase_get(
     filters: dict = None, 
     order: str = None, 
     limit: int = None, 
+    offset: int = None,
     select: str = "*"
 ) -> list:
     """Async query data from Supabase PostgREST."""
@@ -122,6 +123,8 @@ async def async_supabase_get(
         
     if limit:
         params.append(f"limit={limit}")
+    if offset:
+        params.append(f"offset={offset}")
     
     query_str = "&".join(params)
     url = f"{SUPABASE_URL}/rest/v1/{table}?{query_str}"
@@ -142,6 +145,46 @@ async def async_supabase_get(
     except Exception as e:
         print(f"⚠️ Supabase async query error: {e}", file=sys.stderr)
         return []
+
+
+async def async_supabase_count(table: str, filters: dict = None) -> int:
+    """Get exact count of rows matching filters using PostgREST HEAD/count=exact."""
+    global http_client
+    if http_client is None or http_client.is_closed:
+        http_client = httpx.AsyncClient(timeout=15.0)
+
+    params = ["select=id"]
+    if filters:
+        for k, v in filters.items():
+            if isinstance(v, list):
+                params.append(f"{k}=in.{','.join(str(x) for x in v)}")
+            elif isinstance(v, str) and v.startswith("'"):
+                params.append(f"{k}=eq.{v.strip(chr(39))}")
+            elif '[' in k and ']' in k:
+                clean_key = k.split('[')[0]
+                operator = k.split('[')[1].rstrip(']')
+                params.append(f"{clean_key}={operator}.{v}")
+            else:
+                params.append(f"{k}=eq.{v}")
+
+    query_str = "&".join(params)
+    url = f"{SUPABASE_URL}/rest/v1/{table}?{query_str}"
+    headers = {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": f"Bearer {SUPABASE_SERVICE_KEY}",
+        "Prefer": "count=exact",
+        "Range": "0-0"
+    }
+    try:
+        resp = await http_client.get(url, headers=headers)
+        content_range = resp.headers.get("content-range", "")
+        if "/" in content_range:
+            count_part = content_range.split("/")[1]
+            if count_part.isdigit():
+                return int(count_part)
+    except Exception as e:
+        print(f"⚠️ Supabase count error: {e}", file=sys.stderr)
+    return 0
 
 
 def supabase_get(table: str, filters: dict = None, order: str = None, 
@@ -215,20 +258,73 @@ async def shutdown_event():
     if http_client:
         await http_client.aclose()
 
-# ============================================================
+## ============================================================
 # API ENDPOINTS: DAILY
 # ============================================================
+@app.get("/api/dates")
+async def get_available_dates():
+    """Get list of distinct dates available in descending order."""
+    cached = cache.get("available_dates")
+    if cached:
+        return cached
+
+    # Query all records in chunks of 1000 to get full date history
+    date_counts: Dict[str, int] = {}
+    for offset in range(0, 10000, 1000):
+        records = await async_supabase_get(
+            "github_trending_daily",
+            select="date",
+            order="date.desc",
+            limit=1000,
+            offset=offset if offset > 0 else None
+        )
+        if not records:
+            break
+        for r in records:
+            d = r.get("date")
+            if d:
+                date_counts[d] = date_counts.get(d, 0) + 1
+        if len(records) < 1000:
+            break
+
+    sorted_dates = [
+        {"date": d, "count": c} 
+        for d, c in sorted(date_counts.items(), key=lambda x: x[0], reverse=True)
+    ]
+    latest_date = sorted_dates[0]["date"] if sorted_dates else datetime.now().strftime("%Y-%m-%d")
+
+    result = {
+        "latest": latest_date,
+        "today": datetime.now().strftime("%Y-%m-%d"),
+        "dates": sorted_dates
+    }
+    cache.set("available_dates", result, ttl=45)
+    return result
+
+
 @app.get("/api/daily", response_model=List[Dict[str, Any]])
 async def get_daily_trending(
-    date: Optional[str] = Query(None, description="Filter by date (YYYY-MM-DD)"),
-    limit: int = Query(60, ge=1, le=200, description="Max results"),
+    date: Optional[str] = Query(None, description="Filter by date (YYYY-MM-DD) or 'latest'"),
+    limit: int = Query(150, ge=1, le=300, description="Max results"),
     relevance: Optional[str] = Query(None, description="Filter by relevance (critical/high/medium/low)"),
     language: Optional[str] = Query(None, description="Filter by programming language"),
     search: Optional[str] = Query(None, description="Search repo name or description"),
-    sort: str = Query("today", description="Sort by: today, total, name")
+    sort: str = Query("today", description="Sort by: today, total, growth, streak, name")
 ):
-    """Get daily trending repositories with multi-dimensional filtering."""
+    """Get daily trending repositories with multi-dimensional filtering. Defaults to latest available date."""
     filters = {}
+    
+    # Auto-detect latest date if not explicitly specified
+    if not date or date == "latest":
+        latest_row = await async_supabase_get(
+            "github_trending_daily",
+            select="date",
+            order="date.desc",
+            limit=1
+        )
+        if latest_row and latest_row[0].get("date"):
+            date = str(latest_row[0]["date"])
+
     if date:
         filters["date"] = f"'{date}'"
     if relevance:
@@ -239,6 +335,10 @@ async def get_daily_trending(
     order_clause = "today_stars.desc"
     if sort == "total":
         order_clause = "total_stars.desc"
+    elif sort == "growth":
+        order_clause = "growth_rate.desc"
+    elif sort == "streak":
+        order_clause = "consecutive_days.desc"
     elif sort == "name":
         order_clause = "repo_name.asc"
 
@@ -254,8 +354,10 @@ async def get_daily_trending(
         repos = [
             r for r in repos 
             if s_lower in r.get("repo_name", "").lower() 
-            or s_lower in (r.get("description") or "").lower()
+            or s_lower in (r.get("description") or "").lower() 
+            or s_lower in (r.get("description_zh") or "").lower()
             or any(s_lower in tag.lower() for tag in (r.get("relevance_tags") or []))
+            or any(s_lower in ch.lower() for ch in (r.get("channels") or []))
         ]
 
     return repos
@@ -290,30 +392,40 @@ async def get_latest_daily(limit: int = Query(7, ge=1, le=30, description="Last 
 
 @app.get("/api/daily/stats")
 async def get_daily_stats():
-    """Get statistics about daily trending data with in-memory TTL caching."""
+    """Get accurate statistics about daily trending data with in-memory TTL caching."""
     cached = cache.get("daily_stats")
     if cached:
         return cached
 
-    repos = await async_supabase_get(
+    # 1. Exact total records from database
+    total_records = await async_supabase_count("github_trending_daily")
+
+    # 2. Latest and earliest dates
+    latest_row = await async_supabase_get("github_trending_daily", select="date", order="date.desc", limit=1)
+    earliest_row = await async_supabase_get("github_trending_daily", select="date", order="date.asc", limit=1)
+    latest_date = latest_row[0].get("date") if latest_row else None
+    earliest_date = earliest_row[0].get("date") if earliest_row else None
+
+    # 3. Active recent snapshot (ordered by date.desc, limit 1000) for language and relevance breakdown
+    recent_repos = await async_supabase_get(
         "github_trending_daily", 
         select="date,repo_name,relevance_level,language,total_stars,today_stars",
-        limit=10000
+        order="date.desc",
+        limit=1000
     )
 
-    if not repos:
+    if not recent_repos:
         return {"total_records": 0, "unique_dates": 0, "unique_repos": 0}
 
-    dates = set(r.get("date") for r in repos if r.get("date"))
-    repo_names = set(r.get("repo_name") for r in repos if r.get("repo_name"))
+    dates = set(r.get("date") for r in recent_repos if r.get("date"))
+    repo_names = set(r.get("repo_name") for r in recent_repos if r.get("repo_name"))
 
     relevance_counts = {"critical": 0, "high": 0, "medium": 0, "low": 0}
     lang_counts: Dict[str, int] = {}
-    total_stars_sum = 0
     top_today_star = 0
     top_repo = None
 
-    for r in repos:
+    for r in recent_repos:
         level = r.get("relevance_level", "low")
         relevance_counts[level] = relevance_counts.get(level, 0) + 1
         
@@ -325,21 +437,19 @@ async def get_daily_stats():
         if t_star > top_today_star:
             top_today_star = t_star
             top_repo = r.get("repo_name")
-            
-        total_stars_sum += (r.get("total_stars") or 0)
 
     # Sort languages
     sorted_langs = sorted(lang_counts.items(), key=lambda x: x[1], reverse=True)[:10]
 
     stats = {
-        "total_records": len(repos),
+        "total_records": total_records or len(recent_repos),
         "unique_dates": len(dates),
         "unique_repos": len(repo_names),
         "relevance_distribution": relevance_counts,
         "top_languages": dict(sorted_langs),
         "date_range": {
-            "earliest": min(dates) if dates else None,
-            "latest": max(dates) if dates else None,
+            "earliest": earliest_date,
+            "latest": latest_date,
         },
         "highlight": {
             "top_today_repo": top_repo,
@@ -642,35 +752,176 @@ async def get_latest_insight():
 
 
 # ============================================================
-# API ENDPOINTS: SCRAPE TRIGGER
+# API ENDPOINTS: SCRAPE TRIGGER & STATUS
 # ============================================================
 _SCRAPE_LOCK = asyncio.Lock()
+_scrape_state = {
+    "is_running": False,
+    "last_run": None,
+    "last_status": "idle",
+    "last_records": 0,
+    "duration_sec": 0,
+    "message": "系統待命中"
+}
+
+@app.get("/api/scrape/status")
+async def get_scrape_status():
+    """Get live status of GitHub Trending scraping task."""
+    return _scrape_state
 
 @app.post("/api/scrape/trigger")
 async def trigger_live_scrape(background_tasks: BackgroundTasks):
     """Trigger an on-demand GitHub Trending scraping and aggregation run."""
-    if _SCRAPE_LOCK.locked():
+    global _scrape_state
+    if _SCRAPE_LOCK.locked() or _scrape_state["is_running"]:
         return JSONResponse(
             status_code=429, 
-            content={"status": "busy", "message": "Scraping task is already running in background."}
+            content={"status": "busy", "message": "採集任務正在執行中，請稍候..."}
         )
 
     async def run_task():
-        async with _SCRAPE_LOCK:
-            try:
-                from github_trending_analysis import run_full_cycle
-                loop = asyncio.get_event_loop()
-                result = await loop.run_in_executor(None, run_full_cycle)
-                cache.clear()
-                print(f"✅ On-demand scrape completed: {result.get('records', 0)} records.")
-            except Exception as e:
-                print(f"❌ On-demand scrape error: {e}", file=sys.stderr)
+        global _scrape_state
+        _scrape_state["is_running"] = True
+        _scrape_state["message"] = "正在爬取 GitHub Trending 8 頻道並進行相關性分類與翻譯..."
+        start_t = time.time()
+        try:
+            from github_trending_analysis import run_full_cycle
+            loop = asyncio.get_event_loop()
+            result = await loop.run_in_executor(None, run_full_cycle)
+            dur = round(time.time() - start_t, 2)
+            cache.clear()
+            records_count = result.get("records", 0) if isinstance(result, dict) else 0
+            _scrape_state = {
+                "is_running": False,
+                "last_run": datetime.now().isoformat(),
+                "last_status": "ok",
+                "last_records": records_count,
+                "duration_sec": dur,
+                "message": f"採集完成！共收錄 {records_count} 筆專案 (耗時 {dur}s)"
+            }
+            print(f"✅ On-demand scrape completed: {records_count} records ({dur}s).")
+        except Exception as e:
+            dur = round(time.time() - start_t, 2)
+            _scrape_state = {
+                "is_running": False,
+                "last_run": datetime.now().isoformat(),
+                "last_status": "error",
+                "last_records": 0,
+                "duration_sec": dur,
+                "message": f"採集失敗：{str(e)}"
+            }
+            print(f"❌ On-demand scrape error: {e}", file=sys.stderr)
 
     background_tasks.add_task(run_task)
     return {
         "status": "started", 
-        "message": "GitHub Trending 採集任務已在後台啟動，預計 5-10 秒內完成。"
+        "message": "GitHub Trending 採集任務已在後台啟動，預計 3-8 秒內完成。"
     }
+
+
+# ============================================================
+# API ENDPOINTS: DORA CRON & HISTORICAL INSIGHTS
+# ============================================================
+@app.get("/api/cron/status")
+async def get_cron_status():
+    """Get Dora's automated monitoring cron job status from Hermes scheduler."""
+    jobs_file = Path("/home/pipadmin/.hermes/cron/jobs.json")
+    if not jobs_file.exists():
+        return {
+            "status": "not_configured",
+            "schedule_human": "每日 20:00 (台北時間)",
+            "message": "Cron jobs file not found"
+        }
+
+    try:
+        with open(jobs_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            jobs = data.get("jobs", [])
+            target_job = next((j for j in jobs if j.get("id") == "8dbd0d2806a5"), None)
+            if target_job:
+                return {
+                    "status": "active" if target_job.get("enabled") else "paused",
+                    "name": target_job.get("name"),
+                    "schedule": target_job.get("schedule_display", "0 20 * * *"),
+                    "schedule_human": "每日 20:00 (台北時間)",
+                    "next_run_at": target_job.get("next_run_at"),
+                    "last_run_at": target_job.get("last_run_at"),
+                    "last_status": target_job.get("last_status"),
+                    "completed_times": target_job.get("repeat", {}).get("completed", 0),
+                    "platform": target_job.get("origin", {}).get("platform"),
+                    "chat_name": target_job.get("origin", {}).get("chat_name")
+                }
+    except Exception as e:
+        print(f"⚠️ Error reading cron status: {e}", file=sys.stderr)
+
+    return {
+        "status": "active",
+        "schedule": "0 20 * * *",
+        "schedule_human": "每日 20:00 (台北時間)"
+    }
+
+
+@app.get("/api/ai/insights/history")
+async def get_insights_history():
+    """Get list of historical daily insight reports."""
+    output_dir = Path("/home/pipadmin/.hermes/cron/output")
+    reports = []
+    if output_dir.exists():
+        for p in sorted(output_dir.glob("8dbd0d2806a5_*.txt"), reverse=True):
+            fname = p.name
+            parts = fname.replace(".txt", "").split("_")
+            if len(parts) >= 3:
+                d_str = parts[1] # YYYYMMDD
+                t_str = parts[2] # HHMMSS
+                date_formatted = f"{d_str[:4]}-{d_str[4:6]}-{d_str[6:]}"
+                time_formatted = f"{t_str[:2]}:{t_str[2:4]}:{t_str[4:]}"
+                reports.append({
+                    "id": fname,
+                    "date": date_formatted,
+                    "time": time_formatted,
+                    "datetime": f"{date_formatted} {time_formatted}",
+                    "size": p.stat().st_size
+                })
+    return reports[:30]
+
+
+@app.get("/api/ai/insights/report/{filename}")
+async def get_historical_report(filename: str):
+    """Get content of a specific historical report."""
+    output_dir = Path("/home/pipadmin/.hermes/cron/output")
+    target = output_dir / filename
+    # Security: prevent directory traversal
+    try:
+        if not target.resolve().is_relative_to(output_dir.resolve()):
+            raise HTTPException(status_code=403, detail="Forbidden")
+    except Exception:
+        raise HTTPException(status_code=403, detail="Forbidden")
+
+    if not target.exists():
+        raise HTTPException(status_code=404, detail="Report not found")
+
+    try:
+        with open(target, "r", encoding="utf-8", errors="replace") as f:
+            content = f.read()
+            if "## 📊 每日 GitHub 熱門專案監控報告" in content:
+                content = content[content.index("## 📊 每日 GitHub 熱門專案監控報告"):]
+            elif "## 📊" in content:
+                content = content[content.index("## 📊"):]
+            
+            import re
+            date_m = re.search(r"(\d{4}-\d{2}-\d{2})", content)
+            date_str = date_m.group(1) if date_m else filename
+            return {
+                "filename": filename,
+                "date": date_str,
+                "markdown_report": content,
+                "content": content,
+                "trends": {"agent_count": "-", "skill_count": "-", "video_count": "-"},
+                "top3": [],
+                "total_repos": "-"
+            }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ============================================================

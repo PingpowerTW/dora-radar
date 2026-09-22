@@ -40,8 +40,8 @@ if not SUPABASE_ANON_KEY or not SUPABASE_SERVICE_KEY:
                     SUPABASE_SERVICE_KEY = line.split("=", 1)[1]
 
 
-def supabase_post(table: str, data: dict) -> dict:
-    """Insert or upsert data into Supabase using PostgREST merge-duplicates."""
+def supabase_post(table: str, data) -> dict | list:
+    """Insert or upsert data into Supabase using PostgREST merge-duplicates (supports dict or list[dict])."""
     import urllib.request
     
     # Determine conflict target based on table
@@ -70,10 +70,12 @@ def supabase_post(table: str, data: dict) -> dict:
             body = resp.read().decode("utf-8")
             return json.loads(body) if body else {}
     except urllib.error.HTTPError as e:
-        print(f"  ⚠️  Supabase insert error for {data.get('repo_name', '?')} in {table} (HTTP {e.code}): {e.read().decode()}", file=sys.stderr)
+        desc = data.get('repo_name', '?') if isinstance(data, dict) else f"{len(data)} rows"
+        print(f"  ⚠️  Supabase insert error for {desc} in {table} (HTTP {e.code}): {e.read().decode()}", file=sys.stderr)
         return {}
     except Exception as e:
-        print(f"  ⚠️  Supabase insert error for {data.get('repo_name', '?')} in {table}: {e}", file=sys.stderr)
+        desc = data.get('repo_name', '?') if isinstance(data, dict) else f"{len(data)} rows"
+        print(f"  ⚠️  Supabase insert error for {desc} in {table}: {e}", file=sys.stderr)
         return {}
 
 
@@ -342,42 +344,61 @@ def parse_stars(s) -> int:
 # ============================================================
 def store_daily_data(date_str: str, repos: list) -> int:
     """Store daily trending data with lifecycle analysis (is_new, consecutive_days, growth_rate)."""
-    # Fetch historical appearance dates for all repos prior to date_str
-    history_records = supabase_get(
-        "github_trending_daily", 
-        {"date[lt]": date_str, "select": "repo_name,date,consecutive_days", "limit": 10000}
-    )
-    
-    historical_repos = set()
-    yesterday_map = {}
-    
+    from concurrent.futures import ThreadPoolExecutor
+
+    # 1. Fetch yesterday's data accurately
     curr_date = datetime.strptime(date_str, "%Y-%m-%d").date()
     yesterday_date_str = (curr_date - timedelta(days=1)).strftime("%Y-%m-%d")
     
-    for h in history_records:
-        r_name = h.get("repo_name")
-        if r_name:
-            historical_repos.add(r_name)
-            if str(h.get("date")) == yesterday_date_str:
-                yesterday_map[r_name] = h.get("consecutive_days") or 1
+    yesterday_records = supabase_get(
+        "github_trending_daily", 
+        {"date": f"'{yesterday_date_str}'", "select": "repo_name,consecutive_days", "limit": 1000}
+    )
+    yesterday_map = {
+        h["repo_name"]: (h.get("consecutive_days") or 1) 
+        for h in yesterday_records if h.get("repo_name")
+    }
+    
+    # 2. Check which repos appeared in history prior to date_str
+    repo_names = [r["name"] for r in repos]
+    historical_repos = set()
+    for i in range(0, len(repo_names), 40):
+        chunk = repo_names[i:i + 40]
+        matched = supabase_get(
+            "github_trending_daily",
+            {"date[lt]": date_str, "repo_name": chunk, "select": "repo_name", "limit": 1000}
+        )
+        for m in matched:
+            if m.get("repo_name"):
+                historical_repos.add(m["repo_name"])
 
-    count = 0
+    # 3. Parallel translation of descriptions
+    def _do_translate(r):
+        if not r.get("desc_zh"):
+            raw = r.get("desc", "")
+            r["desc_zh"] = translate_en_to_zhtw(raw) if raw else ""
+        return r
+
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        repos = list(executor.map(_do_translate, repos))
+
+    # 4. Prepare batch records
+    daily_batch = []
     for repo in repos:
         name = repo["name"]
         level, reasons = classify_relevance(repo)
-        zh_desc = translate_en_to_zhtw(repo.get("desc", ""))
-        repo["desc_zh"] = zh_desc
+        zh_desc = repo.get("desc_zh", "")
         
         total_stars = parse_stars(repo["total_stars"])
         today_stars = parse_stars(repo["today_stars"])
         
-        # 1. Lifecycle: is_new (first seen in tracking history)
+        # Lifecycle: is_new (first seen in tracking history)
         is_new = name not in historical_repos
         
-        # 2. Consecutive days streak
+        # Consecutive days streak
         consecutive_days = (yesterday_map.get(name, 0) + 1) if name in yesterday_map else 1
         
-        # 3. Growth rate (% increase today)
+        # Growth rate (% increase today)
         growth_rate = round((today_stars / total_stars) * 100, 2) if total_stars > 0 else 0.0
         if growth_rate > 100.0:
             growth_rate = 100.0
@@ -386,7 +407,7 @@ def store_daily_data(date_str: str, repos: list) -> int:
         repo["consecutive_days"] = consecutive_days
         repo["growth_rate"] = growth_rate
         
-        data = {
+        daily_batch.append({
             "date": date_str,
             "repo_name": name,
             "repo_url": repo["url"],
@@ -403,10 +424,16 @@ def store_daily_data(date_str: str, repos: list) -> int:
             "consecutive_days": consecutive_days,
             "growth_rate": growth_rate,
             "channels": repo.get("channels", ["All"]),
-        }
-        result = supabase_post("github_trending_daily", data)
+        })
+
+    # 5. Bulk upsert in batches of 50
+    count = 0
+    for i in range(0, len(daily_batch), 50):
+        chunk = daily_batch[i:i + 50]
+        result = supabase_post("github_trending_daily", chunk)
         if result:
-            count += 1
+            count += len(result) if isinstance(result, list) else len(chunk)
+
     return count
 
 
@@ -464,9 +491,9 @@ def aggregate_weekly():
     # Sort by total_stars descending
     weekly_data.sort(key=lambda x: (x["total_stars"] or 0), reverse=True)
     
-    # Store to weekly table
-    for wd in weekly_data:
-        supabase_post("github_trending_weekly", wd)
+    # Store to weekly table in bulk
+    for i in range(0, len(weekly_data), 50):
+        supabase_post("github_trending_weekly", weekly_data[i:i + 50])
     
     return weekly_data
 
@@ -541,8 +568,9 @@ def aggregate_monthly():
     
     monthly_data.sort(key=lambda x: (x["total_stars"] or 0), reverse=True)
     
-    for md in monthly_data:
-        supabase_post("github_trending_monthly", md)
+    # Store to monthly table in bulk
+    for i in range(0, len(monthly_data), 50):
+        supabase_post("github_trending_monthly", monthly_data[i:i + 50])
     
     return monthly_data
 
@@ -642,7 +670,8 @@ def generate_daily_report(date_str: str, repos: list) -> str:
     
     # Also save structured insight to local JSON for backend API
     try:
-        insight_file = Path(__file__).parent / "latest_insight.json"
+        scripts_dir = Path(__file__).parent
+        insight_file = scripts_dir / "latest_insight.json"
         insight_data = {
             "date": date_str,
             "updated_at": datetime.now().isoformat(),
@@ -659,8 +688,14 @@ def generate_daily_report(date_str: str, repos: list) -> str:
         }
         with open(insight_file, "w", encoding="utf-8") as f:
             json.dump(insight_data, f, ensure_ascii=False, indent=2)
+
+        # Archive historical insight
+        insights_dir = scripts_dir / "insights"
+        insights_dir.mkdir(exist_ok=True)
+        with open(insights_dir / f"insight_{date_str}.json", "w", encoding="utf-8") as f:
+            json.dump(insight_data, f, ensure_ascii=False, indent=2)
     except Exception as e:
-        print(f"  ⚠️  Failed to save latest_insight.json: {e}", file=sys.stderr)
+        print(f"  ⚠️  Failed to save insight files: {e}", file=sys.stderr)
     
     return report
 

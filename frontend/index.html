@@ -335,6 +335,171 @@ input, textarea, select {
   border-color: var(--accent-blue);
 }
 
+/* Dora Automation & Cron Schedule Banner */
+.dora-cron-banner {
+  background: #161b22;
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cron-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cron-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(63, 185, 80, 0.6);
+}
+
+.cron-status-dot.pulse {
+  animation: cronPulse 2s infinite;
+}
+
+@keyframes cronPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(63, 185, 80, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
+}
+
+.cron-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.cron-schedule {
+  color: var(--accent-blue);
+  font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace;
+}
+
+.cron-divider {
+  color: var(--border-color);
+}
+
+.cron-badge {
+  background: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace;
+}
+
+/* Date Navigation Bar */
+.date-nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 28px;
+  background: #13171e;
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.date-nav-btn {
+  padding: 6px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.date-nav-btn:hover:not(:disabled) {
+  background: #30363d;
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.date-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.date-nav-btn.btn-today {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.3);
+  font-weight: 600;
+}
+
+.date-nav-btn.btn-today:hover {
+  background: rgba(56, 189, 248, 0.22);
+}
+
+.date-select-wrapper {
+  display: flex;
+  align-items: center;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0 8px;
+}
+
+.date-select {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  padding: 6px 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.date-badge-info {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.badge-tag-latest {
+  background: rgba(63, 185, 80, 0.15);
+  color: #3fb950;
+  border: 1px solid rgba(63, 185, 80, 0.3);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.badge-tag-history {
+  background: rgba(139, 148, 158, 0.15);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.loading-spinner-sm {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
 /* Main Content */
 .main {
   padding: 24px 28px;
@@ -1104,6 +1269,22 @@ input, textarea, select {
   </div>
 </div>
 
+<!-- Dora Automation & Cron Schedule Banner -->
+<div class="dora-cron-banner" id="doraCronBanner">
+  <div class="cron-banner-left">
+    <span class="cron-status-dot pulse"></span>
+    <span class="cron-title">🤖 Dora 每日自動監控排程：</span>
+    <span class="cron-schedule" id="cronScheduleText">每日 20:00 (台北時間)</span>
+    <span class="cron-divider">·</span>
+    <span class="cron-detail" id="cronLastRunText">上次巡檢：載入中...</span>
+    <span class="cron-divider">·</span>
+    <span class="cron-next" id="cronNextRunText">下次執行：今日 20:00</span>
+  </div>
+  <div class="cron-banner-right">
+    <span class="cron-badge" id="cronCompletedBadge">已完成 93 次巡檢</span>
+  </div>
+</div>
+
 <!-- Filter Bar -->
 <div class="filter-bar" id="filterBar">
   <div class="search-wrapper">
@@ -1130,6 +1311,20 @@ input, textarea, select {
     <option value="streak">🔥 連續上榜天數 ↓</option>
     <option value="name">🔤 專案名稱 A-Z</option>
   </select>
+</div>
+
+<!-- Date Navigation Bar (Daily Tab Only) -->
+<div class="date-nav-bar" id="dateNavBar">
+  <button class="date-nav-btn" id="btnPrevDate" onclick="navigateDate(-1)">⏮️ 前一日</button>
+  <div class="date-select-wrapper">
+    <span class="date-icon" style="margin-right:4px;">📅</span>
+    <select class="date-select" id="datePickerSelect" onchange="onDateSelectChanged()">
+      <option value="">載入日期中...</option>
+    </select>
+  </div>
+  <button class="date-nav-btn" id="btnNextDate" onclick="navigateDate(1)">後一日 ⏭️</button>
+  <button class="date-nav-btn btn-today" id="btnLatestDate" onclick="jumpToLatestDate()">⚡ 回到最新一日</button>
+  <span class="date-badge-info" id="dateBadgeInfo"></span>
 </div>
 
 <!-- Quick Lifecycle Filter Pills -->
@@ -1206,8 +1401,14 @@ let allWeeklyData = [];
 let allMonthlyData = [];
 let languagesList = [];
 let latestInsightData = null;
+let historicalInsightsList = [];
+let selectedInsightFile = '';
 let globalStats = null;
 let risingStarsData = [];
+let availableDates = [];
+let selectedDate = '';
+let latestDate = '';
+let cronStatusData = null;
 let visibleCount = 25;
 const PAGE_SIZE = 25;
 let searchDebounceTimer = null;
@@ -1229,7 +1430,7 @@ function showToast(msg) {
   const toast = document.getElementById('toastMessage');
   toast.textContent = msg;
   toast.classList.add('visible');
-  setTimeout(() => toast.classList.remove('visible'), 3000);
+  setTimeout(() => toast.classList.remove('visible'), 3500);
 }
 
 // ============================================================
@@ -1241,11 +1442,168 @@ document.addEventListener('DOMContentLoaded', async () => {
     year: 'numeric', month: 'short', day: 'numeric', weekday: 'short'
   });
 
+  await loadCronStatus();
   await loadLanguages();
   await loadStats();
+  await loadDates();
   await loadData();
 });
 
+// ============================================================
+// DORA CRON STATUS & SCHEDULE BANNER
+// ============================================================
+async function loadCronStatus() {
+  try {
+    const res = await fetch(`${API_BASE}/api/cron/status`);
+    if (res.ok) {
+      cronStatusData = await res.json();
+      const isActive = cronStatusData.status === 'active';
+      
+      const titleEl = document.querySelector('#doraCronBanner .cron-title');
+      if (titleEl) {
+        titleEl.textContent = isActive ? '🤖 Dora 每日自動監控排程：' : '⏸️ Dora 監控排程暫停中：';
+      }
+
+      const scheduleEl = document.getElementById('cronScheduleText');
+      if (scheduleEl) {
+        scheduleEl.textContent = cronStatusData.schedule_human || cronStatusData.schedule || '每日 20:00 (台北時間)';
+      }
+
+      const lastRunEl = document.getElementById('cronLastRunText');
+      if (lastRunEl) {
+        let lastRunStr = '尚無紀錄';
+        if (cronStatusData.last_run_at) {
+          try {
+            const dt = new Date(cronStatusData.last_run_at);
+            const formatted = dt.toLocaleString('zh-TW', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
+            lastRunStr = `${formatted} (${cronStatusData.last_status || 'ok'})`;
+          } catch(e) {
+            lastRunStr = `${cronStatusData.last_run_at.slice(0, 16).replace('T', ' ')}`;
+          }
+        }
+        lastRunEl.textContent = `上次巡檢：${lastRunStr}`;
+      }
+
+      const nextRunEl = document.getElementById('cronNextRunText');
+      if (nextRunEl) {
+        nextRunEl.textContent = `下次執行：${cronStatusData.schedule_human || '今日 20:00'}`;
+      }
+
+      const completedBadgeEl = document.getElementById('cronCompletedBadge');
+      if (completedBadgeEl) {
+        completedBadgeEl.textContent = `已累積 ${cronStatusData.completed_times || 93} 次自動巡檢`;
+      }
+    }
+  } catch (e) {
+    console.warn('Failed to load cron status', e);
+  }
+}
+
+// ============================================================
+// DATE NAVIGATION (DAILY TAB)
+// ============================================================
+async function loadDates() {
+  try {
+    const res = await fetch(`${API_BASE}/api/dates`);
+    if (res.ok) {
+      const data = await res.json();
+      availableDates = data.dates || [];
+      latestDate = data.latest_date || (availableDates[0] ? availableDates[0].date : '');
+      if (!selectedDate) {
+        selectedDate = latestDate;
+      }
+      populateDateSelector();
+    }
+  } catch (e) {
+    console.warn('Failed to load dates', e);
+  }
+}
+
+function populateDateSelector() {
+  const select = document.getElementById('datePickerSelect');
+  if (!select) return;
+
+  if (!availableDates.length) {
+    select.innerHTML = '<option value="">無日期資料</option>';
+    return;
+  }
+
+  select.innerHTML = availableDates.map(d => {
+    const isLatest = d.date === latestDate;
+    const label = `${d.date} (${d.count} 專案)${isLatest ? ' ⚡最新' : ''}`;
+    return `<option value="${d.date}" ${d.date === selectedDate ? 'selected' : ''}>${label}</option>`;
+  }).join('');
+
+  updateDateNavUI();
+}
+
+function updateDateNavUI() {
+  const select = document.getElementById('datePickerSelect');
+  if (select && select.value !== selectedDate) {
+    select.value = selectedDate;
+  }
+
+  const badgeInfo = document.getElementById('dateBadgeInfo');
+  if (badgeInfo) {
+    if (selectedDate === latestDate) {
+      badgeInfo.innerHTML = '<span class="badge-tag-latest">⚡ 最新採集</span>';
+    } else {
+      badgeInfo.innerHTML = `<span class="badge-tag-history">📜 歷史存檔 (${selectedDate})</span>`;
+    }
+  }
+
+  // availableDates is sorted desc: index 0 is newest, index N-1 is oldest
+  const currIdx = availableDates.findIndex(d => d.date === selectedDate);
+  const btnPrev = document.getElementById('btnPrevDate');
+  const btnNext = document.getElementById('btnNextDate');
+  const btnLatest = document.getElementById('btnLatestDate');
+
+  if (btnPrev) {
+    // "前一日" means older date, which is currIdx + 1
+    btnPrev.disabled = (currIdx < 0 || currIdx >= availableDates.length - 1);
+  }
+  if (btnNext) {
+    // "後一日" means newer date, which is currIdx - 1
+    btnNext.disabled = (currIdx <= 0);
+  }
+  if (btnLatest) {
+    btnLatest.style.display = (selectedDate === latestDate) ? 'none' : 'inline-flex';
+  }
+}
+
+function onDateSelectChanged() {
+  const select = document.getElementById('datePickerSelect');
+  if (select && select.value) {
+    selectedDate = select.value;
+    updateDateNavUI();
+    loadData();
+  }
+}
+
+function navigateDate(delta) {
+  // delta = -1: 前一日 (older), delta = +1: 後一日 (newer)
+  const currIdx = availableDates.findIndex(d => d.date === selectedDate);
+  if (currIdx === -1) return;
+
+  const newIdx = delta < 0 ? currIdx + 1 : currIdx - 1;
+  if (newIdx >= 0 && newIdx < availableDates.length) {
+    selectedDate = availableDates[newIdx].date;
+    updateDateNavUI();
+    loadData();
+  }
+}
+
+function jumpToLatestDate() {
+  if (latestDate && selectedDate !== latestDate) {
+    selectedDate = latestDate;
+    updateDateNavUI();
+    loadData();
+  }
+}
+
+// ============================================================
+// METADATA & STATS LOADING
+// ============================================================
 async function loadLanguages() {
   try {
     const res = await fetch(`${API_BASE}/api/languages`);
@@ -1285,7 +1643,8 @@ async function loadData() {
   showLoading();
   try {
     if (currentTab === 'daily') {
-      const resp = await fetch(`${API_BASE}/api/daily?limit=150`);
+      const url = selectedDate ? `${API_BASE}/api/daily?date=${selectedDate}&limit=150` : `${API_BASE}/api/daily?limit=150`;
+      const resp = await fetch(url);
       if (!resp.ok) throw new Error(`API error: ${resp.status}`);
       allDailyData = await resp.json();
     } else if (currentTab === 'weekly') {
@@ -1304,8 +1663,15 @@ async function loadData() {
       if (risingRes.ok) risingStarsData = await risingRes.json();
       if (statsRes.ok) globalStats = await statsRes.json();
     } else if (currentTab === 'insights') {
-      const resp = await fetch(`${API_BASE}/api/ai/latest-insight`);
-      if (resp.ok) latestInsightData = await resp.json();
+      const [insightRes, historyRes] = await Promise.all([
+        fetch(selectedInsightFile ? `${API_BASE}/api/ai/insights/report/${encodeURIComponent(selectedInsightFile)}` : `${API_BASE}/api/ai/latest-insight`),
+        fetch(`${API_BASE}/api/ai/insights/history`)
+      ]);
+      if (insightRes.ok) latestInsightData = await insightRes.json();
+      if (historyRes.ok) {
+        const hist = await historyRes.json();
+        historicalInsightsList = Array.isArray(hist) ? hist : (hist.history || []);
+      }
     }
     renderCurrentTab();
   } catch (err) {
@@ -1329,12 +1695,18 @@ function switchTab(tab) {
   });
 
   const filterBar = document.getElementById('filterBar');
+  const dateNavBar = document.getElementById('dateNavBar');
   const sortSelect = document.getElementById('sortOrder');
 
   if (tab === 'insights' || tab === 'trends') {
-    filterBar.style.display = 'none';
+    if (filterBar) filterBar.style.display = 'none';
   } else {
-    filterBar.style.display = 'flex';
+    if (filterBar) filterBar.style.display = 'flex';
+  }
+
+  // Date Nav Bar is only shown on Daily tab
+  if (dateNavBar) {
+    dateNavBar.style.display = (tab === 'daily') ? 'flex' : 'none';
   }
 
   if (tab === 'weekly') {
@@ -1355,6 +1727,8 @@ function switchTab(tab) {
     sortSelect.innerHTML = `
       <option value="today">⭐ 今日新增 Star ↓</option>
       <option value="total">📊 總 Star 數 ↓</option>
+      <option value="growth">⚡ 爆發成長率 ↓</option>
+      <option value="streak">🔥 連續上榜天數 ↓</option>
       <option value="name">🔤 專案名稱 A-Z</option>
     `;
     sortSelect.value = 'today';
@@ -1519,44 +1893,31 @@ function renderDaily(repos) {
     document.getElementById('contentArea').innerHTML = `
       <div class="empty-state">
         <div style="font-size:40px;margin-bottom:12px;">📭</div>
-        <div>無符合條件的每日熱門專案</div>
+        <div>【${selectedDate || '當日'}】無符合條件的每日熱門專案</div>
       </div>`;
     return;
   }
 
-  const grouped = {};
-  repos.forEach(r => {
-    const d = r.date;
-    if (!grouped[d]) grouped[d] = [];
-    grouped[d].push(r);
+  const dateStr = selectedDate ? new Date(selectedDate + 'T00:00:00').toLocaleDateString('zh-TW', {
+    year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'
+  }) : '趨勢榜單';
+
+  let html = `<div class="section-title">
+    <div>📅 ${dateStr} <span style="color:var(--text-secondary);font-size:13px;font-weight:400;">(共 ${repos.length} 個專案)</span></div>
+  </div>`;
+
+  html += '<div class="repo-list">';
+  const visible = repos.slice(0, visibleCount);
+  visible.forEach((repo, idx) => {
+    html += renderRepoCard(idx + 1, repo);
   });
 
-  const dates = Object.keys(grouped).sort().reverse();
-  let html = '';
-
-  dates.forEach(date => {
-    const dateRepos = grouped[date];
-    const dateStr = new Date(date + 'T00:00:00').toLocaleDateString('zh-TW', {
-      year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'
-    });
-
-    html += `<div class="section-title">
-      <div>📅 ${dateStr} <span style="color:var(--text-secondary);font-size:13px;font-weight:400;">(共 ${dateRepos.length} 個專案)</span></div>
+  if (repos.length > visibleCount) {
+    html += `<div style="text-align:center;padding:16px;">
+      <button class="btn-action" onclick="loadMore()">載入更多（尚有 ${repos.length - visibleCount} 項）</button>
     </div>`;
-
-    html += '<div class="repo-list">';
-    const visible = dateRepos.slice(0, visibleCount);
-    visible.forEach((repo, idx) => {
-      html += renderRepoCard(idx + 1, repo);
-    });
-
-    if (dateRepos.length > visibleCount) {
-      html += `<div style="text-align:center;padding:16px;">
-        <button class="btn-action" onclick="loadMore()">載入更多（尚有 ${dateRepos.length - visibleCount} 項）</button>
-      </div>`;
-    }
-    html += '</div>';
-  });
+  }
+  html += '</div>';
 
   document.getElementById('contentArea').innerHTML = html;
 }
@@ -1959,6 +2320,11 @@ async function initRelevanceChart() {
 // ============================================================
 let reportViewMode = 'visual'; // 'visual' or 'raw'
 
+function onInsightReportChanged(filename) {
+  selectedInsightFile = filename;
+  loadData();
+}
+
 function renderInsights() {
   if (!latestInsightData) {
     document.getElementById('contentArea').innerHTML = `
@@ -1995,7 +2361,16 @@ function renderInsights() {
         </h2>
         <div style="color:var(--text-secondary);font-size:13px;margin-top:2px;">分析日期：${date} · 由 Hermes Agent Dora 全自主監控與生成</div>
       </div>
-      <div style="display:flex;gap:10px;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        ${historicalInsightsList.length > 0 ? `
+          <div class="date-select-wrapper" style="padding:2px 8px;">
+            <span style="font-size:12px;color:var(--text-secondary);margin-right:4px;">📜 歷次報告：</span>
+            <select class="date-select" id="insightHistorySelect" onchange="onInsightReportChanged(this.value)">
+              <option value="">⚡ 最新日報 (${latestInsightData.date || '最新'})</option>
+              ${historicalInsightsList.map(h => `<option value="${esc(h.id || h.filename)}" ${(h.id || h.filename) === selectedInsightFile ? 'selected' : ''}>${esc(h.date)} (${esc(h.time || '')}) 巡檢報告</option>`).join('')}
+            </select>
+          </div>
+        ` : ''}
         <button class="btn-action" onclick="copyReport()">📋 複製 Telegram 報告</button>
       </div>
     </div>
@@ -2269,17 +2644,53 @@ function closeModalOnBackdrop(e) {
 // ACTIONS: ON-DEMAND SCRAPE
 // ============================================================
 async function triggerScrape() {
-  showToast('🔄 正在觸發即時採集任務...');
+  const btn = document.querySelector('.header-right .btn-primary');
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading-spinner-sm"></span> 採集中...';
+  }
+  showToast('🔄 正在啟動即時 GitHub 趨勢採集 pipeline...');
   try {
     const res = await fetch(`${API_BASE}/api/scrape/trigger`, { method: 'POST' });
     const data = await res.json();
-    showToast(data.message || '採集任務已送出');
-    setTimeout(() => {
-      loadStats();
-      loadData();
-      showToast('✅ 數據已更新');
-    }, 6000);
+    if (!res.ok) throw new Error(data.detail || '啟動失敗');
+    
+    // Poll status until completion
+    let pollCount = 0;
+    const pollInterval = setInterval(async () => {
+      pollCount++;
+      try {
+        const sRes = await fetch(`${API_BASE}/api/scrape/status`);
+        if (sRes.ok) {
+          const s = await sRes.json();
+          if (!s.is_running || pollCount > 60) {
+            clearInterval(pollInterval);
+            if (btn) {
+              btn.disabled = false;
+              btn.innerHTML = '⚡ 即時採集';
+            }
+            if (s.last_status === 'success') {
+              showToast(`✅ 採集完成！耗時 ${s.duration_sec}s，取得 ${s.last_records} 筆專案`);
+              await loadStats();
+              await loadDates();
+              selectedDate = latestDate;
+              await loadData();
+            } else {
+              showToast(`❌ 採集異常：${s.message || '未知錯誤'}`);
+            }
+          } else {
+            showToast(`⏳ 正在採集最新數據... (已耗時 ${s.duration_sec}s)`);
+          }
+        }
+      } catch (e) {
+        // ignore polling network glitch
+      }
+    }, 1000);
   } catch (e) {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '⚡ 即時採集';
+    }
     showToast('❌ 觸發失敗：' + e.message);
   }
 }
