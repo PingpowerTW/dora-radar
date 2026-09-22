@@ -25,10 +25,12 @@ Next scheduled: daily 20:00 via Hermes gateway cron (job `8dbd0d2806a5`)
 |-----------|--------|-------|
 | Backend (port 8081) | ✅ running | `dora-dashboard.service` (FastAPI + Async PostgREST) |
 | Cron/Scheduler | ✅ active | Hermes scheduler `8dbd0d2806a5`, daily 20:00 CST (93 completed) |
-| Supabase connection | ✅ OK | 100.92.131.83:8000 PostgREST (4,043+ records) |
+| Supabase connection | ✅ OK | 100.92.131.83:8000 PostgREST (4,153+ daily records) |
+| Weekly Aggregation | ✅ OK | 14 週歷史全量回填 (2,443 筆去重記錄，2026-06-22 ~ 2026-09-21) |
+| Monthly Aggregation | ✅ OK | 4 個月歷史全量回填 (1,940 筆去重記錄，2026-06-01 ~ 2026-09-01) |
 | Data freshness | ✅ fresh | Latest date: 2026-09-22 (110 records gathered) |
 | Scrape Speed | ✅ 4.55s | Parallel translation (ThreadPoolExecutor 10) + Bulk Upsert (batch 50) |
-| Date Navigation | ✅ OK | Historical date picker supporting 79+ dates |
+| Period Navigation | ✅ OK | 支援 日度/週度/月度 雙向步進與歷史下拉選單 |
 | AI Insights History | ✅ OK | 30+ archived Dora reports available in dropdown |
 
 ## Run History
@@ -50,6 +52,9 @@ Next scheduled: daily 20:00 via Hermes gateway cron (job `8dbd0d2806a5`)
 | 4 | Dora 排程即時看板 | ✅ | 2026-09-22 | 新增 `/api/cron/status` 與頂部排程狀態列，透明顯示上次與下次巡檢時間 |
 | 5 | Dora 歷次智囊日報歸檔 | ✅ | 2026-09-22 | 支援 `/api/ai/insights/history`，前端可切換查看近 30 期 Telegram 監控日報 |
 | 6 | 即時採集即時輪詢回饋 | ✅ | 2026-09-22 | `/api/scrape/status` 輪詢，按鈕載入動畫與耗時動態 Toast |
+| 7 | 歷史週度與月度全量回填 | ✅ | 2026-09-22 | 回填 80 天 4,153 筆日資料至 14 週 (2,443 筆) 與 4 月 (1,940 筆) |
+| 8 | 週度與月度專屬導航與專案卡片指標 | ✅ | 2026-09-22 | 新增 `/api/weeks` 與 `/api/months`，支援最高單日/日均/霸榜天數/月度趨勢 |
+| 9 | 修復生命週期篩選狀態洩漏 Bug | ✅ | 2026-09-22 | 切換頁籤自動重置 `currentLifecycleFilter = 'all'`，防止非日度資料被誤過濾為空白 |
 
 ---
 
