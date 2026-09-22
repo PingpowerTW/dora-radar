@@ -466,9 +466,13 @@ async def get_daily_stats():
 # ============================================================
 @app.get("/api/weeks")
 async def get_available_weeks():
-    """Get all distinct weeks available in weekly aggregation."""
+    """Get all distinct weeks available in weekly aggregation with TTL caching."""
+    cached = cache.get("available_weeks")
+    if cached:
+        return cached
+
     week_map = {}
-    for page in range(5):
+    for page in range(20):
         rows = await async_supabase_get(
             "github_trending_weekly",
             select="week_start,week_end",
@@ -476,6 +480,8 @@ async def get_available_weeks():
             limit=1000,
             offset=page * 1000
         )
+        if not rows:
+            break
         for r in rows:
             ws = r.get("week_start")
             we = r.get("week_end")
@@ -488,18 +494,24 @@ async def get_available_weeks():
 
     sorted_weeks = sorted(week_map.values(), key=lambda x: x["week_start"], reverse=True)
     latest_week = sorted_weeks[0]["week_start"] if sorted_weeks else None
-    return {
+    result = {
         "latest": latest_week,
         "latest_week": latest_week,
         "weeks": sorted_weeks
     }
+    cache.set("available_weeks", result, ttl=120)
+    return result
 
 
 @app.get("/api/months")
 async def get_available_months():
-    """Get all distinct months available in monthly aggregation."""
+    """Get all distinct months available in monthly aggregation with TTL caching."""
+    cached = cache.get("available_months")
+    if cached:
+        return cached
+
     month_map = {}
-    for page in range(5):
+    for page in range(20):
         rows = await async_supabase_get(
             "github_trending_monthly",
             select="month_start,month_end",
@@ -507,6 +519,8 @@ async def get_available_months():
             limit=1000,
             offset=page * 1000
         )
+        if not rows:
+            break
         for r in rows:
             ms = r.get("month_start")
             me = r.get("month_end")
@@ -519,11 +533,13 @@ async def get_available_months():
 
     sorted_months = sorted(month_map.values(), key=lambda x: x["month_start"], reverse=True)
     latest_month = sorted_months[0]["month_start"] if sorted_months else None
-    return {
+    result = {
         "latest": latest_month,
         "latest_month": latest_month,
         "months": sorted_months
     }
+    cache.set("available_months", result, ttl=120)
+    return result
 
 
 @app.get("/api/weekly", response_model=List[Dict[str, Any]])

@@ -1940,9 +1940,9 @@ function getFilteredAndSorted(data) {
       (r.description && r.description.toLowerCase().includes(search)) ||
       (r.description_zh && r.description_zh.toLowerCase().includes(search)) ||
       (r.desc_zh && r.desc_zh.toLowerCase().includes(search)) ||
-      (r.relevance_tags && r.relevance_tags.some(t => t.toLowerCase().includes(search))) ||
-      (r.reasons && r.reasons.some(t => t.toLowerCase().includes(search))) ||
-      (r.channels && r.channels.some(c => c.toLowerCase().includes(search)))
+      (Array.isArray(r.relevance_tags) && r.relevance_tags.some(t => typeof t === 'string' && t.toLowerCase().includes(search))) ||
+      (Array.isArray(r.reasons) && r.reasons.some(t => typeof t === 'string' && t.toLowerCase().includes(search))) ||
+      (Array.isArray(r.channels) && r.channels.some(c => typeof c === 'string' && c.toLowerCase().includes(search)))
     );
   }
 
@@ -2076,6 +2076,10 @@ function renderWeekly(repos) {
   }
 
   const weekStart = repos[0]?.week_start || selectedWeek;
+  if (!selectedWeek && weekStart) {
+    selectedWeek = weekStart;
+    updateDateNavUI();
+  }
   const weekEnd = repos[0]?.week_end || '';
   const title = weekEnd ? `${weekStart} ~ ${weekEnd}` : weekStart;
 
@@ -2110,6 +2114,10 @@ function renderMonthly(repos) {
   }
 
   const monthStart = repos[0]?.month_start || selectedMonth;
+  if (!selectedMonth && monthStart) {
+    selectedMonth = monthStart;
+    updateDateNavUI();
+  }
   const monthLabel = monthStart ? monthStart.slice(0, 7) : '';
 
   let html = `<div class="section-title">
