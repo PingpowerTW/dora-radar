@@ -779,10 +779,13 @@ async def trigger_live_scrape(background_tasks: BackgroundTasks):
             content={"status": "busy", "message": "採集任務正在執行中，請稍候..."}
         )
 
+    # Immediately flag as running to close concurrent race window
+    _scrape_state["is_running"] = True
+    _scrape_state["last_status"] = "running"
+    _scrape_state["message"] = "正在爬取 GitHub Trending 8 頻道並進行相關性分類與翻譯..."
+
     async def run_task():
         global _scrape_state
-        _scrape_state["is_running"] = True
-        _scrape_state["message"] = "正在爬取 GitHub Trending 8 頻道並進行相關性分類與翻譯..."
         start_t = time.time()
         try:
             from github_trending_analysis import run_full_cycle
@@ -790,16 +793,27 @@ async def trigger_live_scrape(background_tasks: BackgroundTasks):
             result = await loop.run_in_executor(None, run_full_cycle)
             dur = round(time.time() - start_t, 2)
             cache.clear()
-            records_count = result.get("records", 0) if isinstance(result, dict) else 0
-            _scrape_state = {
-                "is_running": False,
-                "last_run": datetime.now().isoformat(),
-                "last_status": "ok",
-                "last_records": records_count,
-                "duration_sec": dur,
-                "message": f"採集完成！共收錄 {records_count} 筆專案 (耗時 {dur}s)"
-            }
-            print(f"✅ On-demand scrape completed: {records_count} records ({dur}s).")
+            
+            if isinstance(result, dict) and result.get("status") == "error":
+                _scrape_state = {
+                    "is_running": False,
+                    "last_run": datetime.now().isoformat(),
+                    "last_status": "error",
+                    "last_records": 0,
+                    "duration_sec": dur,
+                    "message": f"採集失敗：{result.get('error', '未知錯誤')}"
+                }
+            else:
+                records_count = result.get("records", 0) if isinstance(result, dict) else 0
+                _scrape_state = {
+                    "is_running": False,
+                    "last_run": datetime.now().isoformat(),
+                    "last_status": "ok",
+                    "last_records": records_count,
+                    "duration_sec": dur,
+                    "message": f"採集完成！共收錄 {records_count} 筆專案 (耗時 {dur}s)"
+                }
+                print(f"✅ On-demand scrape completed: {records_count} records ({dur}s).")
         except Exception as e:
             dur = round(time.time() - start_t, 2)
             _scrape_state = {
