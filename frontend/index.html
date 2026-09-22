@@ -20,26 +20,69 @@
     document.write('<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\\/script>');
   }
 </script>
+<!-- Google Fonts: Plus Jakarta Sans, JetBrains Mono, & Material Symbols Outlined -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style>
 :root {
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-tertiary: #21262d;
-  --border-color: #30363d;
-  --border-hover: #58a6ff;
-  --text-primary: #e6edf3;
-  --text-secondary: #8b949e;
-  --text-muted: #6e7681;
-  --accent-blue: #58a6ff;
-  --accent-green: #3fb950;
-  --accent-purple: #bc8cff;
-  --accent-orange: #d29922;
-  --accent-red: #f85149;
-  --critical: #f85149;
-  --high: #d29922;
-  --medium: #e3b341;
-  --low: #8b949e;
-  --card-radius: 10px;
+  /* Surface & Glass Backgrounds (Bright Light Theme) */
+  --bg-base: #f8fafc;
+  --bg-gradient: radial-gradient(at 0% 0%, rgba(224, 242, 254, 0.75) 0px, transparent 50%),
+                 radial-gradient(at 100% 0%, rgba(238, 242, 255, 0.85) 0px, transparent 50%),
+                 radial-gradient(at 50% 100%, rgba(241, 245, 249, 0.8) 0px, transparent 50%),
+                 #f8fafc;
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  --bg-glass-strong: rgba(255, 255, 255, 0.9);
+  --bg-glass-hover: rgba(255, 255, 255, 0.98);
+  --bg-solid: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --bg-muted: #e2e8f0;
+
+  /* Borders & Dividers */
+  --border-glass: rgba(226, 232, 240, 0.85);
+  --border-glass-strong: rgba(203, 213, 225, 0.9);
+  --border-glass-light: rgba(255, 255, 255, 0.85);
+  --border-focus: #3b82f6;
+
+  /* Typography Colors (High Contrast Slate) */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  /* Accents & Brand Gradients */
+  --accent-blue: #2563eb;
+  --accent-indigo: #4f46e5;
+  --accent-cyan: #0284c7;
+  --accent-green: #059669;
+  --accent-amber: #d97706;
+  --accent-rose: #e11d48;
+  --accent-purple: #7c3aed;
+
+  /* Relevance Level Colors */
+  --critical: #ef4444;
+  --high: #f59e0b;
+  --medium: #eab308;
+  --low: #64748b;
+
+  /* Rounded Corners (All corners rounded) */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* Soft Diffuse Shadows */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 2px 8px -1px rgba(15, 23, 42, 0.05), 0 1px 3px -1px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 8px 24px -4px rgba(15, 23, 42, 0.07), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+  --shadow-lg: 0 16px 36px -6px rgba(15, 23, 42, 0.1), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  --shadow-modal: 0 25px 60px -12px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  --blur-md: 16px;
+  --blur-lg: 24px;
 }
 
 * { 
@@ -50,14 +93,31 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background: var(--bg-primary);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.5;
   min-height: 100vh;
   user-select: none;
   -webkit-user-select: none;
   cursor: default;
+  overflow-x: hidden;
+}
+
+/* Material Symbols Outlined Icon Styling */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
 }
 
 input, textarea, select {
@@ -71,17 +131,29 @@ input, textarea, select {
   -webkit-user-select: text;
 }
 
+/* Glass Panel Base */
+.glass-panel {
+  background: var(--bg-glass);
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  backdrop-filter: blur(var(--blur-md));
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-sm);
+}
+
 /* Header */
 .header {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  backdrop-filter: blur(var(--blur-md));
+  border-bottom: 1px solid var(--border-glass);
+  padding: 12px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 1px 6px rgba(15, 23, 42, 0.03);
 }
 
 .header-left {
@@ -93,22 +165,27 @@ input, textarea, select {
 .logo-wrap {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-decoration: none;
 }
 
 .logo-radar-box {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
 }
 
 .logo-radar-box:hover {
-  transform: scale(1.06);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
 }
 
 .logo-radar-svg {
@@ -145,26 +222,26 @@ input, textarea, select {
   color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   line-height: 1.2;
 }
 
 .brand-gradient {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  background: linear-gradient(135deg, #0284c7 0%, #4f46e5 50%, #9333ea 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .version-tag {
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 700;
-  padding: 1px 6px;
-  background: rgba(56, 189, 248, 0.12);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  border-radius: 4px;
+  padding: 2px 8px;
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+  color: #0284c7;
+  border: 1px solid rgba(2, 132, 199, 0.25);
+  border-radius: var(--radius-pill);
   letter-spacing: 0.5px;
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace;
+  font-family: 'JetBrains Mono', monospace;
   vertical-align: middle;
 }
 
@@ -185,58 +262,69 @@ input, textarea, select {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 12px;
-  background: var(--bg-tertiary);
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
   color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  border: 1px solid var(--border-glass);
+  font-family: 'JetBrains Mono', monospace;
+  box-shadow: var(--shadow-xs);
 }
 
 .stat-badge .num {
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .btn-action {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  border-radius: 6px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #cbd5e1;
+  color: var(--text-secondary);
+  border-radius: var(--radius-pill);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-xs);
+  line-height: 1;
 }
 
 .btn-action:hover {
-  background: #30363d;
-  border-color: var(--accent-blue);
-  color: var(--accent-blue);
+  background: #ffffff;
+  border-color: #94a3b8;
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary {
-  background: #238636;
-  border-color: rgba(240, 246, 252, 0.1);
-  color: #fff;
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  border: none;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
 }
 
 .btn-primary:hover {
-  background: #2ea043;
-  border-color: rgba(240, 246, 252, 0.2);
-  color: #fff;
+  background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.38);
+  transform: translateY(-1px);
 }
 
 /* Tabs */
 .tabs-container {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  padding: 0 28px;
+  background: rgba(255, 255, 255, 0.75);
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  backdrop-filter: blur(var(--blur-md));
+  border-bottom: 1px solid var(--border-glass);
+  padding: 6px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -244,101 +332,50 @@ input, textarea, select {
 
 .tabs {
   display: flex;
-  gap: 2px;
+  gap: 6px;
   overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-btn {
-  padding: 12px 18px;
+  padding: 10px 18px;
   background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
   color: var(--text-secondary);
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.15s ease;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .tab-btn:hover {
   color: var(--text-primary);
+  background: rgba(241, 245, 249, 0.8);
 }
 
 .tab-btn.active {
-  color: var(--accent-blue);
-  border-bottom-color: var(--accent-blue);
-}
-
-/* Filter Bar */
-.filter-bar {
-  display: flex;
-  gap: 12px;
-  padding: 14px 28px;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.search-wrapper {
-  flex: 1;
-  min-width: 240px;
-  position: relative;
-}
-
-.search-input {
-  width: 100%;
-  padding: 8px 36px 8px 14px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  color: var(--text-primary);
-  font-size: 13px;
-  outline: none;
-  transition: border-color 0.15s ease;
-}
-
-.search-input:focus {
-  border-color: var(--accent-blue);
-}
-
-.search-clear {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  font-size: 14px;
-  padding: 4px 6px;
-  border-radius: 4px;
-  display: none;
-}
-
-.search-clear.visible { display: block; }
-
-.filter-select {
-  padding: 8px 12px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  color: var(--text-primary);
-  font-size: 13px;
-  cursor: pointer;
-  outline: none;
-}
-
-.filter-select:focus {
-  border-color: var(--accent-blue);
+  color: #2563eb;
+  background: #eff6ff;
+  border-color: rgba(191, 219, 254, 0.85);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.08);
 }
 
 /* Dora Automation & Cron Schedule Banner */
 .dora-cron-banner {
-  background: #161b22;
-  border-bottom: 1px solid var(--border-color);
+  background: rgba(248, 250, 252, 0.88);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-glass);
   padding: 8px 28px;
   display: flex;
   align-items: center;
@@ -362,7 +399,7 @@ input, textarea, select {
   border-radius: 50%;
   background: var(--accent-green);
   display: inline-block;
-  box-shadow: 0 0 8px rgba(63, 185, 80, 0.6);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
 }
 
 .cron-status-dot.pulse {
@@ -370,91 +407,202 @@ input, textarea, select {
 }
 
 @keyframes cronPulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(63, 185, 80, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 .cron-title {
   color: var(--text-primary);
   font-weight: 600;
-}
-
-.cron-schedule {
-  color: var(--accent-blue);
-  font-weight: 600;
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace;
-}
-
-.cron-divider {
-  color: var(--border-color);
-}
-
-.cron-badge {
-  background: rgba(56, 189, 248, 0.1);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace;
-}
-
-/* Date Navigation Bar */
-.date-nav-bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 28px;
-  background: #13171e;
-  border-bottom: 1px solid var(--border-color);
-  flex-wrap: wrap;
-}
-
-.date-nav-btn {
-  padding: 6px 12px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s ease;
   display: inline-flex;
   align-items: center;
   gap: 4px;
 }
 
+.cron-schedule {
+  color: #0284c7;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.cron-divider {
+  color: #cbd5e1;
+}
+
+.cron-badge {
+  background: rgba(2, 132, 199, 0.08);
+  color: #0284c7;
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Filter Bar */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.68);
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  backdrop-filter: blur(var(--blur-md));
+  border-bottom: 1px solid var(--border-glass);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-wrapper {
+  flex: 1;
+  min-width: 260px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon-prefix {
+  position: absolute;
+  left: 14px;
+  color: #94a3b8;
+  font-size: 19px;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 9px 38px 9px 42px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-xs);
+}
+
+.search-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #f1f5f9;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+
+.search-clear:hover {
+  background: #e2e8f0;
+  color: var(--text-primary);
+}
+
+.search-clear.visible { display: flex; }
+
+.filter-select {
+  padding: 9px 16px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-pill);
+  color: #334155;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-xs);
+}
+
+.filter-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Date & Period Navigation Bar */
+.date-nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 28px;
+  background: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  backdrop-filter: blur(var(--blur-md));
+  border-bottom: 1px solid var(--border-glass);
+  flex-wrap: wrap;
+}
+
+.date-nav-btn {
+  padding: 7px 15px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #cbd5e1;
+  color: var(--text-secondary);
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: var(--shadow-xs);
+}
+
 .date-nav-btn:hover:not(:disabled) {
-  background: #30363d;
+  background: #ffffff;
   border-color: var(--accent-blue);
   color: var(--accent-blue);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
 }
 
 .date-nav-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: not-allowed;
+  transform: none;
 }
 
 .date-nav-btn.btn-today {
-  background: rgba(56, 189, 248, 0.12);
-  color: #38bdf8;
-  border-color: rgba(56, 189, 248, 0.3);
-  font-weight: 600;
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+  color: #0284c7;
+  border: 1px solid rgba(2, 132, 199, 0.3);
+  font-weight: 700;
 }
 
 .date-nav-btn.btn-today:hover {
-  background: rgba(56, 189, 248, 0.22);
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.18) 0%, rgba(99, 102, 241, 0.18) 100%);
+  border-color: #0284c7;
 }
 
 .date-select-wrapper {
   display: flex;
   align-items: center;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0 8px;
+  gap: 4px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-pill);
+  padding: 2px 12px;
+  box-shadow: var(--shadow-xs);
 }
 
 .date-select {
@@ -474,30 +622,91 @@ input, textarea, select {
 }
 
 .badge-tag-latest {
-  background: rgba(63, 185, 80, 0.15);
-  color: #3fb950;
-  border: 1px solid rgba(63, 185, 80, 0.3);
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-weight: 600;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(5, 150, 105, 0.12) 100%);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .badge-tag-history {
-  background: rgba(139, 148, 158, 0.15);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  padding: 3px 10px;
-  border-radius: 12px;
+  background: rgba(100, 116, 139, 0.1);
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.loading-spinner-sm {
-  width: 12px;
-  height: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #fff;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  display: inline-block;
+/* Quick Filter Pills */
+.quick-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px 28px;
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-xs);
+  user-select: none;
+}
+
+.pill-btn:hover {
+  background: #ffffff;
+  color: var(--text-primary);
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.pill-btn.active {
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
+}
+
+.pill-btn.new-pill.active {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.28);
+}
+
+.pill-btn.breakout-pill.active {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.28);
+}
+
+.pill-btn.streak-pill.active {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(194, 65, 12, 0.28);
 }
 
 /* Main Content */
@@ -507,96 +716,126 @@ input, textarea, select {
   margin: 0 auto;
 }
 
-/* Summary Cards */
+/* Summary Cards (Glassmorphism Bento Grid) */
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 14px;
+  gap: 16px;
   margin-bottom: 24px;
 }
 
 .summary-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--card-radius);
-  padding: 16px;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  backdrop-filter: blur(var(--blur-md));
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .summary-card:hover {
-  border-color: #444c56;
+  border-color: #cbd5e1;
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .summary-card.primary {
-  border-color: rgba(88, 166, 255, 0.3);
-  background: linear-gradient(180deg, var(--bg-secondary) 0%, rgba(88, 166, 255, 0.05) 100%);
+  border-color: rgba(191, 219, 254, 0.85);
+  background: linear-gradient(135deg, rgba(239, 246, 255, 0.9) 0%, rgba(255, 255, 255, 0.85) 100%);
 }
 
 .summary-card.critical {
-  border-color: rgba(248, 81, 73, 0.3);
-  background: linear-gradient(180deg, var(--bg-secondary) 0%, rgba(248, 81, 73, 0.05) 100%);
+  border-color: rgba(254, 202, 202, 0.85);
+  background: linear-gradient(135deg, rgba(254, 242, 242, 0.9) 0%, rgba(255, 255, 255, 0.85) 100%);
 }
 
 .card-label {
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
-  font-weight: 600;
+  letter-spacing: 0.6px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .card-value {
-  font-size: 26px;
-  font-weight: 700;
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 28px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.5px;
 }
 
-.card-value.critical { color: var(--critical); }
-.card-value.high { color: var(--accent-orange); }
-.card-value.medium { color: var(--medium); }
-.card-value.low { color: var(--text-secondary); }
-.card-value.blue { color: var(--accent-blue); }
-.card-value.green { color: var(--accent-green); }
+.card-value.critical { color: #dc2626; }
+.card-value.high { color: #d97706; }
+.card-value.medium { color: #b45309; }
+.card-value.low { color: #64748b; }
+.card-value.blue { color: #2563eb; }
+.card-value.green { color: #059669; }
 
 /* Repo List & Cards */
 .repo-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .repo-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--card-radius);
-  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  backdrop-filter: blur(var(--blur-md));
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
   display: flex;
   align-items: flex-start;
-  gap: 16px;
-  transition: all 0.15s ease;
+  gap: 18px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
+  box-shadow: var(--shadow-sm);
 }
 
 .repo-card:hover {
-  border-color: var(--border-hover);
-  background: #1c2128;
-  transform: translateY(-1px);
+  border-color: #93c5fd;
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .repo-rank {
   font-size: 18px;
-  font-weight: 700;
-  color: var(--text-muted);
-  min-width: 32px;
+  font-weight: 800;
+  color: #94a3b8;
+  min-width: 40px;
   text-align: center;
-  padding-top: 2px;
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  padding: 4px 8px;
+  font-family: 'JetBrains Mono', monospace;
+  background: #f1f5f9;
+  border-radius: var(--radius-md);
 }
 
-.repo-rank.top1 { color: #f1e05a; }
-.repo-rank.top2 { color: #e6edf3; }
-.repo-rank.top3 { color: #d29922; }
+.repo-rank.top1 {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #b45309;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
+}
+
+.repo-rank.top2 {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  color: #475569;
+}
+
+.repo-rank.top3 {
+  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+  color: #c2410c;
+}
 
 .repo-info {
   flex: 1;
@@ -612,30 +851,32 @@ input, textarea, select {
 }
 
 .repo-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--accent-blue);
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #1e40af;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  transition: color 0.15s ease;
 }
 
 .repo-name:hover {
+  color: #2563eb;
   text-decoration: underline;
 }
 
 .repo-desc {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--text-secondary);
-  margin-top: 6px;
-  line-height: 1.5;
+  margin-top: 8px;
+  line-height: 1.6;
 }
 
 .repo-meta {
   display: flex;
-  gap: 12px;
-  margin-top: 10px;
+  gap: 14px;
+  margin-top: 12px;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -644,9 +885,9 @@ input, textarea, select {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 12px;
-  color: var(--text-secondary);
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  color: #475569;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .meta-item strong {
@@ -654,75 +895,136 @@ input, textarea, select {
 }
 
 .lang-dot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   display: inline-block;
 }
 
 .relevance-badge {
-  padding: 2px 8px;
-  border-radius: 12px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
   font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-weight: 700;
   letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .relevance-badge.critical {
-  background: rgba(248, 81, 73, 0.15);
-  color: var(--critical);
-  border: 1px solid rgba(248, 81, 73, 0.3);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(244, 63, 94, 0.12) 100%);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .relevance-badge.high {
-  background: rgba(210, 153, 34, 0.15);
-  color: var(--accent-orange);
-  border: 1px solid rgba(210, 153, 34, 0.3);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(234, 88, 12, 0.12) 100%);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 .relevance-badge.medium {
-  background: rgba(227, 179, 65, 0.15);
-  color: var(--medium);
-  border: 1px solid rgba(227, 179, 65, 0.3);
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.12) 0%, rgba(202, 138, 4, 0.12) 100%);
+  color: #b45309;
+  border: 1px solid rgba(234, 179, 8, 0.3);
 }
 
 .relevance-badge.low {
-  background: rgba(139, 148, 158, 0.15);
-  color: var(--text-secondary);
-  border: 1px solid rgba(139, 148, 158, 0.25);
+  background: rgba(148, 163, 184, 0.15);
+  color: #475569;
+  border: 1px solid rgba(148, 163, 184, 0.3);
 }
 
 .repo-tags {
   display: flex;
   gap: 6px;
-  margin-top: 8px;
+  margin-top: 10px;
   flex-wrap: wrap;
 }
 
 .tag {
   font-size: 11px;
-  padding: 1px 8px;
-  background: var(--bg-tertiary);
-  border-radius: 6px;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
+  padding: 2px 10px;
+  background: #f1f5f9;
+  border-radius: var(--radius-pill);
+  color: #475569;
+  border: 1px solid #e2e8f0;
 }
 
 .btn-history {
-  padding: 4px 10px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
+  padding: 5px 13px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-pill);
   font-size: 12px;
-  color: var(--accent-blue);
+  font-weight: 600;
+  color: #2563eb;
   cursor: pointer;
-  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-xs);
 }
 
 .btn-history:hover {
-  background: #30363d;
-  border-color: var(--accent-blue);
+  background: #eff6ff;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* Card Title Badges */
+.badge-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+  color: #e11d48;
+  border: 1px solid rgba(244, 63, 94, 0.4);
+}
+
+.badge-streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  color: #c2410c;
+  border: 1px solid rgba(249, 115, 22, 0.4);
+}
+
+.badge-growth {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+  color: #a16207;
+  border: 1px solid rgba(234, 179, 8, 0.4);
+}
+
+.badge-channel {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 500;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
 }
 
 /* Charts Grid */
@@ -734,29 +1036,33 @@ input, textarea, select {
 }
 
 .chart-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--card-radius);
-  padding: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  backdrop-filter: blur(var(--blur-md));
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
 }
 
 .chart-title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 14.5px;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* Modal */
+/* Modal Popup Window (CRITICAL: 100% Solid Opaque Background for Zero Transparency Issues) */
 .modal-backdrop {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
-  z-index: 999;
+  background: rgba(15, 23, 42, 0.6);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
   display: none;
   align-items: center;
   justify-content: center;
@@ -766,57 +1072,70 @@ input, textarea, select {
 .modal-backdrop.active { display: flex; }
 
 .modal-content {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  background: #ffffff !important; /* Fully opaque solid background so text is 100% visible */
+  border: 1px solid rgba(203, 213, 225, 0.9);
+  border-radius: var(--radius-xl);
   width: 100%;
-  max-width: 800px;
-  max-height: 85vh;
+  max-width: 820px;
+  max-height: 88vh;
   overflow-y: auto;
-  padding: 24px;
+  padding: 28px;
   position: relative;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+  box-shadow: var(--shadow-modal);
+  color: var(--text-primary);
 }
 
 .modal-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  background: transparent;
-  border: none;
+  top: 18px;
+  right: 18px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   color: var(--text-secondary);
-  font-size: 20px;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
-.modal-close:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+.modal-close:hover { 
+  color: var(--text-primary); 
+  background: #e2e8f0;
+  transform: rotate(90deg);
+}
 
 /* Toast */
 .toast {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: #1f6feb;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  z-index: 1000;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  font-size: 13.5px;
+  font-weight: 600;
+  z-index: 1100;
   display: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  animation: fadeIn 0.2s ease forwards;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  align-items: center;
+  gap: 8px;
 }
 
-.toast.visible { display: block; }
+.toast.visible { display: flex; }
 
 /* Section Title */
 .section-title {
   font-size: 16px;
-  font-weight: 600;
-  margin: 20px 0 12px 0;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 22px 0 14px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -830,9 +1149,9 @@ input, textarea, select {
 }
 
 .loading-spinner {
-  width: 36px;
-  height: 36px;
-  border: 3px solid var(--border-color);
+  width: 38px;
+  height: 38px;
+  border: 3px solid rgba(203, 213, 225, 0.6);
   border-top-color: var(--accent-blue);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -853,12 +1172,14 @@ input, textarea, select {
 
 /* Report Card & Modern Markdown Typography */
 .report-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  backdrop-filter: blur(var(--blur-md));
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-sm);
   margin-top: 10px;
 }
 
@@ -867,7 +1188,7 @@ input, textarea, select {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  background: linear-gradient(90deg, #0284c7 0%, #4f46e5 50%, #9333ea 100%);
   z-index: 10;
 }
 
@@ -876,8 +1197,8 @@ input, textarea, select {
   align-items: center;
   justify-content: space-between;
   padding: 14px 24px;
-  border-bottom: 1px solid var(--border-color);
-  background: rgba(22, 27, 34, 0.85);
+  border-bottom: 1px solid #e2e8f0;
+  background: rgba(248, 250, 252, 0.9);
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -890,21 +1211,21 @@ input, textarea, select {
 
 .report-badge-source {
   font-size: 11px;
-  padding: 3px 8px;
-  background: rgba(56, 189, 248, 0.12);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  border-radius: 6px;
-  font-weight: 600;
+  padding: 3px 10px;
+  background: rgba(2, 132, 199, 0.08);
+  color: #0284c7;
+  border: 1px solid rgba(2, 132, 199, 0.25);
+  border-radius: var(--radius-pill);
+  font-weight: 700;
   letter-spacing: 0.5px;
 }
 
 .view-toggle-group {
   display: inline-flex;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 2px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-pill);
+  padding: 3px;
 }
 
 .view-toggle-btn {
@@ -914,7 +1235,7 @@ input, textarea, select {
   color: var(--text-secondary);
   font-size: 12px;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -924,15 +1245,15 @@ input, textarea, select {
 }
 
 .view-toggle-btn.active {
-  background: #30363d;
-  color: #38bdf8;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  color: var(--accent-blue);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.1);
 }
 
 .report-content {
   padding: 28px;
-  color: var(--text-primary);
-  line-height: 1.75;
+  color: #1e293b;
+  line-height: 1.8;
   font-size: 14.5px;
   user-select: text;
   -webkit-user-select: text;
@@ -942,7 +1263,7 @@ input, textarea, select {
   font-size: 21px;
   font-weight: 800;
   margin-bottom: 14px;
-  color: #ffffff;
+  color: #0f172a;
   letter-spacing: -0.3px;
 }
 
@@ -950,32 +1271,32 @@ input, textarea, select {
   font-size: 16px;
   font-weight: 700;
   margin: 26px 0 12px 0;
-  color: #e6edf3;
+  color: #0f172a;
   display: flex;
   align-items: center;
-  border-left: 3px solid #38bdf8;
+  border-left: 4px solid var(--accent-blue);
   padding-left: 10px;
 }
 
 .report-content h3 {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   margin: 18px 0 8px 0;
-  color: #58a6ff;
+  color: var(--accent-blue);
 }
 
 .report-content p {
   margin-bottom: 12px;
-  color: #c9d1d9;
+  color: #334155;
 }
 
 .report-content strong {
-  color: #ffffff;
-  font-weight: 600;
+  color: #0f172a;
+  font-weight: 700;
 }
 
 .report-content a {
-  color: #58a6ff;
+  color: var(--accent-blue);
   text-decoration: none;
   font-weight: 600;
 }
@@ -987,13 +1308,13 @@ input, textarea, select {
 .report-content hr {
   border: none;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #30363d 30%, #30363d 70%, transparent);
+  background: linear-gradient(90deg, transparent, #cbd5e1 30%, #cbd5e1 70%, transparent);
   margin: 24px 0;
 }
 
 .report-content ul, .report-content ol {
   margin: 10px 0 16px 22px;
-  color: #c9d1d9;
+  color: #334155;
 }
 
 .report-content li {
@@ -1004,20 +1325,20 @@ input, textarea, select {
   width: 100%;
   border-collapse: collapse;
   margin: 18px 0;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
   overflow: hidden;
   font-size: 13px;
 }
 
 .report-content th {
-  background: #1c2128;
+  background: #f8fafc;
   padding: 10px 14px;
   text-align: left;
   color: var(--text-secondary);
-  font-weight: 600;
-  border-bottom: 1px solid var(--border-color);
+  font-weight: 700;
+  border-bottom: 1px solid #e2e8f0;
   text-transform: uppercase;
   font-size: 11px;
   letter-spacing: 0.5px;
@@ -1025,9 +1346,9 @@ input, textarea, select {
 
 .report-content td {
   padding: 10px 14px;
-  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
-  color: #e6edf3;
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .report-content tr:last-child td {
@@ -1035,157 +1356,68 @@ input, textarea, select {
 }
 
 .report-content tr:hover td {
-  background: rgba(88, 166, 255, 0.04);
+  background: rgba(37, 99, 235, 0.03);
 }
 
 .report-content blockquote {
-  border-left: 3px solid #bc8cff;
-  background: rgba(188, 140, 255, 0.05);
+  border-left: 4px solid #6366f1;
+  background: rgba(99, 102, 241, 0.05);
   padding: 12px 18px;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   margin: 16px 0;
-  color: #d2a8ff;
+  color: #4338ca;
 }
 
 .report-raw-box {
-  background: #090d13;
+  background: #0f172a;
   padding: 24px;
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   line-height: 1.6;
-  color: #7ee787;
+  color: #38bdf8;
   white-space: pre-wrap;
   word-break: break-word;
   max-height: 600px;
   overflow-y: auto;
 }
 
-/* Quick Filter Pills */
-.quick-filters {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  padding: 0 28px 14px 28px;
-  background: var(--bg-primary);
+/* Browser Compatibility Fallback */
+@supports not (backdrop-filter: blur(10px)) {
+  .header, .tabs-container, .filter-bar, .date-nav-bar, .quick-filters,
+  .summary-card, .repo-card, .chart-card, .report-card, .dora-cron-banner {
+    background: #ffffff !important;
+  }
 }
 
-.pill-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  user-select: none;
-}
-
-.pill-btn:hover {
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
-  border-color: #58a6ff;
-  transform: translateY(-1px);
-}
-
-.pill-btn.active {
-  background: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
-  border-color: #38bdf8;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
-}
-
-.pill-btn.new-pill.active {
-  background: rgba(244, 63, 94, 0.15);
-  color: #fb7185;
-  border-color: #f43f5e;
-  box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
-}
-
-.pill-btn.breakout-pill.active {
-  background: rgba(234, 179, 8, 0.15);
-  color: #facc15;
-  border-color: #eab308;
-  box-shadow: 0 0 10px rgba(234, 179, 8, 0.2);
-}
-
-.pill-btn.streak-pill.active {
-  background: rgba(249, 115, 22, 0.15);
-  color: #fb923c;
-  border-color: #f97316;
-  box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
-}
-
-/* Card Badges */
-.badge-new {
-  display: inline-flex;
-  align-items: center;
-  padding: 1px 7px;
-  border-radius: 4px;
-  font-size: 10.5px;
-  font-weight: 800;
-  background: linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(192, 132, 252, 0.2));
-  color: #fb7185;
-  border: 1px solid rgba(244, 63, 94, 0.5);
-  letter-spacing: 0.4px;
-  animation: pulseNew 2.5s infinite;
-}
-
-@keyframes pulseNew {
-  0%, 100% { box-shadow: 0 0 0 rgba(244, 63, 94, 0); }
-  50% { box-shadow: 0 0 8px rgba(244, 63, 94, 0.4); }
-}
-
-.badge-streak {
-  display: inline-flex;
-  align-items: center;
-  padding: 1px 6px;
-  border-radius: 4px;
-  font-size: 10.5px;
-  font-weight: 600;
-  background: rgba(249, 115, 22, 0.15);
-  color: #fb923c;
-  border: 1px solid rgba(249, 115, 22, 0.3);
-}
-
-.badge-growth {
-  display: inline-flex;
-  align-items: center;
-  padding: 1px 6px;
-  border-radius: 4px;
-  font-size: 10.5px;
-  font-weight: 700;
-  background: rgba(234, 179, 8, 0.15);
-  color: #facc15;
-  border: 1px solid rgba(234, 179, 8, 0.3);
-}
-
-.badge-channel {
-  display: inline-flex;
-  align-items: center;
-  padding: 1px 6px;
-  border-radius: 4px;
-  font-size: 10.5px;
-  font-weight: 500;
-  background: var(--bg-tertiary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .header { padding: 12px 16px; }
-  .tabs-container { padding: 0 16px; }
-  .filter-bar { padding: 12px 16px 8px 16px; }
-  .quick-filters { padding: 0 16px 12px 16px; }
-  .main { padding: 16px; }
+/* Responsive & Mobile-first Ergonomics */
+@media (max-width: 900px) {
+  .header { padding: 12px 18px; }
+  .tabs-container { padding: 4px 16px; }
+  .filter-bar { padding: 12px 16px; }
+  .quick-filters { padding: 10px 16px; }
+  .main { padding: 18px 16px; }
+  .date-nav-bar { padding: 10px 16px; }
   .charts-grid { grid-template-columns: 1fr; }
+  .summary-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
+@media (max-width: 640px) {
+  .header-left { gap: 10px; }
+  .logo-title { font-size: 17px; }
+  .logo-sub { display: none; }
   .header-right .stat-badge { display: none; }
+  .summary-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .card-value { font-size: 22px; }
+  .filter-bar { flex-direction: column; align-items: stretch; }
+  .search-wrapper { min-width: 100%; width: 100%; }
+  .filter-select { width: 100%; min-height: 42px; }
+  .date-nav-bar { justify-content: space-between; }
+  .date-select-wrapper { order: 1; width: 100%; justify-content: center; margin-top: 6px; }
+  .date-badge-info { order: 2; width: 100%; text-align: center; margin-top: 4px; }
+  .repo-card { flex-direction: column; padding: 16px; gap: 12px; }
+  .repo-rank { align-self: flex-start; }
+  .modal-content { padding: 20px 16px; max-height: 92vh; border-radius: var(--radius-lg); }
+  .modal-content .summary-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 </style>
 </head>
@@ -1220,24 +1452,24 @@ input, textarea, select {
             </filter>
           </defs>
           <!-- Frame Background -->
-          <rect x="2" y="2" width="44" height="44" rx="12" fill="#161b22" stroke="url(#doraGrad)" stroke-width="1.5"/>
+          <rect x="2" y="2" width="44" height="44" rx="12" fill="#ffffff" stroke="url(#doraGrad)" stroke-width="1.5"/>
           <!-- Concentric Orbit Rings -->
-          <circle cx="24" cy="24" r="16" stroke="#30363d" stroke-width="1" stroke-dasharray="2 3"/>
+          <circle cx="24" cy="24" r="16" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2 3"/>
           <circle cx="24" cy="24" r="9.5" stroke="url(#doraGrad)" stroke-width="1.2" stroke-opacity="0.5"/>
           <!-- Rotating Radar Sweep Beam -->
           <g class="radar-rotor">
             <path d="M 24 24 L 38 10 A 20 20 0 0 0 24 4 Z" fill="url(#radarBeam)"/>
           </g>
           <!-- Grid Axis Lines -->
-          <line x1="24" y1="5" x2="24" y2="43" stroke="#30363d" stroke-width="1" stroke-opacity="0.7"/>
-          <line x1="5" y1="24" x2="43" y2="24" stroke="#30363d" stroke-width="1" stroke-opacity="0.7"/>
+          <line x1="24" y1="5" x2="24" y2="43" stroke="#e2e8f0" stroke-width="1" stroke-opacity="0.9"/>
+          <line x1="5" y1="24" x2="43" y2="24" stroke="#e2e8f0" stroke-width="1" stroke-opacity="0.9"/>
           <!-- Glowing Center Core -->
           <circle cx="24" cy="24" r="6" fill="url(#coreGlow)"/>
-          <circle cx="24" cy="24" r="3.2" fill="#38bdf8" filter="url(#blipGlowFilter)"/>
+          <circle cx="24" cy="24" r="3.2" fill="#0284c7" filter="url(#blipGlowFilter)"/>
           <!-- Active Hotspot Radar Blips -->
-          <circle cx="34" cy="14" r="2.2" fill="#38bdf8" class="radar-blip blip-1" filter="url(#blipGlowFilter)"/>
-          <circle cx="13" cy="32" r="1.8" fill="#c084fc" class="radar-blip blip-2"/>
-          <circle cx="32" cy="34" r="1.6" fill="#3fb950" class="radar-blip blip-3"/>
+          <circle cx="34" cy="14" r="2.2" fill="#0284c7" class="radar-blip blip-1" filter="url(#blipGlowFilter)"/>
+          <circle cx="13" cy="32" r="1.8" fill="#9333ea" class="radar-blip blip-2"/>
+          <circle cx="32" cy="34" r="1.6" fill="#10b981" class="radar-blip blip-3"/>
         </svg>
       </div>
       <div>
@@ -1254,18 +1486,18 @@ input, textarea, select {
       <span class="live-dot"></span>
       <span id="headerTodayDate">-</span>
     </div>
-    <button class="btn-action btn-primary" onclick="triggerScrape()">⚡ 即時採集</button>
+    <button class="btn-action btn-primary" onclick="triggerScrape()"><span class="material-symbols-outlined" style="font-size:18px;">bolt</span> 即時採集</button>
   </div>
 </div>
 
 <!-- Tabs -->
 <div class="tabs-container">
   <div class="tabs">
-    <button class="tab-btn active" data-tab="daily" onclick="switchTab('daily')">📡 今日熱門雷達</button>
-    <button class="tab-btn" data-tab="weekly" onclick="switchTab('weekly')">📅 週度彙總統計</button>
-    <button class="tab-btn" data-tab="monthly" onclick="switchTab('monthly')">📆 月度趨勢走向</button>
-    <button class="tab-btn" data-tab="trends" onclick="switchTab('trends')">🔥 開源生態洞察</button>
-    <button class="tab-btn" data-tab="insights" onclick="switchTab('insights')">💡 Dora 智囊觀點</button>
+    <button class="tab-btn active" data-tab="daily" onclick="switchTab('daily')"><span class="material-symbols-outlined">radar</span> 今日熱門雷達</button>
+    <button class="tab-btn" data-tab="weekly" onclick="switchTab('weekly')"><span class="material-symbols-outlined">calendar_view_week</span> 週度彙總統計</button>
+    <button class="tab-btn" data-tab="monthly" onclick="switchTab('monthly')"><span class="material-symbols-outlined">calendar_month</span> 月度趨勢走向</button>
+    <button class="tab-btn" data-tab="trends" onclick="switchTab('trends')"><span class="material-symbols-outlined">insights</span> 開源生態洞察</button>
+    <button class="tab-btn" data-tab="insights" onclick="switchTab('insights')"><span class="material-symbols-outlined">psychology</span> Dora 智囊觀點</button>
   </div>
 </div>
 
@@ -1273,7 +1505,7 @@ input, textarea, select {
 <div class="dora-cron-banner" id="doraCronBanner">
   <div class="cron-banner-left">
     <span class="cron-status-dot pulse"></span>
-    <span class="cron-title">🤖 Dora 每日自動監控排程：</span>
+    <span class="cron-title"><span class="material-symbols-outlined" style="font-size:17px;color:var(--accent-blue);">smart_toy</span> Dora 每日自動監控排程：</span>
     <span class="cron-schedule" id="cronScheduleText">每日 20:00 (台北時間)</span>
     <span class="cron-divider">·</span>
     <span class="cron-detail" id="cronLastRunText">上次巡檢：載入中...</span>
@@ -1281,15 +1513,16 @@ input, textarea, select {
     <span class="cron-next" id="cronNextRunText">下次執行：今日 20:00</span>
   </div>
   <div class="cron-banner-right">
-    <span class="cron-badge" id="cronCompletedBadge">已完成 93 次巡檢</span>
+    <span class="cron-badge" id="cronCompletedBadge"><span class="material-symbols-outlined" style="font-size:14px;">verified</span> 已完成 93 次巡檢</span>
   </div>
 </div>
 
 <!-- Filter Bar -->
 <div class="filter-bar" id="filterBar">
   <div class="search-wrapper">
-    <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜尋專案名稱、描述或關鍵字..." onkeyup="handleSearchDebounced()">
-    <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+    <span class="material-symbols-outlined search-icon-prefix">search</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="搜尋專案名稱、描述或關鍵字..." onkeyup="handleSearchDebounced()">
+    <button class="search-clear" id="searchClear" onclick="clearSearch()"><span class="material-symbols-outlined" style="font-size:16px;">close</span></button>
   </div>
   
   <select class="filter-select" id="relevanceFilter" onchange="applyFilters()">
@@ -1315,24 +1548,24 @@ input, textarea, select {
 
 <!-- Date & Period Navigation Bar (Daily, Weekly, Monthly) -->
 <div class="date-nav-bar" id="dateNavBar">
-  <button class="date-nav-btn" id="btnPrevDate" onclick="navigateDate(-1)">⏮️ 前一日</button>
+  <button class="date-nav-btn" id="btnPrevDate" onclick="navigateDate(-1)"><span class="material-symbols-outlined" style="font-size:16px;">chevron_left</span> 前一日</button>
   <div class="date-select-wrapper">
-    <span class="date-icon" style="margin-right:4px;">📅</span>
+    <span class="material-symbols-outlined" style="font-size:16px;color:var(--text-secondary);margin-left:4px;">calendar_today</span>
     <select class="date-select" id="datePickerSelect" onchange="onDateSelectChanged()">
       <option value="">載入日期中...</option>
     </select>
   </div>
-  <button class="date-nav-btn" id="btnNextDate" onclick="navigateDate(1)">後一日 ⏭️</button>
-  <button class="date-nav-btn btn-today" id="btnLatestDate" onclick="jumpToLatestDate()">⚡ 回到最新一日</button>
+  <button class="date-nav-btn" id="btnNextDate" onclick="navigateDate(1)">後一日 <span class="material-symbols-outlined" style="font-size:16px;">chevron_right</span></button>
+  <button class="date-nav-btn btn-today" id="btnLatestDate" onclick="jumpToLatestDate()"><span class="material-symbols-outlined" style="font-size:16px;">bolt</span> 回到最新一日</button>
   <span class="date-badge-info" id="dateBadgeInfo"></span>
 </div>
 
 <!-- Quick Lifecycle Filter Pills -->
 <div class="quick-filters" id="quickFiltersBar">
-  <button class="pill-btn active" id="filterPillAll" onclick="setLifecycleFilter('all')">🌐 全部專案 (<span id="countAll">-</span>)</button>
-  <button class="pill-btn new-pill" id="filterPillNew" onclick="setLifecycleFilter('new')">✨ 今日首發新面孔 (<span id="countNew">-</span>)</button>
-  <button class="pill-btn breakout-pill" id="filterPillBreakout" onclick="setLifecycleFilter('breakout')">🚀 爆發潛力黑馬 (<span id="countBreakout">-</span>)</button>
-  <button class="pill-btn streak-pill" id="filterPillStreak" onclick="setLifecycleFilter('streak')">🔥 連續霸榜常客 (<span id="countStreak">-</span>)</button>
+  <button class="pill-btn active" id="filterPillAll" onclick="setLifecycleFilter('all')"><span class="material-symbols-outlined" style="font-size:16px;">grid_view</span> 全部專案 (<span id="countAll">-</span>)</button>
+  <button class="pill-btn new-pill" id="filterPillNew" onclick="setLifecycleFilter('new')"><span class="material-symbols-outlined" style="font-size:16px;">auto_awesome</span> 今日首發新面孔 (<span id="countNew">-</span>)</button>
+  <button class="pill-btn breakout-pill" id="filterPillBreakout" onclick="setLifecycleFilter('breakout')"><span class="material-symbols-outlined" style="font-size:16px;">rocket_launch</span> 爆發潛力黑馬 (<span id="countBreakout">-</span>)</button>
+  <button class="pill-btn streak-pill" id="filterPillStreak" onclick="setLifecycleFilter('streak')"><span class="material-symbols-outlined" style="font-size:16px;">local_fire_department</span> 連續霸榜常客 (<span id="countStreak">-</span>)</button>
 </div>
 
 <!-- Main Content -->
@@ -1340,27 +1573,27 @@ input, textarea, select {
   <!-- Summary Cards -->
   <div class="summary-grid" id="summaryCards">
     <div class="summary-card primary">
-      <div class="card-label">📊 總記錄筆數</div>
+      <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:var(--accent-blue);">analytics</span> 總記錄筆數</div>
       <div class="card-value blue" id="statTotal">-</div>
     </div>
     <div class="summary-card">
-      <div class="card-label">📅 追蹤天數</div>
+      <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:var(--accent-green);">calendar_today</span> 追蹤天數</div>
       <div class="card-value green" id="statDays">-</div>
     </div>
     <div class="summary-card critical">
-      <div class="card-label">🔴 Critical (AI Agent)</div>
+      <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:#dc2626;">smart_toy</span> Critical (AI Agent)</div>
       <div class="card-value critical" id="statCritical">-</div>
     </div>
     <div class="summary-card">
-      <div class="card-label">🟠 High (Skills/Infra)</div>
+      <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:#d97706;">extension</span> High (Skills/Infra)</div>
       <div class="card-value high" id="statHigh">-</div>
     </div>
     <div class="summary-card">
-      <div class="card-label">🟡 Medium</div>
+      <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:#b45309;">build</span> Medium</div>
       <div class="card-value medium" id="statMedium">-</div>
     </div>
     <div class="summary-card">
-      <div class="card-label">⚪ Low</div>
+      <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:#64748b;">public</span> Low</div>
       <div class="card-value low" id="statLow">-</div>
     </div>
   </div>
@@ -1377,7 +1610,7 @@ input, textarea, select {
 <!-- Project History Modal -->
 <div class="modal-backdrop" id="historyModal" onclick="closeModalOnBackdrop(event)">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeHistoryModal()">✕</button>
+    <button class="modal-close" onclick="closeHistoryModal()"><span class="material-symbols-outlined" style="font-size:18px;">close</span></button>
     <div id="modalBody">
       <div class="loading">
         <div class="loading-spinner"></div>
@@ -1568,9 +1801,9 @@ function populateDateSelector() {
   const btnLatest = document.getElementById('btnLatestDate');
 
   if (currentTab === 'daily') {
-    if (btnPrev) btnPrev.textContent = '⏮️ 前一日';
-    if (btnNext) btnNext.textContent = '後一日 ⏭️';
-    if (btnLatest) btnLatest.textContent = '⚡ 回到最新一日';
+    if (btnPrev) btnPrev.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;">chevron_left</span> 前一日';
+    if (btnNext) btnNext.innerHTML = '後一日 <span class="material-symbols-outlined" style="font-size:16px;">chevron_right</span>';
+    if (btnLatest) btnLatest.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;">bolt</span> 回到最新一日';
 
     if (!availableDates.length) {
       select.innerHTML = '<option value="">無日期資料</option>';
@@ -1582,9 +1815,9 @@ function populateDateSelector() {
       return `<option value="${d.date}" ${d.date === selectedDate ? 'selected' : ''}>${label}</option>`;
     }).join('');
   } else if (currentTab === 'weekly') {
-    if (btnPrev) btnPrev.textContent = '⏮️ 前一週';
-    if (btnNext) btnNext.textContent = '後一週 ⏭️';
-    if (btnLatest) btnLatest.textContent = '⚡ 回到最新週';
+    if (btnPrev) btnPrev.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;">chevron_left</span> 前一週';
+    if (btnNext) btnNext.innerHTML = '後一週 <span class="material-symbols-outlined" style="font-size:16px;">chevron_right</span>';
+    if (btnLatest) btnLatest.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;">bolt</span> 回到最新週';
 
     if (!availableWeeks.length) {
       select.innerHTML = '<option value="">無週度資料</option>';
@@ -1596,9 +1829,9 @@ function populateDateSelector() {
       return `<option value="${w.week_start}" ${w.week_start === selectedWeek ? 'selected' : ''}>${label}</option>`;
     }).join('');
   } else if (currentTab === 'monthly') {
-    if (btnPrev) btnPrev.textContent = '⏮️ 前一月';
-    if (btnNext) btnNext.textContent = '後一月 ⏭️';
-    if (btnLatest) btnLatest.textContent = '⚡ 回到最新月';
+    if (btnPrev) btnPrev.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;">chevron_left</span> 前一月';
+    if (btnNext) btnNext.innerHTML = '後一月 <span class="material-symbols-outlined" style="font-size:16px;">chevron_right</span>';
+    if (btnLatest) btnLatest.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;">bolt</span> 回到最新月';
 
     if (!availableMonths.length) {
       select.innerHTML = '<option value="">無月度資料</option>';
@@ -1652,10 +1885,10 @@ function updateDateNavUI() {
 
   if (badgeInfo) {
     if (currentVal === latestVal) {
-      badgeInfo.innerHTML = `<span class="badge-tag-latest">⚡ 最新${unit}次</span>`;
+      badgeInfo.innerHTML = `<span class="badge-tag-latest"><span class="material-symbols-outlined" style="font-size:15px;">bolt</span> 最新${unit}次</span>`;
     } else {
       const displayVal = (unit === '月' && currentVal) ? currentVal.slice(0, 7) : currentVal;
-      badgeInfo.innerHTML = `<span class="badge-tag-history">📜 歷史存檔 (${displayVal})</span>`;
+      badgeInfo.innerHTML = `<span class="badge-tag-history"><span class="material-symbols-outlined" style="font-size:15px;">history</span> 歷史存檔 (${displayVal})</span>`;
     }
   }
 
@@ -2184,37 +2417,37 @@ function renderRepoCard(index, repo, mode = 'daily') {
   if (langName) {
     metaHtml += `<span class="meta-item"><span class="lang-dot" style="background-color:${langColor}"></span> ${esc(langName)}</span>`;
   }
-  metaHtml += `<span class="meta-item">⭐ <strong>${totalStars.toLocaleString()}</strong> 總星</span>`;
+  metaHtml += `<span class="meta-item"><span class="material-symbols-outlined" style="font-size:15px;color:#eab308;">star</span> <strong>${totalStars.toLocaleString()}</strong> 總星</span>`;
 
   if (mode === 'weekly') {
-    metaHtml += `<span class="meta-item">🔥 最高單日 +<strong>${peakStars.toLocaleString()}</strong></span>`;
+    metaHtml += `<span class="meta-item"><span class="material-symbols-outlined" style="font-size:15px;color:#ea580c;">local_fire_department</span> 最高單日 +<strong>${peakStars.toLocaleString()}</strong></span>`;
     if (avgDailyStars > 0) {
-      metaHtml += `<span class="meta-item">📈 日均 +<strong>${Math.round(avgDailyStars).toLocaleString()}</strong></span>`;
+      metaHtml += `<span class="meta-item"><span class="material-symbols-outlined" style="font-size:15px;color:#059669;">trending_up</span> 日均 +<strong>${Math.round(avgDailyStars).toLocaleString()}</strong></span>`;
     }
     const days = repo.appearance_days || repo.total_appearances;
     if (days) {
-      metaHtml += `<span class="meta-item">📊 當週上榜 <strong>${days}</strong> 天</span>`;
+      metaHtml += `<span class="meta-item"><span class="material-symbols-outlined" style="font-size:15px;color:#4f46e5;">bar_chart</span> 當週上榜 <strong>${days}</strong> 天</span>`;
     }
   } else if (mode === 'monthly') {
-    metaHtml += `<span class="meta-item">🔥 最高單日 +<strong>${peakStars.toLocaleString()}</strong></span>`;
+    metaHtml += `<span class="meta-item"><span class="material-symbols-outlined" style="font-size:15px;color:#ea580c;">local_fire_department</span> 最高單日 +<strong>${peakStars.toLocaleString()}</strong></span>`;
     const apps = repo.total_appearances || repo.appearance_days;
     if (apps) {
-      metaHtml += `<span class="meta-item">📊 累積上榜 <strong>${apps}</strong> 次</span>`;
+      metaHtml += `<span class="meta-item"><span class="material-symbols-outlined" style="font-size:15px;color:#4f46e5;">bar_chart</span> 累積上榜 <strong>${apps}</strong> 次</span>`;
     }
     if (repo.trend_direction === 'up') {
-      metaHtml += `<span class="meta-item" style="color:var(--accent-green);">📈 趨勢上升</span>`;
+      metaHtml += `<span class="meta-item" style="color:var(--accent-green);"><span class="material-symbols-outlined" style="font-size:15px;">trending_up</span> 趨勢上升</span>`;
     } else if (repo.trend_direction === 'down') {
-      metaHtml += `<span class="meta-item" style="color:#f85149;">📉 趨勢放緩</span>`;
+      metaHtml += `<span class="meta-item" style="color:#dc2626;"><span class="material-symbols-outlined" style="font-size:15px;">trending_down</span> 趨勢放緩</span>`;
     } else if (repo.trend_direction === 'stable') {
-      metaHtml += `<span class="meta-item" style="color:var(--accent-blue);">➡️ 表現穩定</span>`;
+      metaHtml += `<span class="meta-item" style="color:var(--accent-blue);"><span class="material-symbols-outlined" style="font-size:15px;">trending_flat</span> 表現穩定</span>`;
     }
   } else {
-    metaHtml += `<span class="meta-item">🔥 今日 +<strong>${todayStars.toLocaleString()}</strong></span>`;
+    metaHtml += `<span class="meta-item"><span class="material-symbols-outlined" style="font-size:15px;color:#ea580c;">local_fire_department</span> 今日 +<strong>${todayStars.toLocaleString()}</strong></span>`;
     if (forks) {
-      metaHtml += `<span class="meta-item">🍴 <strong>${forks.toLocaleString()}</strong></span>`;
+      metaHtml += `<span class="meta-item"><span class="material-symbols-outlined" style="font-size:15px;color:#64748b;">call_split</span> <strong>${forks.toLocaleString()}</strong></span>`;
     }
     if (repo.total_appearances) {
-      metaHtml += `<span class="meta-item">📊 上榜 <strong>${repo.total_appearances}</strong> 次</span>`;
+      metaHtml += `<span class="meta-item"><span class="material-symbols-outlined" style="font-size:15px;color:#4f46e5;">bar_chart</span> 上榜 <strong>${repo.total_appearances}</strong> 次</span>`;
     }
   }
   metaHtml += `<span class="relevance-badge ${esc(relevance)}">${relevanceMap[relevance] || '⚪ Low'}</span>`;
@@ -2222,13 +2455,13 @@ function renderRepoCard(index, repo, mode = 'daily') {
   // Badges next to title
   let badgesHtml = '';
   if (mode === 'daily') {
-    if (isNew) badgesHtml += `<span class="badge-new">✨ NEW 首次上榜</span>`;
-    if (consecutive >= 2) badgesHtml += `<span class="badge-streak">🔥 連續 ${consecutive} 天</span>`;
-    if (growthRate >= 10.0) badgesHtml += `<span class="badge-growth">🚀 +${growthRate}% 爆發</span>`;
+    if (isNew) badgesHtml += `<span class="badge-new"><span class="material-symbols-outlined" style="font-size:13px;">auto_awesome</span> 首次上榜</span>`;
+    if (consecutive >= 2) badgesHtml += `<span class="badge-streak"><span class="material-symbols-outlined" style="font-size:13px;">local_fire_department</span> 連續 ${consecutive} 天</span>`;
+    if (growthRate >= 10.0) badgesHtml += `<span class="badge-growth"><span class="material-symbols-outlined" style="font-size:13px;">rocket_launch</span> +${growthRate}% 爆發</span>`;
   } else if (mode === 'weekly') {
-    if ((repo.appearance_days || 0) >= 4) badgesHtml += `<span class="badge-streak">🔥 當週霸榜 ${repo.appearance_days} 天</span>`;
+    if ((repo.appearance_days || 0) >= 4) badgesHtml += `<span class="badge-streak"><span class="material-symbols-outlined" style="font-size:13px;">local_fire_department</span> 當週霸榜 ${repo.appearance_days} 天</span>`;
   } else if (mode === 'monthly') {
-    if ((repo.total_appearances || 0) >= 10) badgesHtml += `<span class="badge-streak">🏆 月度常客 (${repo.total_appearances}次)</span>`;
+    if ((repo.total_appearances || 0) >= 10) badgesHtml += `<span class="badge-streak"><span class="material-symbols-outlined" style="font-size:13px;">emoji_events</span> 月度常客 (${repo.total_appearances}次)</span>`;
   }
   if (channels && channels.length) {
     badgesHtml += channels.filter(c => c !== 'All').map(c => `<span class="badge-channel">${esc(c)}</span>`).join('');
@@ -2241,11 +2474,11 @@ function renderRepoCard(index, repo, mode = 'daily') {
         <div class="repo-title-row">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
             <a class="repo-name" href="${esc(repoUrl)}" target="_blank" rel="noreferrer">
-              ${esc(repoName)} ↗
+              ${esc(repoName)} <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;">open_in_new</span>
             </a>
             ${badgesHtml}
           </div>
-          <button class="btn-history" onclick="openHistoryModal('${esc(repoName)}')">📈 歷程分析</button>
+          <button class="btn-history" onclick="openHistoryModal('${esc(repoName)}')"><span class="material-symbols-outlined" style="font-size:15px;">timeline</span> 歷程分析</button>
         </div>
         
         <div class="repo-desc">${esc(desc)}</div>
@@ -2281,35 +2514,35 @@ function renderTrends() {
     <!-- Top Visual Summary Cards -->
     <div style="margin-bottom: 24px;">
       <div class="section-title" style="margin-top:0;">
-        <div>🤖 AI Agent 與開發工具相關性洞察 (共 ${total} 筆)</div>
+        <div><span class="material-symbols-outlined" style="font-size:20px;vertical-align:middle;margin-right:6px;color:var(--accent-blue);">smart_toy</span> AI Agent 與開發工具相關性洞察 (共 ${total} 筆)</div>
       </div>
       
       <!-- Progress Bar Segment -->
-      <div style="height: 12px; width: 100%; border-radius: 6px; background: var(--bg-tertiary); overflow: hidden; display: flex; margin-bottom: 14px;">
-        <div style="width: ${pctCrit}%; background: #f85149;" title="Critical: ${dist.critical} (${pctCrit}%)"></div>
-        <div style="width: ${pctHigh}%; background: #d29922;" title="High: ${dist.high} (${pctHigh}%)"></div>
-        <div style="width: ${pctMed}%; background: #e3b341;" title="Medium: ${dist.medium} (${pctMed}%)"></div>
-        <div style="width: ${pctLow}%; background: #8b949e;" title="Low: ${dist.low} (${pctLow}%)"></div>
+      <div style="height: 12px; width: 100%; border-radius: 6px; background: #e2e8f0; overflow: hidden; display: flex; margin-bottom: 14px;">
+        <div style="width: ${pctCrit}%; background: #dc2626;" title="Critical: ${dist.critical} (${pctCrit}%)"></div>
+        <div style="width: ${pctHigh}%; background: #d97706;" title="High: ${dist.high} (${pctHigh}%)"></div>
+        <div style="width: ${pctMed}%; background: #b45309;" title="Medium: ${dist.medium} (${pctMed}%)"></div>
+        <div style="width: ${pctLow}%; background: #94a3b8;" title="Low: ${dist.low} (${pctLow}%)"></div>
       </div>
 
       <div class="summary-grid" style="grid-template-columns: repeat(4, 1fr);">
         <div class="summary-card critical">
-          <div class="card-label">🔴 Critical (核心 Agent)</div>
+          <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:#dc2626;">smart_toy</span> Critical (核心 Agent)</div>
           <div class="card-value critical">${dist.critical || 0}</div>
           <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">佔比 ${pctCrit}% · 智能體/自主系統</div>
         </div>
         <div class="summary-card">
-          <div class="card-label">🟠 High (Skills / Infra)</div>
+          <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:#d97706;">extension</span> High (Skills / Infra)</div>
           <div class="card-value high">${dist.high || 0}</div>
           <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">佔比 ${pctHigh}% · 技能與模型基礎</div>
         </div>
         <div class="summary-card">
-          <div class="card-label">🟡 Medium (工具 / 介面)</div>
+          <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:#b45309;">build</span> Medium (工具 / 介面)</div>
           <div class="card-value medium">${dist.medium || 0}</div>
           <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">佔比 ${pctMed}% · 輔助工程套件</div>
         </div>
         <div class="summary-card">
-          <div class="card-label">⚪ Low (一般通用熱門)</div>
+          <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:#64748b;">public</span> Low (一般通用熱門)</div>
           <div class="card-value low">${dist.low || 0}</div>
           <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">佔比 ${pctLow}% · 一般社群開源</div>
         </div>
@@ -2319,13 +2552,13 @@ function renderTrends() {
     <!-- Charts Row -->
     <div class="charts-grid">
       <div class="chart-card">
-        <div class="chart-title">📊 程式語言分佈 (開源生態)</div>
+        <div class="chart-title"><span style="display:flex;align-items:center;gap:6px;"><span class="material-symbols-outlined" style="font-size:18px;color:var(--accent-blue);">pie_chart</span> 程式語言分佈 (開源生態)</span></div>
         <div style="position: relative; height: 220px; width: 100%;">
           <canvas id="languageChart"></canvas>
         </div>
       </div>
       <div class="chart-card">
-        <div class="chart-title">🤖 相關性分佈長條圖</div>
+        <div class="chart-title"><span style="display:flex;align-items:center;gap:6px;"><span class="material-symbols-outlined" style="font-size:18px;color:var(--accent-blue);">bar_chart</span> 相關性分佈長條圖</span></div>
         <div style="position: relative; height: 220px; width: 100%;">
           <canvas id="relevanceChart"></canvas>
         </div>
@@ -2333,7 +2566,7 @@ function renderTrends() {
     </div>
     
     <div class="section-title">
-      <div>🌟 持續上升新星 (連續多日上榜的熱門專案)</div>
+      <div><span class="material-symbols-outlined" style="font-size:20px;vertical-align:middle;margin-right:6px;color:#eab308;">hotel_class</span> 持續上升新星 (連續多日上榜的熱門專案)</div>
     </div>
     <div class="repo-list" id="risingStarsList">
       ${risingStarsData.length > 0 ? 
@@ -2412,7 +2645,7 @@ async function initLanguageChart() {
       datasets: [{
         data: data,
         backgroundColor: colors,
-        borderColor: '#161b22',
+        borderColor: '#ffffff',
         borderWidth: 2
       }]
     },
@@ -2421,7 +2654,7 @@ async function initLanguageChart() {
       maintainAspectRatio: false,
       animation: { duration: 400 },
       plugins: {
-        legend: { position: 'right', labels: { color: '#e6edf3', boxWidth: 12, padding: 10 } }
+        legend: { position: 'right', labels: { color: '#334155', boxWidth: 12, padding: 10, font: { family: 'Plus Jakarta Sans', size: 12 } } }
       }
     }
   });
@@ -2444,10 +2677,10 @@ async function initRelevanceChart() {
   if (typeof Chart === 'undefined') {
     const total = critical + high + medium + low || 1;
     const items = [
-      { label: '🔴 Critical (Agent)', count: critical, color: '#f85149' },
-      { label: '🟠 High (Skills)', count: high, color: '#d29922' },
-      { label: '🟡 Medium (Tools)', count: medium, color: '#e3b341' },
-      { label: '⚪ Low (General)', count: low, color: '#8b949e' }
+      { label: 'Critical (Agent)', count: critical, color: '#dc2626' },
+      { label: 'High (Skills)', count: high, color: '#d97706' },
+      { label: 'Medium (Tools)', count: medium, color: '#b45309' },
+      { label: 'Low (General)', count: low, color: '#64748b' }
     ];
     let fallbackHtml = '<div style="display:flex;flex-direction:column;gap:8px;padding-top:10px;">';
     items.forEach(it => {
@@ -2457,7 +2690,7 @@ async function initRelevanceChart() {
           <span>${it.label}</span>
           <span style="color:var(--text-secondary);font-family:monospace;font-weight:600;">${it.count} 筆 (${pct}%)</span>
         </div>
-        <div style="height:6px;width:100%;background:var(--bg-tertiary);border-radius:3px;overflow:hidden;">
+        <div style="height:6px;width:100%;background:#e2e8f0;border-radius:3px;overflow:hidden;">
           <div style="height:100%;width:${pct}%;background:${it.color};"></div>
         </div>
       `;
@@ -2479,8 +2712,8 @@ async function initRelevanceChart() {
       datasets: [{
         label: '專案數量',
         data: [critical, high, medium, low],
-        backgroundColor: ['#f85149', '#d29922', '#e3b341', '#8b949e'],
-        borderRadius: 6
+        backgroundColor: ['#dc2626', '#d97706', '#b45309', '#64748b'],
+        borderRadius: 8
       }]
     },
     options: {
@@ -2491,8 +2724,8 @@ async function initRelevanceChart() {
         legend: { display: false }
       },
       scales: {
-        x: { ticks: { color: '#8b949e' }, grid: { display: false } },
-        y: { ticks: { color: '#8b949e' }, grid: { color: '#30363d' } }
+        x: { ticks: { color: '#64748b', font: { family: 'Plus Jakarta Sans', size: 12 } }, grid: { display: false } },
+        y: { ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 11 } }, grid: { color: '#e2e8f0' } }
       }
     }
   });
@@ -2538,8 +2771,9 @@ function renderInsights() {
   let html = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
       <div>
-        <h2 style="font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px;">
-          <span>💡 Dora 每日智囊洞察與進化建議</span>
+        <h2 style="font-size:20px;font-weight:800;display:flex;align-items:center;gap:8px;color:var(--text-primary);">
+          <span class="material-symbols-outlined" style="font-size:24px;color:var(--accent-blue);">psychology</span>
+          <span>Dora 每日智囊洞察與進化建議</span>
           <span class="report-badge-source">HERMES AGENT</span>
         </h2>
         <div style="color:var(--text-secondary);font-size:13px;margin-top:2px;">分析日期：${date} · 由 Hermes Agent Dora 全自主監控與生成</div>
@@ -2547,36 +2781,37 @@ function renderInsights() {
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
         ${historicalInsightsList.length > 0 ? `
           <div class="date-select-wrapper" style="padding:2px 8px;">
-            <span style="font-size:12px;color:var(--text-secondary);margin-right:4px;">📜 歷次報告：</span>
+            <span class="material-symbols-outlined" style="font-size:16px;color:var(--text-secondary);margin-right:2px;">history</span>
+            <span style="font-size:12px;color:var(--text-secondary);margin-right:4px;">歷次報告：</span>
             <select class="date-select" id="insightHistorySelect" onchange="onInsightReportChanged(this.value)">
               <option value="">⚡ 最新日報 (${latestInsightData.date || '最新'})</option>
               ${historicalInsightsList.map(h => `<option value="${esc(h.id || h.filename)}" ${(h.id || h.filename) === selectedInsightFile ? 'selected' : ''}>${esc(h.date)} (${esc(h.time || '')}) 巡檢報告</option>`).join('')}
             </select>
           </div>
         ` : ''}
-        <button class="btn-action" onclick="copyReport()">📋 複製 Telegram 報告</button>
+        <button class="btn-action" onclick="copyReport()"><span class="material-symbols-outlined" style="font-size:16px;">content_copy</span> 複製 Telegram 報告</button>
       </div>
     </div>
 
     <!-- Summary Metrics -->
     <div class="summary-grid">
       <div class="summary-card critical">
-        <div class="card-label">🤖 Agent 相關專案</div>
+        <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:#dc2626;">smart_toy</span> Agent 相關專案</div>
         <div class="card-value critical">${trends.agent_count || 0} 個</div>
       </div>
       <div class="summary-card high">
-        <div class="card-label">📋 Skills 模組化專案</div>
+        <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:#d97706;">extension</span> Skills 模組化專案</div>
         <div class="card-value high">${trends.skill_count || 0} 個</div>
       </div>
       <div class="summary-card">
-        <div class="card-label">🔍 今日監控專案數</div>
+        <div class="card-label"><span class="material-symbols-outlined" style="font-size:16px;color:var(--accent-blue);">analytics</span> 今日監控專案數</div>
         <div class="card-value blue">${latestInsightData.total_repos || 0} 個</div>
       </div>
     </div>
 
     <!-- TOP 3 Section -->
     <div class="section-title">
-      <div>🏆 今日最值得研究 TOP 3 專案</div>
+      <div><span class="material-symbols-outlined" style="font-size:20px;vertical-align:middle;margin-right:6px;color:#eab308;">emoji_events</span> 今日最值得研究 TOP 3 專案</div>
     </div>
     <div class="repo-list" style="margin-bottom:28px;">
       ${top3.map((r, i) => renderRepoCard(i + 1, r)).join('')}
@@ -2584,21 +2819,24 @@ function renderInsights() {
 
     <!-- Report Section -->
     <div class="section-title">
-      <div>📄 完整監控報告內容</div>
+      <div><span class="material-symbols-outlined" style="font-size:20px;vertical-align:middle;margin-right:6px;color:var(--accent-blue);">description</span> 完整監控報告內容</div>
     </div>
 
     <div class="report-card">
       <div class="report-top-bar">
         <div class="report-top-left">
-          <span style="font-weight:700;font-size:13px;color:var(--text-primary);">📊 每日監控日報全文</span>
+          <span style="font-weight:700;font-size:13px;color:var(--text-primary);display:flex;align-items:center;gap:6px;">
+            <span class="material-symbols-outlined" style="font-size:16px;color:var(--accent-blue);">article</span>
+            每日監控日報全文
+          </span>
           <span class="report-badge-source">AI GENERATED</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;">
           <div class="view-toggle-group">
-            <button class="view-toggle-btn ${reportViewMode === 'visual' ? 'active' : ''}" onclick="setReportMode('visual')">🎨 視覺化圖文排版</button>
-            <button class="view-toggle-btn ${reportViewMode === 'raw' ? 'active' : ''}" onclick="setReportMode('raw')">📄 Markdown 原始碼</button>
+            <button class="view-toggle-btn ${reportViewMode === 'visual' ? 'active' : ''}" onclick="setReportMode('visual')"><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;margin-right:2px;">palette</span> 視覺化排版</button>
+            <button class="view-toggle-btn ${reportViewMode === 'raw' ? 'active' : ''}" onclick="setReportMode('raw')"><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;margin-right:2px;">code</span> Markdown 原始碼</button>
           </div>
-          <button class="btn-action" style="padding:4px 10px;font-size:12px;" onclick="copyReport()">📋 複製</button>
+          <button class="btn-action" style="padding:4px 10px;font-size:12px;" onclick="copyReport()"><span class="material-symbols-outlined" style="font-size:14px;">content_copy</span> 複製</button>
         </div>
       </div>
 
@@ -2701,61 +2939,61 @@ function renderModalContent(data) {
   const desc = zhDesc || rawDesc || '無專案說明';
 
   let html = `
-    <div style="margin-bottom: 20px;">
-      <h2 style="font-size: 20px; font-weight: 700; color: var(--accent-blue);">
-        <a href="${esc(data.repo_url)}" target="_blank" style="color: inherit; text-decoration: none;">${esc(data.repo_name)} ↗</a>
+    <div style="margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid #e2e8f0;">
+      <h2 style="font-size: 21px; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+        <a href="${esc(data.repo_url)}" target="_blank" style="color: var(--accent-blue); text-decoration: none;">${esc(data.repo_name)} <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">open_in_new</span></a>
       </h2>
-      <div style="color: var(--text-primary); font-size: 14px; margin-top: 6px; font-weight: 500;">
+      <div style="color: #334155; font-size: 14px; margin-top: 8px; line-height: 1.6; font-weight: 500;">
         ${esc(desc)}
       </div>
     </div>
 
-    <div class="summary-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 20px;">
-      <div class="summary-card">
-        <div class="card-label">⭐ 總 Stars</div>
+    <div class="summary-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 22px; gap: 12px;">
+      <div class="summary-card" style="background: #ffffff; border: 1px solid #e2e8f0;">
+        <div class="card-label"><span class="material-symbols-outlined" style="font-size:15px;color:#eab308;">star</span> 總 Stars</div>
         <div class="card-value blue">${(data.total_stars || 0).toLocaleString()}</div>
       </div>
-      <div class="summary-card">
-        <div class="card-label">📊 累積上榜</div>
+      <div class="summary-card" style="background: #ffffff; border: 1px solid #e2e8f0;">
+        <div class="card-label"><span class="material-symbols-outlined" style="font-size:15px;color:#059669;">bar_chart</span> 累積上榜</div>
         <div class="card-value green">${data.total_appearances || 1} 天</div>
       </div>
-      <div class="summary-card">
-        <div class="card-label">🔥 累積熱度</div>
+      <div class="summary-card" style="background: #ffffff; border: 1px solid #e2e8f0;">
+        <div class="card-label"><span class="material-symbols-outlined" style="font-size:15px;color:#ea580c;">local_fire_department</span> 累積熱度</div>
         <div class="card-value high">+${(data.cumulative_trending_stars || 0).toLocaleString()}</div>
       </div>
-      <div class="summary-card">
-        <div class="card-label">🍴 Forks</div>
-        <div class="card-value">${(data.forks || 0).toLocaleString()}</div>
+      <div class="summary-card" style="background: #ffffff; border: 1px solid #e2e8f0;">
+        <div class="card-label"><span class="material-symbols-outlined" style="font-size:15px;color:#64748b;">call_split</span> Forks</div>
+        <div class="card-value" style="color:#334155;">${(data.forks || 0).toLocaleString()}</div>
       </div>
     </div>
 
-    <div class="chart-card" style="margin-bottom: 20px;">
-      <div class="chart-title">📈 Star 每日熱門度增長軌跡</div>
+    <div class="chart-card" style="margin-bottom: 22px; background: #ffffff; border: 1px solid #e2e8f0;">
+      <div class="chart-title"><span style="display:flex;align-items:center;gap:6px;"><span class="material-symbols-outlined" style="font-size:18px;color:var(--accent-blue);">show_chart</span> Star 每日熱門度增長軌跡</span></div>
       <div style="height: 220px; width: 100%; position: relative;">
         <canvas id="modalGrowthChart"></canvas>
       </div>
     </div>
 
-    <div class="section-title">
-      <div>📅 上榜歷史詳細紀錄</div>
+    <div class="section-title" style="margin: 18px 0 10px 0;">
+      <div><span class="material-symbols-outlined" style="font-size:18px;vertical-align:middle;margin-right:4px;color:var(--accent-blue);">calendar_month</span> 上榜歷史詳細紀錄</div>
     </div>
-    <div style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px;">
-      <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
-        <thead style="background: var(--bg-tertiary); color: var(--text-secondary); sticky: top;">
+    <div style="max-height: 240px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: var(--radius-md); background: #ffffff;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; background: #ffffff;">
+        <thead style="background: #f8fafc; color: #475569; position: sticky; top: 0; z-index: 2; border-bottom: 1px solid #e2e8f0;">
           <tr>
-            <th style="padding: 8px 12px;">日期</th>
-            <th style="padding: 8px 12px;">當日新增 Star</th>
-            <th style="padding: 8px 12px;">總 Star 數</th>
-            <th style="padding: 8px 12px;">AI 分類</th>
+            <th style="padding: 10px 14px; font-weight: 700;">日期</th>
+            <th style="padding: 10px 14px; font-weight: 700;">當日新增 Star</th>
+            <th style="padding: 10px 14px; font-weight: 700;">總 Star 數</th>
+            <th style="padding: 10px 14px; font-weight: 700;">AI 分類</th>
           </tr>
         </thead>
         <tbody>
           ${timeline.map(t => `
-            <tr style="border-top: 1px solid var(--border-color);">
-              <td style="padding: 8px 12px; font-family: monospace;">${esc(t.date)}</td>
-              <td style="padding: 8px 12px; color: var(--accent-green); font-weight: 600;">+${t.today_stars.toLocaleString()}</td>
-              <td style="padding: 8px 12px;">${t.total_stars.toLocaleString()}</td>
-              <td style="padding: 8px 12px;"><span class="relevance-badge ${esc(t.relevance_level)}">${esc(t.relevance_level)}</span></td>
+            <tr style="border-top: 1px solid #f1f5f9; color: #0f172a;">
+              <td style="padding: 9px 14px; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #334155;">${esc(t.date)}</td>
+              <td style="padding: 9px 14px; color: #059669; font-weight: 700; font-family: 'JetBrains Mono', monospace;">+${t.today_stars.toLocaleString()}</td>
+              <td style="padding: 9px 14px; font-family: 'JetBrains Mono', monospace; color: #0f172a;">${t.total_stars.toLocaleString()}</td>
+              <td style="padding: 9px 14px;"><span class="relevance-badge ${esc(t.relevance_level)}">${esc(t.relevance_level)}</span></td>
             </tr>
           `).join('')}
         </tbody>
@@ -2781,12 +3019,14 @@ function renderModalContent(data) {
         datasets: [{
           label: '當日新增 Star',
           data: timeline.map(t => t.today_stars),
-          borderColor: '#58a6ff',
-          backgroundColor: 'rgba(88, 166, 255, 0.15)',
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37, 99, 235, 0.12)',
           fill: true,
           tension: 0.3,
           pointRadius: 4,
-          pointBackgroundColor: '#58a6ff'
+          pointBackgroundColor: '#2563eb',
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 2
         }]
       },
       options: {
@@ -2795,8 +3035,8 @@ function renderModalContent(data) {
         animation: { duration: 300 },
         plugins: { legend: { display: false } },
         scales: {
-          x: { ticks: { color: '#8b949e' }, grid: { display: false } },
-          y: { ticks: { color: '#8b949e' }, grid: { color: '#30363d' } }
+          x: { ticks: { color: '#64748b', font: { family: 'Plus Jakarta Sans', size: 11 } }, grid: { display: false } },
+          y: { ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 11 } }, grid: { color: '#e2e8f0' } }
         }
       }
     });

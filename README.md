@@ -29,8 +29,12 @@
 - 內建多通道自動翻譯機制（Google Web Client + MyMemory Fallback）。
 - 每日新專案入庫時自動生成高品質繁體中文說明，支援中英雙語對照排版與中英雙向即時搜尋。
 
-### 4. 🎨 Dora Radar 視覺化科技儀表板 (Futuristic Web Dashboard)
-- **動態科技雷達 SVG Logo**：內建 60fps 平滑旋轉掃描光束與呼吸觀測節點。
+### 4. 🎨 Dora Radar 視覺化科技儀表板 (Glassmorphic Light Design System)
+- **現代明亮淺色毛玻璃美學**：採用 Glassmorphism 半透明模糊效果（`backdrop-filter`）與柔和漫射陰影，所有邊角全面圓潤化，元件色彩搭配平滑漸變。
+- **Google Material Symbols & 現代字體**：全域整合 Google Material Symbols Outlined 圖標系統，搭配 Plus Jakarta Sans 與 JetBrains Mono 科技排版。
+- **高對比彈窗專案歷程 (Popup Modal)**：彈跳視窗與表格強制採用 100% 不透明純白背景（Solid White Opaque），確保文字與歷史數據絕對清晰高對比，杜絕背景透明穿透。
+- **行動裝置與跨瀏覽器相容體驗**：符合行動端觸控最佳尺寸（>= 44px），提供 `-webkit-` 兼容前綴與 `@supports` 無毛玻璃自動降級機制。
+- **動態科技雷達 SVG Logo**：明亮風格專屬向量雷達，內建 60fps 平滑旋轉掃描光束與呼吸觀測節點。
 - **即時膠囊快選 (Quick Filter Pills)**：`[ 🌐 全部專案 ]`、`[ ✨ 今日首發新面孔 ]`、`[ 🚀 爆發潛力黑馬 ]`、`[ 🔥 連續霸榜常客 ]`。
 - **圖表與歷史軌跡**：本地整合 Chart.js，支援程式語言佔比圓餅圖、AI 相關性長條圖，以及單一專案 50+ 天歷史 Star 增長曲線 Modal。
 - **雜誌級日報閱讀器**：本地整合 Marked.js，支援圖文排版與 Markdown 原始碼一鍵切換與複製。
