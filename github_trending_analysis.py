@@ -79,7 +79,7 @@ def supabase_post(table: str, data) -> dict | list:
         return {}
 
 
-def supabase_get(table: str, filters: dict = None, order: str = None, limit: int = None, select: str = None) -> list:
+def supabase_get(table: str, filters: dict = None, order: str = None, limit: int = None, select: str = None, offset: int = None) -> list:
     """Query data from Supabase."""
     import urllib.request
     params = []
@@ -114,6 +114,8 @@ def supabase_get(table: str, filters: dict = None, order: str = None, limit: int
         params.append(f"order={quote(order_clean)}")
     if limit:
         params.append(f"limit={limit}")
+    if offset:
+        params.append(f"offset={offset}")
     
     query = "&".join(params)
     url = f"{SUPABASE_URL}/rest/v1/{table}"
@@ -441,138 +443,168 @@ def store_daily_data(date_str: str, repos: list) -> int:
 # WEEKLY AGGREGATION
 # ============================================================
 def aggregate_weekly():
-    """Aggregate daily data into weekly summary."""
+    """Aggregate daily data into weekly summary for current and previous week."""
     from datetime import date as date_type
     
     today = date_type.today()
-    week_start = today - timedelta(days=today.weekday())
-    week_end = week_start + timedelta(days=6)
+    weeks_to_process = [
+        today - timedelta(days=today.weekday()), # current week Monday
+        today - timedelta(days=today.weekday() + 7) # previous week Monday
+    ]
     
-    # Get all repos in this week
-    repos = supabase_get("github_trending_daily", {
-        "date[gte]": week_start.isoformat(),
-        "date[lte]": week_end.isoformat(),
-    })
-    
-    if not repos:
-        return None
-    
-    # Deduplicate: group by repo_name, take highest total_stars
-    repo_map = {}
-    for r in repos:
-        name = r["repo_name"]
-        if name not in repo_map or (r.get("total_stars") or 0) > (repo_map[name].get("total_stars") or 0):
-            repo_map[name] = r
-    
-    # Calculate averages
-    weekly_data = []
-    for name, r in repo_map.items():
-        days_with_repo = [x for x in repos if x["repo_name"] == name]
-        avg_today = sum((d.get("today_stars") or 0) for d in days_with_repo) / len(days_with_repo) if days_with_repo else 0
-        peak_today = max((d.get("today_stars") or 0) for d in days_with_repo) if days_with_repo else 0
+    all_results = []
+    for week_start in weeks_to_process:
+        week_end = week_start + timedelta(days=6)
         
-        weekly_data.append({
-            "week_start": week_start.isoformat(),
-            "week_end": week_end.isoformat(),
-            "repo_name": r["repo_name"],
-            "repo_url": r["repo_url"],
-            "description": r.get("description", ""),
-            "description_zh": r.get("description_zh", ""),
-            "total_stars": r.get("total_stars", 0),
-            "peak_today_stars": peak_today,
-            "avg_daily_stars": round(avg_today, 2),
-            "language": r.get("language", "Unknown"),
-            "language_color": r.get("language_color", ""),
-            "forks": r.get("forks", 0),
-            "relevance_level": r.get("relevance_level", "low"),
-            "relevance_tags": r.get("relevance_tags", []),
-        })
-    
-    # Sort by total_stars descending
-    weekly_data.sort(key=lambda x: (x["total_stars"] or 0), reverse=True)
-    
-    # Store to weekly table in bulk
-    for i in range(0, len(weekly_data), 50):
-        supabase_post("github_trending_weekly", weekly_data[i:i + 50])
-    
-    return weekly_data
+        # Paginate to fetch all daily repos in this week
+        repos = []
+        for page in range(3):
+            chunk = supabase_get("github_trending_daily", {
+                "date[gte]": week_start.isoformat(),
+                "date[lte]": week_end.isoformat(),
+            }, limit=1000, offset=page*1000)
+            repos.extend(chunk)
+            if len(chunk) < 1000:
+                break
+        
+        if not repos:
+            continue
+        
+        repo_map = {}
+        for r in repos:
+            name = r["repo_name"]
+            if name not in repo_map or (r.get("total_stars") or 0) > (repo_map[name].get("total_stars") or 0):
+                repo_map[name] = r
+        
+        weekly_data = []
+        for name, r in repo_map.items():
+            days_with_repo = [x for x in repos if x["repo_name"] == name]
+            avg_today = sum((d.get("today_stars") or 0) for d in days_with_repo) / len(days_with_repo) if days_with_repo else 0
+            peak_today = max((d.get("today_stars") or 0) for d in days_with_repo) if days_with_repo else 0
+            
+            all_channels = []
+            for d in days_with_repo:
+                for ch in (d.get("channels") or []):
+                    if ch not in all_channels:
+                        all_channels.append(ch)
+            
+            weekly_data.append({
+                "week_start": week_start.isoformat(),
+                "week_end": week_end.isoformat(),
+                "repo_name": r["repo_name"],
+                "repo_url": r.get("repo_url") or f"https://github.com/{r['repo_name']}",
+                "description": r.get("description", ""),
+                "description_zh": r.get("description_zh", ""),
+                "total_stars": r.get("total_stars", 0),
+                "peak_today_stars": peak_today,
+                "avg_daily_stars": round(avg_today, 2),
+                "language": r.get("language", "Unknown"),
+                "language_color": r.get("language_color", ""),
+                "forks": r.get("forks", 0),
+                "relevance_level": r.get("relevance_level", "low"),
+                "relevance_tags": r.get("relevance_tags", []),
+                "channels": all_channels,
+                "is_new": any(d.get("is_new") for d in days_with_repo),
+            })
+        
+        weekly_data.sort(key=lambda x: (x["total_stars"] or 0), reverse=True)
+        for i in range(0, len(weekly_data), 50):
+            supabase_post("github_trending_weekly", weekly_data[i:i + 50])
+        all_results.extend(weekly_data)
+        
+    return all_results
 
 
 # ============================================================
 # MONTHLY AGGREGATION
 # ============================================================
 def aggregate_monthly():
-    """Aggregate daily data into monthly summary."""
+    """Aggregate daily data into monthly summary for current and previous month."""
     from datetime import date as date_type
     
     today = date_type.today()
-    month_start = today.replace(day=1)
-    if today.month == 12:
-        month_end = today.replace(year=today.year + 1, month=1, day=1) - timedelta(days=1)
-    else:
-        month_end = today.replace(month=today.month + 1, day=1) - timedelta(days=1)
+    current_month_start = today.replace(day=1)
+    prev_month_end = current_month_start - timedelta(days=1)
+    prev_month_start = prev_month_end.replace(day=1)
     
-    repos = supabase_get("github_trending_daily", {
-        "date[gte]": month_start.isoformat(),
-        "date[lte]": month_end.isoformat(),
-    })
+    months_to_process = [current_month_start, prev_month_start]
+    all_results = []
     
-    if not repos:
-        return None
-    
-    # Group by repo_name
-    repo_map = {}
-    for r in repos:
-        name = r["repo_name"]
-        if name not in repo_map:
-            repo_map[name] = []
-        repo_map[name].append(r)
-    
-    monthly_data = []
-    for name, days in repo_map.items():
-        total_stars = max((d.get("total_stars") or 0) for d in days)
-        peak_today = max((d.get("today_stars") or 0) for d in days)
-        avg_today = sum((d.get("today_stars") or 0) for d in days) / len(days)
+    for month_start in months_to_process:
+        if month_start.month == 12:
+            month_end = month_start.replace(year=month_start.year + 1, month=1, day=1) - timedelta(days=1)
+        else:
+            month_end = month_start.replace(month=month_start.month + 1, day=1) - timedelta(days=1)
         
-        # Determine trend direction
-        if len(days) >= 3:
-            first_half = sum((d.get("today_stars") or 0) for d in days[:len(days)//2]) / (len(days)//2)
-            second_half = sum((d.get("today_stars") or 0) for d in days[len(days)//2:]) / (len(days) - len(days)//2)
-            if second_half > first_half * 1.2:
-                trend = "rising"
-            elif second_half < first_half * 0.8:
-                trend = "falling"
+        # Paginate up to 5000 rows to ensure entire month of daily data is captured
+        repos = []
+        for page in range(5):
+            chunk = supabase_get("github_trending_daily", {
+                "date[gte]": month_start.isoformat(),
+                "date[lte]": month_end.isoformat(),
+            }, limit=1000, offset=page*1000)
+            repos.extend(chunk)
+            if len(chunk) < 1000:
+                break
+        
+        if not repos:
+            continue
+        
+        repo_map = {}
+        for r in repos:
+            name = r["repo_name"]
+            if name not in repo_map:
+                repo_map[name] = []
+            repo_map[name].append(r)
+        
+        monthly_data = []
+        for name, days in repo_map.items():
+            total_stars = max((d.get("total_stars") or 0) for d in days)
+            peak_today = max((d.get("today_stars") or 0) for d in days)
+            avg_today = sum((d.get("today_stars") or 0) for d in days) / len(days)
+            
+            if len(days) >= 3:
+                first_half = sum((d.get("today_stars") or 0) for d in days[:len(days)//2]) / (len(days)//2)
+                second_half = sum((d.get("today_stars") or 0) for d in days[len(days)//2:]) / (len(days) - len(days)//2)
+                trend = "rising" if second_half > first_half * 1.2 else "falling" if second_half < first_half * 0.8 else "stable"
             else:
                 trend = "stable"
-        else:
-            trend = "stable"
+            
+            all_channels = []
+            for d in days:
+                for ch in (d.get("channels") or []):
+                    if ch not in all_channels:
+                        all_channels.append(ch)
+            
+            latest_r = max(days, key=lambda x: x.get("total_stars") or 0)
+            
+            monthly_data.append({
+                "month_start": month_start.isoformat(),
+                "month_end": month_end.isoformat(),
+                "repo_name": name,
+                "repo_url": latest_r.get("repo_url") or f"https://github.com/{name}",
+                "description": latest_r.get("description", ""),
+                "description_zh": latest_r.get("description_zh", ""),
+                "total_stars": total_stars,
+                "peak_today_stars": peak_today,
+                "total_appearances": len(days),
+                "avg_daily_stars": round(avg_today, 2),
+                "language": latest_r.get("language", "Unknown"),
+                "language_color": latest_r.get("language_color", ""),
+                "forks": latest_r.get("forks", 0),
+                "relevance_level": latest_r.get("relevance_level", "low"),
+                "relevance_tags": latest_r.get("relevance_tags", []),
+                "trend_direction": trend,
+                "channels": all_channels,
+                "is_new": any(d.get("is_new") for d in days),
+            })
         
-        monthly_data.append({
-            "month_start": month_start.isoformat(),
-            "month_end": month_end.isoformat(),
-            "repo_name": name,
-            "repo_url": days[0]["repo_url"],
-            "description": days[0].get("description", ""),
-            "description_zh": days[0].get("description_zh", ""),
-            "total_stars": total_stars,
-            "peak_today_stars": peak_today,
-            "total_appearances": len(days),
-            "avg_daily_stars": round(avg_today, 2),
-            "language": days[0].get("language", "Unknown"),
-            "language_color": days[0].get("language_color", ""),
-            "forks": days[0].get("forks", 0),
-            "relevance_level": days[0].get("relevance_level", "low"),
-            "relevance_tags": days[0].get("relevance_tags", []),
-            "trend_direction": trend,
-        })
-    
-    monthly_data.sort(key=lambda x: (x["total_stars"] or 0), reverse=True)
-    
-    # Store to monthly table in bulk
-    for i in range(0, len(monthly_data), 50):
-        supabase_post("github_trending_monthly", monthly_data[i:i + 50])
-    
-    return monthly_data
+        monthly_data.sort(key=lambda x: (x["total_stars"] or 0), reverse=True)
+        for i in range(0, len(monthly_data), 50):
+            supabase_post("github_trending_monthly", monthly_data[i:i + 50])
+        all_results.extend(monthly_data)
+        
+    return all_results
 
 
 # ============================================================

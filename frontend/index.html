@@ -1313,7 +1313,7 @@ input, textarea, select {
   </select>
 </div>
 
-<!-- Date Navigation Bar (Daily Tab Only) -->
+<!-- Date & Period Navigation Bar (Daily, Weekly, Monthly) -->
 <div class="date-nav-bar" id="dateNavBar">
   <button class="date-nav-btn" id="btnPrevDate" onclick="navigateDate(-1)">⏮️ 前一日</button>
   <div class="date-select-wrapper">
@@ -1408,6 +1408,12 @@ let risingStarsData = [];
 let availableDates = [];
 let selectedDate = '';
 let latestDate = '';
+let availableWeeks = [];
+let selectedWeek = '';
+let latestWeek = '';
+let availableMonths = [];
+let selectedMonth = '';
+let latestMonth = '';
 let cronStatusData = null;
 let visibleCount = 25;
 const PAGE_SIZE = 25;
@@ -1445,7 +1451,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadCronStatus();
   await loadLanguages();
   await loadStats();
-  await loadDates();
+  await Promise.all([loadDates(), loadWeeks(), loadMonths()]);
   await loadData();
 });
 
@@ -1500,7 +1506,7 @@ async function loadCronStatus() {
 }
 
 // ============================================================
-// DATE NAVIGATION (DAILY TAB)
+// DATE & PERIOD NAVIGATION (DAILY / WEEKLY / MONTHLY)
 // ============================================================
 async function loadDates() {
   try {
@@ -1512,10 +1518,44 @@ async function loadDates() {
       if (!selectedDate) {
         selectedDate = latestDate;
       }
-      populateDateSelector();
+      if (currentTab === 'daily') populateDateSelector();
     }
   } catch (e) {
     console.warn('Failed to load dates', e);
+  }
+}
+
+async function loadWeeks() {
+  try {
+    const res = await fetch(`${API_BASE}/api/weeks`);
+    if (res.ok) {
+      const data = await res.json();
+      availableWeeks = data.weeks || [];
+      latestWeek = data.latest || data.latest_week || (availableWeeks[0] ? availableWeeks[0].week_start : '');
+      if (!selectedWeek) {
+        selectedWeek = latestWeek;
+      }
+      if (currentTab === 'weekly') populateDateSelector();
+    }
+  } catch (e) {
+    console.warn('Failed to load weeks', e);
+  }
+}
+
+async function loadMonths() {
+  try {
+    const res = await fetch(`${API_BASE}/api/months`);
+    if (res.ok) {
+      const data = await res.json();
+      availableMonths = data.months || [];
+      latestMonth = data.latest || data.latest_month || (availableMonths[0] ? availableMonths[0].month_start : '');
+      if (!selectedMonth) {
+        selectedMonth = latestMonth;
+      }
+      if (currentTab === 'monthly') populateDateSelector();
+    }
+  } catch (e) {
+    console.warn('Failed to load months', e);
   }
 }
 
@@ -1523,82 +1563,175 @@ function populateDateSelector() {
   const select = document.getElementById('datePickerSelect');
   if (!select) return;
 
-  if (!availableDates.length) {
-    select.innerHTML = '<option value="">無日期資料</option>';
-    return;
-  }
+  const btnPrev = document.getElementById('btnPrevDate');
+  const btnNext = document.getElementById('btnNextDate');
+  const btnLatest = document.getElementById('btnLatestDate');
 
-  select.innerHTML = availableDates.map(d => {
-    const isLatest = d.date === latestDate;
-    const label = `${d.date} (${d.count} 專案)${isLatest ? ' ⚡最新' : ''}`;
-    return `<option value="${d.date}" ${d.date === selectedDate ? 'selected' : ''}>${label}</option>`;
-  }).join('');
+  if (currentTab === 'daily') {
+    if (btnPrev) btnPrev.textContent = '⏮️ 前一日';
+    if (btnNext) btnNext.textContent = '後一日 ⏭️';
+    if (btnLatest) btnLatest.textContent = '⚡ 回到最新一日';
+
+    if (!availableDates.length) {
+      select.innerHTML = '<option value="">無日期資料</option>';
+      return;
+    }
+    select.innerHTML = availableDates.map(d => {
+      const isLatest = d.date === latestDate;
+      const label = `${d.date} (${d.count} 專案)${isLatest ? ' ⚡最新' : ''}`;
+      return `<option value="${d.date}" ${d.date === selectedDate ? 'selected' : ''}>${label}</option>`;
+    }).join('');
+  } else if (currentTab === 'weekly') {
+    if (btnPrev) btnPrev.textContent = '⏮️ 前一週';
+    if (btnNext) btnNext.textContent = '後一週 ⏭️';
+    if (btnLatest) btnLatest.textContent = '⚡ 回到最新週';
+
+    if (!availableWeeks.length) {
+      select.innerHTML = '<option value="">無週度資料</option>';
+      return;
+    }
+    select.innerHTML = availableWeeks.map(w => {
+      const isLatest = w.week_start === latestWeek;
+      const label = `${w.week_start} ~ ${w.week_end} (${w.count} 專案)${isLatest ? ' ⚡最新週' : ''}`;
+      return `<option value="${w.week_start}" ${w.week_start === selectedWeek ? 'selected' : ''}>${label}</option>`;
+    }).join('');
+  } else if (currentTab === 'monthly') {
+    if (btnPrev) btnPrev.textContent = '⏮️ 前一月';
+    if (btnNext) btnNext.textContent = '後一月 ⏭️';
+    if (btnLatest) btnLatest.textContent = '⚡ 回到最新月';
+
+    if (!availableMonths.length) {
+      select.innerHTML = '<option value="">無月度資料</option>';
+      return;
+    }
+    select.innerHTML = availableMonths.map(m => {
+      const isLatest = m.month_start === latestMonth;
+      const monthLabel = m.month_start.slice(0, 7);
+      const label = `${monthLabel} 月度 (${m.count} 專案)${isLatest ? ' ⚡最新月' : ''}`;
+      return `<option value="${m.month_start}" ${m.month_start === selectedMonth ? 'selected' : ''}>${label}</option>`;
+    }).join('');
+  }
 
   updateDateNavUI();
 }
 
 function updateDateNavUI() {
   const select = document.getElementById('datePickerSelect');
-  if (select && select.value !== selectedDate) {
-    select.value = selectedDate;
-  }
-
   const badgeInfo = document.getElementById('dateBadgeInfo');
-  if (badgeInfo) {
-    if (selectedDate === latestDate) {
-      badgeInfo.innerHTML = '<span class="badge-tag-latest">⚡ 最新採集</span>';
-    } else {
-      badgeInfo.innerHTML = `<span class="badge-tag-history">📜 歷史存檔 (${selectedDate})</span>`;
-    }
-  }
-
-  // availableDates is sorted desc: index 0 is newest, index N-1 is oldest
-  const currIdx = availableDates.findIndex(d => d.date === selectedDate);
   const btnPrev = document.getElementById('btnPrevDate');
   const btnNext = document.getElementById('btnNextDate');
   const btnLatest = document.getElementById('btnLatestDate');
 
+  let currentVal = '';
+  let latestVal = '';
+  let list = [];
+  let unit = '日';
+
+  if (currentTab === 'daily') {
+    currentVal = selectedDate;
+    latestVal = latestDate;
+    list = availableDates.map(d => d.date);
+    unit = '日';
+  } else if (currentTab === 'weekly') {
+    currentVal = selectedWeek;
+    latestVal = latestWeek;
+    list = availableWeeks.map(w => w.week_start);
+    unit = '週';
+  } else if (currentTab === 'monthly') {
+    currentVal = selectedMonth;
+    latestVal = latestMonth;
+    list = availableMonths.map(m => m.month_start);
+    unit = '月';
+  } else {
+    return;
+  }
+
+  if (select && select.value !== currentVal) {
+    select.value = currentVal;
+  }
+
+  if (badgeInfo) {
+    if (currentVal === latestVal) {
+      badgeInfo.innerHTML = `<span class="badge-tag-latest">⚡ 最新${unit}次</span>`;
+    } else {
+      const displayVal = (unit === '月' && currentVal) ? currentVal.slice(0, 7) : currentVal;
+      badgeInfo.innerHTML = `<span class="badge-tag-history">📜 歷史存檔 (${displayVal})</span>`;
+    }
+  }
+
+  // list is sorted desc: index 0 is newest, index N-1 is oldest
+  const currIdx = list.indexOf(currentVal);
+
   if (btnPrev) {
-    // "前一日" means older date, which is currIdx + 1
-    btnPrev.disabled = (currIdx < 0 || currIdx >= availableDates.length - 1);
+    // "前一日/週/月" means older, which is currIdx + 1
+    btnPrev.disabled = (currIdx < 0 || currIdx >= list.length - 1);
   }
   if (btnNext) {
-    // "後一日" means newer date, which is currIdx - 1
+    // "後一日/週/月" means newer, which is currIdx - 1
     btnNext.disabled = (currIdx <= 0);
   }
   if (btnLatest) {
-    btnLatest.style.display = (selectedDate === latestDate) ? 'none' : 'inline-flex';
+    btnLatest.style.display = (currentVal === latestVal) ? 'none' : 'inline-flex';
   }
 }
 
 function onDateSelectChanged() {
   const select = document.getElementById('datePickerSelect');
-  if (select && select.value) {
+  if (!select || !select.value) return;
+
+  if (currentTab === 'daily') {
     selectedDate = select.value;
-    updateDateNavUI();
-    loadData();
+  } else if (currentTab === 'weekly') {
+    selectedWeek = select.value;
+  } else if (currentTab === 'monthly') {
+    selectedMonth = select.value;
   }
+  updateDateNavUI();
+  loadData();
 }
 
 function navigateDate(delta) {
-  // delta = -1: 前一日 (older), delta = +1: 後一日 (newer)
-  const currIdx = availableDates.findIndex(d => d.date === selectedDate);
+  let list = [];
+  let currentVal = '';
+  if (currentTab === 'daily') {
+    list = availableDates.map(d => d.date);
+    currentVal = selectedDate;
+  } else if (currentTab === 'weekly') {
+    list = availableWeeks.map(w => w.week_start);
+    currentVal = selectedWeek;
+  } else if (currentTab === 'monthly') {
+    list = availableMonths.map(m => m.month_start);
+    currentVal = selectedMonth;
+  } else {
+    return;
+  }
+
+  const currIdx = list.indexOf(currentVal);
   if (currIdx === -1) return;
 
   const newIdx = delta < 0 ? currIdx + 1 : currIdx - 1;
-  if (newIdx >= 0 && newIdx < availableDates.length) {
-    selectedDate = availableDates[newIdx].date;
+  if (newIdx >= 0 && newIdx < list.length) {
+    if (currentTab === 'daily') selectedDate = list[newIdx];
+    else if (currentTab === 'weekly') selectedWeek = list[newIdx];
+    else if (currentTab === 'monthly') selectedMonth = list[newIdx];
+
     updateDateNavUI();
     loadData();
   }
 }
 
 function jumpToLatestDate() {
-  if (latestDate && selectedDate !== latestDate) {
+  if (currentTab === 'daily' && latestDate && selectedDate !== latestDate) {
     selectedDate = latestDate;
-    updateDateNavUI();
-    loadData();
+  } else if (currentTab === 'weekly' && latestWeek && selectedWeek !== latestWeek) {
+    selectedWeek = latestWeek;
+  } else if (currentTab === 'monthly' && latestMonth && selectedMonth !== latestMonth) {
+    selectedMonth = latestMonth;
+  } else {
+    return;
   }
+  updateDateNavUI();
+  loadData();
 }
 
 // ============================================================
@@ -1648,11 +1781,13 @@ async function loadData() {
       if (!resp.ok) throw new Error(`API error: ${resp.status}`);
       allDailyData = await resp.json();
     } else if (currentTab === 'weekly') {
-      const resp = await fetch(`${API_BASE}/api/weekly?limit=150`);
+      const url = selectedWeek ? `${API_BASE}/api/weekly?week_start=${selectedWeek}&limit=250` : `${API_BASE}/api/weekly?limit=250`;
+      const resp = await fetch(url);
       if (!resp.ok) throw new Error(`API error: ${resp.status}`);
       allWeeklyData = await resp.json();
     } else if (currentTab === 'monthly') {
-      const resp = await fetch(`${API_BASE}/api/monthly?limit=150`);
+      const url = selectedMonth ? `${API_BASE}/api/monthly?month_start=${selectedMonth}&limit=250` : `${API_BASE}/api/monthly?limit=250`;
+      const resp = await fetch(url);
       if (!resp.ok) throw new Error(`API error: ${resp.status}`);
       allMonthlyData = await resp.json();
     } else if (currentTab === 'trends') {
@@ -1690,23 +1825,30 @@ function switchTab(tab) {
   currentTab = tab;
   visibleCount = PAGE_SIZE;
 
+  // Crucial: Reset lifecycle filter state on tab switch to avoid empty data state!
+  currentLifecycleFilter = 'all';
+  document.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('filterPillAll')?.classList.add('active');
+
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === tab);
   });
 
   const filterBar = document.getElementById('filterBar');
   const dateNavBar = document.getElementById('dateNavBar');
+  const quickFiltersBar = document.getElementById('quickFiltersBar');
   const sortSelect = document.getElementById('sortOrder');
 
   if (tab === 'insights' || tab === 'trends') {
     if (filterBar) filterBar.style.display = 'none';
+    if (dateNavBar) dateNavBar.style.display = 'none';
+    if (quickFiltersBar) quickFiltersBar.style.display = 'none';
   } else {
     if (filterBar) filterBar.style.display = 'flex';
-  }
-
-  // Date Nav Bar is only shown on Daily tab
-  if (dateNavBar) {
-    dateNavBar.style.display = (tab === 'daily') ? 'flex' : 'none';
+    if (dateNavBar) dateNavBar.style.display = 'flex';
+    // Quick lifecycle filters are only applicable to daily radar
+    if (quickFiltersBar) quickFiltersBar.style.display = (tab === 'daily') ? 'flex' : 'none';
+    populateDateSelector();
   }
 
   if (tab === 'weekly') {
@@ -1714,6 +1856,8 @@ function switchTab(tab) {
       <option value="total">📊 總 Star 數 ↓</option>
       <option value="peak">🔥 最高單日 Star ↓</option>
       <option value="avg">📈 平均單日 Star ↓</option>
+      <option value="streak">🔥 當週霸榜天數 ↓</option>
+      <option value="name">🔤 專案名稱 A-Z</option>
     `;
     sortSelect.value = 'total';
   } else if (tab === 'monthly') {
@@ -1721,6 +1865,7 @@ function switchTab(tab) {
       <option value="total">📊 總 Star 數 ↓</option>
       <option value="peak">🔥 最高單日 Star ↓</option>
       <option value="appearances">📈 上榜次數 ↓</option>
+      <option value="name">🔤 專案名稱 A-Z</option>
     `;
     sortSelect.value = 'total';
   } else {
@@ -1819,13 +1964,13 @@ function getFilteredAndSorted(data) {
   } else if (sortVal === 'growth') {
     filtered.sort((a, b) => (b.growth_rate || 0) - (a.growth_rate || 0));
   } else if (sortVal === 'streak') {
-    filtered.sort((a, b) => (b.consecutive_days || 1) - (a.consecutive_days || 1));
+    filtered.sort((a, b) => ((b.consecutive_days ?? b.appearance_days) || 1) - ((a.consecutive_days ?? a.appearance_days) || 1));
   } else if (sortVal === 'peak') {
-    filtered.sort((a, b) => (b.peak_today_stars || 0) - (a.peak_today_stars || 0));
+    filtered.sort((a, b) => ((b.peak_today_stars ?? b.today_stars) || 0) - ((a.peak_today_stars ?? a.today_stars) || 0));
   } else if (sortVal === 'avg') {
     filtered.sort((a, b) => (b.avg_daily_stars || 0) - (a.avg_daily_stars || 0));
   } else if (sortVal === 'appearances') {
-    filtered.sort((a, b) => (b.total_appearances || 0) - (a.total_appearances || 0));
+    filtered.sort((a, b) => ((b.total_appearances ?? b.appearance_days) || 0) - ((a.total_appearances ?? a.appearance_days) || 0));
   } else if (sortVal === 'name') {
     filtered.sort((a, b) => (a.repo_name || a.name || '').localeCompare(b.repo_name || b.name || ''));
   }
@@ -1863,10 +2008,10 @@ function loadMore() {
 // ============================================================
 function renderCurrentTab() {
   const quickFiltersBar = document.getElementById('quickFiltersBar');
-  if (currentTab === 'insights' || currentTab === 'trends') {
-    if (quickFiltersBar) quickFiltersBar.style.display = 'none';
-  } else {
+  if (currentTab === 'daily') {
     if (quickFiltersBar) quickFiltersBar.style.display = 'flex';
+  } else {
+    if (quickFiltersBar) quickFiltersBar.style.display = 'none';
   }
 
   if (currentTab === 'daily') {
@@ -1874,11 +2019,9 @@ function renderCurrentTab() {
     const items = getFilteredAndSorted(allDailyData);
     renderDaily(items);
   } else if (currentTab === 'weekly') {
-    updateLifecycleCounts(allWeeklyData);
     const items = getFilteredAndSorted(allWeeklyData);
     renderWeekly(items);
   } else if (currentTab === 'monthly') {
-    updateLifecycleCounts(allMonthlyData);
     const items = getFilteredAndSorted(allMonthlyData);
     renderMonthly(items);
   } else if (currentTab === 'trends') {
@@ -1909,7 +2052,7 @@ function renderDaily(repos) {
   html += '<div class="repo-list">';
   const visible = repos.slice(0, visibleCount);
   visible.forEach((repo, idx) => {
-    html += renderRepoCard(idx + 1, repo);
+    html += renderRepoCard(idx + 1, repo, 'daily');
   });
 
   if (repos.length > visibleCount) {
@@ -1924,85 +2067,67 @@ function renderDaily(repos) {
 
 function renderWeekly(repos) {
   if (!repos.length) {
-    document.getElementById('contentArea').innerHTML = `<div class="empty-state"><div style="font-size:40px;">📭</div><div>尚無每週統整資料</div></div>`;
+    document.getElementById('contentArea').innerHTML = `
+      <div class="empty-state">
+        <div style="font-size:40px;margin-bottom:12px;">📭</div>
+        <div>【${selectedWeek || '當週'}】無符合條件的週度專案</div>
+      </div>`;
     return;
   }
 
-  const grouped = {};
-  repos.forEach(r => {
-    const ws = r.week_start;
-    if (!grouped[ws]) grouped[ws] = [];
-    grouped[ws].push(r);
+  const weekStart = repos[0]?.week_start || selectedWeek;
+  const weekEnd = repos[0]?.week_end || '';
+  const title = weekEnd ? `${weekStart} ~ ${weekEnd}` : weekStart;
+
+  let html = `<div class="section-title">
+    <div>📅 週次彙總：${title} <span style="color:var(--text-secondary);font-size:13px;font-weight:400;">(共 ${repos.length} 個去重專案)</span></div>
+  </div>`;
+
+  html += '<div class="repo-list">';
+  const visible = repos.slice(0, visibleCount);
+  visible.forEach((repo, idx) => {
+    html += renderRepoCard(idx + 1, repo, 'weekly');
   });
 
-  const weeks = Object.keys(grouped).sort().reverse();
-  let html = '';
-
-  weeks.forEach(weekStart => {
-    const weekRepos = grouped[weekStart];
-    const weekEnd = weekRepos[0]?.week_end || '';
-    html += `<div class="section-title">
-      <div>📅 週次彙總：${weekStart} ~ ${weekEnd} <span style="color:var(--text-secondary);font-size:13px;font-weight:400;">(${weekRepos.length} 個去重專案)</span></div>
+  if (repos.length > visibleCount) {
+    html += `<div style="text-align:center;padding:16px;">
+      <button class="btn-action" onclick="loadMore()">載入更多（尚有 ${repos.length - visibleCount} 項）</button>
     </div>`;
-
-    html += '<div class="repo-list">';
-    const visible = weekRepos.slice(0, visibleCount);
-    visible.forEach((repo, idx) => {
-      html += renderRepoCard(idx + 1, {
-        ...repo,
-        today_stars: repo.peak_today_stars,
-      }, 'peak');
-    });
-
-    if (weekRepos.length > visibleCount) {
-      html += `<div style="text-align:center;padding:16px;">
-        <button class="btn-action" onclick="loadMore()">載入更多（尚有 ${weekRepos.length - visibleCount} 項）</button>
-      </div>`;
-    }
-    html += '</div>';
-  });
+  }
+  html += '</div>';
 
   document.getElementById('contentArea').innerHTML = html;
 }
 
 function renderMonthly(repos) {
   if (!repos.length) {
-    document.getElementById('contentArea').innerHTML = `<div class="empty-state"><div style="font-size:40px;">📭</div><div>尚無每月趨勢資料</div></div>`;
+    document.getElementById('contentArea').innerHTML = `
+      <div class="empty-state">
+        <div style="font-size:40px;margin-bottom:12px;">📭</div>
+        <div>【${selectedMonth ? selectedMonth.slice(0, 7) : '當月'}】無符合條件的月度專案</div>
+      </div>`;
     return;
   }
 
-  const grouped = {};
-  repos.forEach(r => {
-    const ms = r.month_start;
-    if (!grouped[ms]) grouped[ms] = [];
-    grouped[ms].push(r);
+  const monthStart = repos[0]?.month_start || selectedMonth;
+  const monthLabel = monthStart ? monthStart.slice(0, 7) : '';
+
+  let html = `<div class="section-title">
+    <div>📆 月度趨勢：${monthLabel} 月度 <span style="color:var(--text-secondary);font-size:13px;font-weight:400;">(共 ${repos.length} 個上榜專案)</span></div>
+  </div>`;
+
+  html += '<div class="repo-list">';
+  const visible = repos.slice(0, visibleCount);
+  visible.forEach((repo, idx) => {
+    html += renderRepoCard(idx + 1, repo, 'monthly');
   });
 
-  const months = Object.keys(grouped).sort().reverse();
-  let html = '';
-
-  months.forEach(monthStart => {
-    const monthRepos = grouped[monthStart];
-    html += `<div class="section-title">
-      <div>📆 月度彙總：${monthStart} <span style="color:var(--text-secondary);font-size:13px;font-weight:400;">(${monthRepos.length} 個專案)</span></div>
+  if (repos.length > visibleCount) {
+    html += `<div style="text-align:center;padding:16px;">
+      <button class="btn-action" onclick="loadMore()">載入更多（尚有 ${repos.length - visibleCount} 項）</button>
     </div>`;
-
-    html += '<div class="repo-list">';
-    const visible = monthRepos.slice(0, visibleCount);
-    visible.forEach((repo, idx) => {
-      html += renderRepoCard(idx + 1, {
-        ...repo,
-        today_stars: repo.peak_today_stars,
-      }, 'monthly');
-    });
-
-    if (monthRepos.length > visibleCount) {
-      html += `<div style="text-align:center;padding:16px;">
-        <button class="btn-action" onclick="loadMore()">載入更多（尚有 ${monthRepos.length - visibleCount} 項）</button>
-      </div>`;
-    }
-    html += '</div>';
-  });
+  }
+  html += '</div>';
 
   document.getElementById('contentArea').innerHTML = html;
 }
@@ -2027,6 +2152,11 @@ function renderRepoCard(index, repo, mode = 'daily') {
   let todayStars = repo.today_stars_num ?? repo.today_stars ?? repo.peak_today_stars ?? 0;
   if (typeof todayStars === 'string') todayStars = parseInt(todayStars.replace(/,/g, '')) || 0;
 
+  let peakStars = repo.peak_today_stars ?? todayStars;
+  if (typeof peakStars === 'string') peakStars = parseInt(peakStars.replace(/,/g, '')) || 0;
+
+  let avgDailyStars = repo.avg_daily_stars ?? 0;
+
   let forks = repo.forks ?? 0;
   if (typeof forks === 'string') forks = parseInt(String(forks).replace(/,/g, '')) || 0;
 
@@ -2041,6 +2171,61 @@ function renderRepoCard(index, repo, mode = 'daily') {
     low: '⚪ Low'
   };
 
+  // Meta items based on mode
+  let metaHtml = '';
+  if (langName) {
+    metaHtml += `<span class="meta-item"><span class="lang-dot" style="background-color:${langColor}"></span> ${esc(langName)}</span>`;
+  }
+  metaHtml += `<span class="meta-item">⭐ <strong>${totalStars.toLocaleString()}</strong> 總星</span>`;
+
+  if (mode === 'weekly') {
+    metaHtml += `<span class="meta-item">🔥 最高單日 +<strong>${peakStars.toLocaleString()}</strong></span>`;
+    if (avgDailyStars > 0) {
+      metaHtml += `<span class="meta-item">📈 日均 +<strong>${Math.round(avgDailyStars).toLocaleString()}</strong></span>`;
+    }
+    const days = repo.appearance_days || repo.total_appearances;
+    if (days) {
+      metaHtml += `<span class="meta-item">📊 當週上榜 <strong>${days}</strong> 天</span>`;
+    }
+  } else if (mode === 'monthly') {
+    metaHtml += `<span class="meta-item">🔥 最高單日 +<strong>${peakStars.toLocaleString()}</strong></span>`;
+    const apps = repo.total_appearances || repo.appearance_days;
+    if (apps) {
+      metaHtml += `<span class="meta-item">📊 累積上榜 <strong>${apps}</strong> 次</span>`;
+    }
+    if (repo.trend_direction === 'up') {
+      metaHtml += `<span class="meta-item" style="color:var(--accent-green);">📈 趨勢上升</span>`;
+    } else if (repo.trend_direction === 'down') {
+      metaHtml += `<span class="meta-item" style="color:#f85149;">📉 趨勢放緩</span>`;
+    } else if (repo.trend_direction === 'stable') {
+      metaHtml += `<span class="meta-item" style="color:var(--accent-blue);">➡️ 表現穩定</span>`;
+    }
+  } else {
+    metaHtml += `<span class="meta-item">🔥 今日 +<strong>${todayStars.toLocaleString()}</strong></span>`;
+    if (forks) {
+      metaHtml += `<span class="meta-item">🍴 <strong>${forks.toLocaleString()}</strong></span>`;
+    }
+    if (repo.total_appearances) {
+      metaHtml += `<span class="meta-item">📊 上榜 <strong>${repo.total_appearances}</strong> 次</span>`;
+    }
+  }
+  metaHtml += `<span class="relevance-badge ${esc(relevance)}">${relevanceMap[relevance] || '⚪ Low'}</span>`;
+
+  // Badges next to title
+  let badgesHtml = '';
+  if (mode === 'daily') {
+    if (isNew) badgesHtml += `<span class="badge-new">✨ NEW 首次上榜</span>`;
+    if (consecutive >= 2) badgesHtml += `<span class="badge-streak">🔥 連續 ${consecutive} 天</span>`;
+    if (growthRate >= 10.0) badgesHtml += `<span class="badge-growth">🚀 +${growthRate}% 爆發</span>`;
+  } else if (mode === 'weekly') {
+    if ((repo.appearance_days || 0) >= 4) badgesHtml += `<span class="badge-streak">🔥 當週霸榜 ${repo.appearance_days} 天</span>`;
+  } else if (mode === 'monthly') {
+    if ((repo.total_appearances || 0) >= 10) badgesHtml += `<span class="badge-streak">🏆 月度常客 (${repo.total_appearances}次)</span>`;
+  }
+  if (channels && channels.length) {
+    badgesHtml += channels.filter(c => c !== 'All').map(c => `<span class="badge-channel">${esc(c)}</span>`).join('');
+  }
+
   return `
     <div class="repo-card">
       <div class="repo-rank ${rankClass}">#${index}</div>
@@ -2050,10 +2235,7 @@ function renderRepoCard(index, repo, mode = 'daily') {
             <a class="repo-name" href="${esc(repoUrl)}" target="_blank" rel="noreferrer">
               ${esc(repoName)} ↗
             </a>
-            ${isNew ? `<span class="badge-new">✨ NEW 首次上榜</span>` : ''}
-            ${consecutive >= 2 ? `<span class="badge-streak">🔥 連續 ${consecutive} 天</span>` : ''}
-            ${growthRate >= 10.0 ? `<span class="badge-growth">🚀 +${growthRate}% 爆發</span>` : ''}
-            ${channels.filter(c => c !== 'All').map(c => `<span class="badge-channel">${esc(c)}</span>`).join('')}
+            ${badgesHtml}
           </div>
           <button class="btn-history" onclick="openHistoryModal('${esc(repoName)}')">📈 歷程分析</button>
         </div>
@@ -2061,12 +2243,7 @@ function renderRepoCard(index, repo, mode = 'daily') {
         <div class="repo-desc">${esc(desc)}</div>
         
         <div class="repo-meta">
-          ${langName ? `<span class="meta-item"><span class="lang-dot" style="background-color:${langColor}"></span> ${esc(langName)}</span>` : ''}
-          <span class="meta-item">⭐ <strong>${totalStars.toLocaleString()}</strong></span>
-          <span class="meta-item">🔥 今日 +<strong>${todayStars.toLocaleString()}</strong></span>
-          ${forks ? `<span class="meta-item">🍴 <strong>${forks.toLocaleString()}</strong></span>` : ''}
-          ${repo.total_appearances ? `<span class="meta-item">📊 上榜 <strong>${repo.total_appearances}</strong> 次</span>` : ''}
-          <span class="relevance-badge ${esc(relevance)}">${relevanceMap[relevance] || '⚪ Low'}</span>
+          ${metaHtml}
         </div>
         
         ${renderTags(tags)}

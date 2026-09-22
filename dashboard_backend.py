@@ -464,21 +464,88 @@ async def get_daily_stats():
 # ============================================================
 # API ENDPOINTS: WEEKLY & MONTHLY
 # ============================================================
+@app.get("/api/weeks")
+async def get_available_weeks():
+    """Get all distinct weeks available in weekly aggregation."""
+    week_map = {}
+    for page in range(5):
+        rows = await async_supabase_get(
+            "github_trending_weekly",
+            select="week_start,week_end",
+            order="week_start.desc",
+            limit=1000,
+            offset=page * 1000
+        )
+        for r in rows:
+            ws = r.get("week_start")
+            we = r.get("week_end")
+            if ws and ws not in week_map:
+                week_map[ws] = {"week_start": ws, "week_end": we, "count": 0}
+            if ws:
+                week_map[ws]["count"] += 1
+        if len(rows) < 1000:
+            break
+
+    sorted_weeks = sorted(week_map.values(), key=lambda x: x["week_start"], reverse=True)
+    latest_week = sorted_weeks[0]["week_start"] if sorted_weeks else None
+    return {
+        "latest": latest_week,
+        "latest_week": latest_week,
+        "weeks": sorted_weeks
+    }
+
+
+@app.get("/api/months")
+async def get_available_months():
+    """Get all distinct months available in monthly aggregation."""
+    month_map = {}
+    for page in range(5):
+        rows = await async_supabase_get(
+            "github_trending_monthly",
+            select="month_start,month_end",
+            order="month_start.desc",
+            limit=1000,
+            offset=page * 1000
+        )
+        for r in rows:
+            ms = r.get("month_start")
+            me = r.get("month_end")
+            if ms and ms not in month_map:
+                month_map[ms] = {"month_start": ms, "month_end": me, "count": 0}
+            if ms:
+                month_map[ms]["count"] += 1
+        if len(rows) < 1000:
+            break
+
+    sorted_months = sorted(month_map.values(), key=lambda x: x["month_start"], reverse=True)
+    latest_month = sorted_months[0]["month_start"] if sorted_months else None
+    return {
+        "latest": latest_month,
+        "latest_month": latest_month,
+        "months": sorted_months
+    }
+
+
 @app.get("/api/weekly", response_model=List[Dict[str, Any]])
 async def get_weekly_trending(
     week_start: Optional[str] = Query(None, description="Filter by week start date"),
-    limit: int = Query(60, ge=1, le=200, description="Max results"),
+    limit: int = Query(150, ge=1, le=500, description="Max results"),
     language: Optional[str] = Query(None, description="Filter by language"),
-    sort: str = Query("total", description="Sort by: total, peak, avg")
+    sort: str = Query("total", description="Sort by: total, peak, avg, name")
 ):
-    """Get weekly aggregated trending repositories."""
+    """Get weekly aggregated trending repositories. Defaults to the latest available week."""
     filters = {}
+    if not week_start:
+        latest_rows = await async_supabase_get("github_trending_weekly", order="week_start.desc", limit=1, select="week_start")
+        if latest_rows and latest_rows[0].get("week_start"):
+            week_start = latest_rows[0]["week_start"]
+
     if week_start:
         filters["week_start"] = f"'{week_start}'"
     if language and language.lower() != "all":
         filters["language"] = f"'{language}'"
 
-    order_field = "total_stars.desc" if sort == "total" else "peak_today_stars.desc" if sort == "peak" else "avg_daily_stars.desc"
+    order_field = "total_stars.desc" if sort == "total" else "peak_today_stars.desc" if sort == "peak" else "avg_daily_stars.desc" if sort == "avg" else "repo_name.asc"
 
     repos = await async_supabase_get(
         "github_trending_weekly", 
@@ -489,48 +556,26 @@ async def get_weekly_trending(
     return repos
 
 
-@app.get("/api/weekly/latest")
-async def get_latest_weekly(limit: int = Query(4, ge=1, le=12, description="Last N weeks")):
-    """Get the latest N weeks of aggregated data."""
-    cache_key = f"latest_weekly_{limit}"
-    cached = cache.get(cache_key)
-    if cached:
-        return cached
-
-    repos = await async_supabase_get(
-        "github_trending_weekly", 
-        order="week_start.desc,total_stars.desc",
-        limit=limit * 50
-    )
-
-    from collections import OrderedDict
-    weekly_groups = OrderedDict()
-    for r in repos:
-        ws = r.get("week_start")
-        if ws not in weekly_groups:
-            weekly_groups[ws] = []
-        weekly_groups[ws].append(r)
-
-    latest = dict(list(weekly_groups.items())[:limit])
-    cache.set(cache_key, latest, ttl=60)
-    return latest
-
-
 @app.get("/api/monthly", response_model=List[Dict[str, Any]])
 async def get_monthly_trending(
     month_start: Optional[str] = Query(None, description="Filter by month start date"),
-    limit: int = Query(60, ge=1, le=200, description="Max results"),
+    limit: int = Query(150, ge=1, le=500, description="Max results"),
     language: Optional[str] = Query(None, description="Filter by language"),
-    sort: str = Query("total", description="Sort by: total, peak, appearances")
+    sort: str = Query("total", description="Sort by: total, peak, appearances, name")
 ):
-    """Get monthly aggregated trending repositories."""
+    """Get monthly aggregated trending repositories. Defaults to the latest available month."""
     filters = {}
+    if not month_start:
+        latest_rows = await async_supabase_get("github_trending_monthly", order="month_start.desc", limit=1, select="month_start")
+        if latest_rows and latest_rows[0].get("month_start"):
+            month_start = latest_rows[0]["month_start"]
+
     if month_start:
         filters["month_start"] = f"'{month_start}'"
     if language and language.lower() != "all":
         filters["language"] = f"'{language}'"
 
-    order_field = "total_stars.desc" if sort == "total" else "peak_today_stars.desc" if sort == "peak" else "total_appearances.desc"
+    order_field = "total_stars.desc" if sort == "total" else "peak_today_stars.desc" if sort == "peak" else "total_appearances.desc" if sort == "appearances" else "repo_name.asc"
 
     repos = await async_supabase_get(
         "github_trending_monthly", 
