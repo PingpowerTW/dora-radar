@@ -2012,8 +2012,7 @@ function renderRepoCard(index, repo, mode = 'daily') {
   const repoUrl = repo.repo_url || repo.url || (repoName ? `https://github.com/${repoName}` : '#');
   const zhDesc = repo.description_zh || repo.desc_zh || '';
   const rawDesc = repo.description || repo.desc || '';
-  const primaryDesc = zhDesc || rawDesc || '無專案說明';
-  const showEnSub = zhDesc && rawDesc && zhDesc !== rawDesc;
+  const desc = zhDesc || rawDesc || '無專案說明';
   const relevance = repo.relevance_level || repo.relevance || 'low';
   const tags = repo.relevance_tags || repo.reasons || [];
   
@@ -2059,8 +2058,7 @@ function renderRepoCard(index, repo, mode = 'daily') {
           <button class="btn-history" onclick="openHistoryModal('${esc(repoName)}')">📈 歷程分析</button>
         </div>
         
-        <div class="repo-desc">${esc(primaryDesc)}</div>
-        ${showEnSub ? `<div class="repo-desc-en" style="color:var(--text-muted);font-size:12px;margin-top:2px;">${esc(rawDesc)}</div>` : ''}
+        <div class="repo-desc">${esc(desc)}</div>
         
         <div class="repo-meta">
           ${langName ? `<span class="meta-item"><span class="lang-dot" style="background-color:${langColor}"></span> ${esc(langName)}</span>` : ''}
@@ -2515,8 +2513,7 @@ function renderModalContent(data) {
   const timeline = data.timeline || [];
   const zhDesc = data.description_zh || '';
   const rawDesc = data.description || '';
-  const primaryDesc = zhDesc || rawDesc || '無專案說明';
-  const hasBoth = zhDesc && rawDesc && zhDesc !== rawDesc;
+  const desc = zhDesc || rawDesc || '無專案說明';
 
   let html = `
     <div style="margin-bottom: 20px;">
@@ -2524,13 +2521,8 @@ function renderModalContent(data) {
         <a href="${esc(data.repo_url)}" target="_blank" style="color: inherit; text-decoration: none;">${esc(data.repo_name)} ↗</a>
       </h2>
       <div style="color: var(--text-primary); font-size: 14px; margin-top: 6px; font-weight: 500;">
-        ${esc(primaryDesc)}
+        ${esc(desc)}
       </div>
-      ${hasBoth ? `
-        <div style="color: var(--text-secondary); font-size: 12px; margin-top: 3px; font-style: italic;">
-          ${esc(rawDesc)}
-        </div>
-      ` : ''}
     </div>
 
     <div class="summary-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 20px;">
