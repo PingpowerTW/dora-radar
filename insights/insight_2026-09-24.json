@@ -16,7 +16,7 @@
         "All",
         "Python"
       ],
-      "desc_zh": "事後諸葛亮：智能體的學習記憶",
+      "desc_zh": "事後諸葛亮：AI Agent的學習記憶",
       "is_new": true,
       "consecutive_days": 1,
       "growth_rate": 5.97,
@@ -27,7 +27,7 @@
       ],
       "today_stars_num": 1607,
       "total_stars_num": 26924,
-      "description_zh": "事後諸葛亮：智能體的學習記憶"
+      "description_zh": "事後諸葛亮：AI Agent的學習記憶"
     },
     {
       "name": "google/ax",
@@ -43,7 +43,7 @@
         "All",
         "Go"
       ],
-      "desc_zh": "Google 的開放代理程式編排運行時",
+      "desc_zh": "Google 的開放代理程式編排Runtime",
       "is_new": false,
       "consecutive_days": 3,
       "growth_rate": 15.94,
@@ -54,7 +54,7 @@
       ],
       "today_stars_num": 1543,
       "total_stars_num": 9679,
-      "description_zh": "Google 的開放代理程式編排運行時"
+      "description_zh": "Google 的開放代理程式編排Runtime"
     },
     {
       "name": "dream-num/univer",
@@ -125,7 +125,7 @@
       "channels": [
         "TypeScript"
       ],
-      "desc_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。",
+      "desc_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端Runtime使用。",
       "is_new": false,
       "consecutive_days": 1,
       "growth_rate": 1.22,
@@ -136,7 +136,7 @@
       ],
       "today_stars_num": 942,
       "total_stars_num": 77083,
-      "description_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。"
+      "description_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端Runtime使用。"
     },
     {
       "name": "agent-substrate/substrate",
@@ -232,7 +232,7 @@
         "All",
         "Python"
       ],
-      "desc_zh": "事後諸葛亮：智能體的學習記憶",
+      "desc_zh": "事後諸葛亮：AI Agent的學習記憶",
       "is_new": true,
       "consecutive_days": 1,
       "growth_rate": 5.97,
@@ -243,7 +243,7 @@
       ],
       "today_stars_num": 1607,
       "total_stars_num": 26924,
-      "description_zh": "事後諸葛亮：智能體的學習記憶"
+      "description_zh": "事後諸葛亮：AI Agent的學習記憶"
     },
     {
       "name": "op7418/Humanizer-zh",
@@ -355,7 +355,7 @@
     {
       "name": "ArvinLovegood/go-stock",
       "url": "https://github.com/ArvinLovegood/go-stock",
-      "desc": "🦄🦄🦄AI赋能股票分析：AI加持的股票分析/选股工具。股票行情获取，AI热点资讯分析，AI资金/财务分析，涨跌报警推送。支持A股，港股，美股。支持市场整体/个股情绪分析，AI辅助选股等。数据全部保留在本地。支持DeepSeek，OpenAI， Ollama，LMStudio，AnythingLLM，硅基流动，火山方舟，阿里云百炼等平台或模型。",
+      "desc": "🦄🦄🦄AI赋能股票分析：AI加持的股票分析/选股工具。股票行情获取，AI热点资讯分析，AI资金/财务分析，涨跌报警推送。支援A股，港股，美股。支援市场整体/个股情绪分析，AI辅助选股等。数据全部保留在本地。支援DeepSeek，OpenAI， Ollama，LMStudio，AnythingLLM，硅基流动，火山方舟，阿里云百炼等平台或模型。",
       "total_stars": "7,688",
       "today_stars": "87",
       "forks": "1,344",
@@ -365,7 +365,7 @@
       "channels": [
         "Go"
       ],
-      "desc_zh": "🦄🦄🦄AI賦能股票分析：AI加持的股票分析/選股工具。股票行情獲取，AI熱點分析，AI資金/財務分析，漲跌警報。支持A股，港股，美股。支持市場整體/個股情緒分析，輔助股選等。資料全部保留在本地。支持DeepSeek，OpenAI， Ollama，LMStudio，AnythingLLM，矽基流動，火山方舟，阿里雲百煉等平台或模型。",
+      "desc_zh": "🦄🦄🦄AI賦能股票分析：AI加持的股票分析/選股工具。股票行情獲取，AI熱點分析，AI資金/財務分析，漲跌警報。支援A股，港股，美股。支援市場整體/個股情緒分析，輔助股選等。資料全部保留在本地。支援DeepSeek，OpenAI， Ollama，LMStudio，AnythingLLM，矽基流動，火山方舟，阿里雲百煉等平台或模型。",
       "is_new": true,
       "consecutive_days": 1,
       "growth_rate": 1.13,
@@ -376,7 +376,7 @@
       ],
       "today_stars_num": 87,
       "total_stars_num": 7688,
-      "description_zh": "🦄🦄🦄AI賦能股票分析：AI加持的股票分析/選股工具。股票行情獲取，AI熱點分析，AI資金/財務分析，漲跌警報。支持A股，港股，美股。支持市場整體/個股情緒分析，輔助股選等。資料全部保留在本地。支持DeepSeek，OpenAI， Ollama，LMStudio，AnythingLLM，矽基流動，火山方舟，阿里雲百煉等平台或模型。"
+      "description_zh": "🦄🦄🦄AI賦能股票分析：AI加持的股票分析/選股工具。股票行情獲取，AI熱點分析，AI資金/財務分析，漲跌警報。支援A股，港股，美股。支援市場整體/個股情緒分析，輔助股選等。資料全部保留在本地。支援DeepSeek，OpenAI， Ollama，LMStudio，AnythingLLM，矽基流動，火山方舟，阿里雲百煉等平台或模型。"
     },
     {
       "name": "aayushch/laya",
@@ -501,7 +501,7 @@
         "All",
         "Python"
       ],
-      "desc_zh": "事後諸葛亮：智能體的學習記憶",
+      "desc_zh": "事後諸葛亮：AI Agent的學習記憶",
       "is_new": true,
       "consecutive_days": 1,
       "growth_rate": 5.97,
@@ -512,7 +512,7 @@
       ],
       "today_stars_num": 1607,
       "total_stars_num": 26924,
-      "description_zh": "事後諸葛亮：智能體的學習記憶"
+      "description_zh": "事後諸葛亮：AI Agent的學習記憶"
     },
     {
       "name": "google/ax",
@@ -528,7 +528,7 @@
         "All",
         "Go"
       ],
-      "desc_zh": "Google 的開放代理程式編排運行時",
+      "desc_zh": "Google 的開放代理程式編排Runtime",
       "is_new": false,
       "consecutive_days": 3,
       "growth_rate": 15.94,
@@ -539,7 +539,7 @@
       ],
       "today_stars_num": 1543,
       "total_stars_num": 9679,
-      "description_zh": "Google 的開放代理程式編排運行時"
+      "description_zh": "Google 的開放代理程式編排Runtime"
     },
     {
       "name": "dream-num/univer",
@@ -570,6 +570,6 @@
       "description_zh": "AI 代理程式的 Office 工具 — 在一個執行階段中處理電子表格、文件、投影片、畫布、關係表和 PDF。"
     }
   ],
-  "markdown_report": "# 📊 每日 GitHub 開源雷達與趨勢報告\n**日期：** 2026-09-24 (Thursday)\n**來源：** GitHub Trending 多語言子榜 (Python, TS, JS, Rust, Go, C++, Jupyter)\n**去重總計：** ✅ 本日監控 117 個不重複專案\n\n---\n\n## 💡 Dora 的精選推薦 (對 Hermes 自我進化最有價值)\n\n### 1. 🔴 [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) ✨ NEW\n- **Stars:** 26,924 (今日 +1,607)\n- **分類:** CRITICAL | **語言:** Python\n- **簡介:** 事後諸葛亮：智能體的學習記憶\n\n### 2. 🔴 [google/ax](https://github.com/google/ax) 🔥 連續 3 天\n- **Stars:** 9,679 (今日 +1,543)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Google 的開放代理程式編排運行時\n\n### 3. 🔴 [dream-num/univer](https://github.com/dream-num/univer) 🔥 連續 3 天\n- **Stars:** 17,058 (今日 +1,142)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** AI 代理程式的 Office 工具 — 在一個執行階段中處理電子表格、文件、投影片、畫布、關係表和 PDF。\n\n### 4. 🔴 [farion1231/cc-switch](https://github.com/farion1231/cc-switch) 🔥 連續 1 天\n- **Stars:** 136,273 (今日 +957)\n- **分類:** CRITICAL | **語言:** Rust\n- **簡介:** 一款跨平台桌面一體式助手，適用於 Claude Code、Codex、OpenCode、OpenClaw、Grok Build 和 Hermes Agent。唯一官方網站：ccswitch.io\n\n### 5. 🔴 [stablyai/orca](https://github.com/stablyai/orca) 🔥 連續 1 天\n- **Stars:** 77,083 (今日 +942)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。\n\n### 6. 🔴 [agent-substrate/substrate](https://github.com/agent-substrate/substrate) 🔥 連續 4 天\n- **Stars:** 3,686 (今日 +558)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Agent Substrate：核心系統\n\n### 7. 🔴 [superdesigndev/treg](https://github.com/superdesigndev/treg) 🔥 連續 3 天\n- **Stars:** 2,943 (今日 +506)\n- **分類:** CRITICAL | **語言:** Python\n- **簡介:** 用於代理工具的 OpenRouter。在此加入社群：https://discord.gg/6mQYYfFMAn\n\n### 8. 🔴 [obra/superpowers](https://github.com/obra/superpowers) 🔥 連續 2 天\n- **Stars:** 290,983 (今日 +474)\n- **分類:** CRITICAL | **語言:** Shell\n- **簡介:** 有效的代理技能架構和軟體開發方法。\n\n---\n\n## ✨ 今日首發新面孔 (首次上榜，共 29 個)\n\n| # | 新進專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|----------|------|----------|----------|--------|\n| 1 | [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) | Python | 26,924 | +1,607 | 🔴 critical |\n| 2 | [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) | Python | 18,343 | +290 | 🔴 critical |\n| 3 | [FxEmbed/FxEmbed](https://github.com/FxEmbed/FxEmbed) | TypeScript | 5,262 | +165 | ⚪ low |\n| 4 | [zeronsh/zeron](https://github.com/zeronsh/zeron) | Rust | 2,200 | +129 | 🔴 critical |\n| 5 | [androoAGI/starnet](https://github.com/androoAGI/starnet) | JavaScript | 201 | +95 | 🔴 critical |\n| 6 | [ArvinLovegood/go-stock](https://github.com/ArvinLovegood/go-stock) | Go | 7,688 | +87 | 🟡 medium |\n| 7 | [aayushch/laya](https://github.com/aayushch/laya) | Python | 253 | +79 | 🟠 high |\n| 8 | [julyx10/lap](https://github.com/julyx10/lap) | Vue | 2,684 | +71 | ⚪ low |\n| 9 | [astral-sh/uv](https://github.com/astral-sh/uv) | Rust | 90,131 | +43 | ⚪ low |\n| 10 | [stepfun-ai/Step-Code](https://github.com/stepfun-ai/Step-Code) | TypeScript | 386 | +37 | ⚪ low |\n\n---\n\n## 📈 今日 GitHub Trending 全覽 TOP 20\n\n| # | 專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|------|------|----------|----------|--------|\n| 1 | [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) | Python | 26,924 | +1,607 | 🔴 critical |\n| 2 | [google/ax](https://github.com/google/ax) | Go | 9,679 | +1,543 | 🔴 critical |\n| 3 | [dream-num/univer](https://github.com/dream-num/univer) | TypeScript | 17,058 | +1,142 | 🔴 critical |\n| 4 | [farion1231/cc-switch](https://github.com/farion1231/cc-switch) | Rust | 136,273 | +957 | 🔴 critical |\n| 5 | [stablyai/orca](https://github.com/stablyai/orca) | TypeScript | 77,083 | +942 | 🔴 critical |\n| 6 | [experientiallabs/experiential](https://github.com/experientiallabs/experiential) | Python | 6,663 | +774 | ⚪ low |\n| 7 | [anthropics/financial-services](https://github.com/anthropics/financial-services) | Python | 37,195 | +664 | ⚪ low |\n| 8 | [flexprice/flexprice](https://github.com/flexprice/flexprice) | Go | 6,935 | +617 | ⚪ low |\n| 9 | [agent-substrate/substrate](https://github.com/agent-substrate/substrate) | Go | 3,686 | +558 | 🔴 critical |\n| 10 | [mvt-project/mvt](https://github.com/mvt-project/mvt) | Python | 14,602 | +543 | ⚪ low |\n| 11 | [superdesigndev/treg](https://github.com/superdesigndev/treg) | Python | 2,943 | +506 | 🔴 critical |\n| 12 | [obra/superpowers](https://github.com/obra/superpowers) | Shell | 290,983 | +474 | 🔴 critical |\n| 13 | [laoma2053/awesome-zhuiju-free](https://github.com/laoma2053/awesome-zhuiju-free) | JavaScript | 10,171 | +432 | ⚪ low |\n| 14 | [every-app/open-seo](https://github.com/every-app/open-seo) | TypeScript | 20,736 | +426 | ⚪ low |\n| 15 | [clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) | Rust | 147,032 | +396 | 🟡 medium |\n| 16 | [davila7/claude-code-templates](https://github.com/davila7/claude-code-templates) | Python | 31,684 | +389 | 🔴 critical |\n| 17 | [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) | TypeScript | 33,122 | +371 | 🔴 critical |\n| 18 | [rohitg00/ai-engineering-from-scratch](https://github.com/rohitg00/ai-engineering-from-scratch) | Python | 55,913 | +310 | ⚪ low |\n| 19 | [hydra-db/hydradb](https://github.com/hydra-db/hydradb) | Rust | 5,531 | +305 | 🟡 medium |\n| 20 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | JavaScript | 70,620 | +304 | ⚪ low |\n\n---\n\n## 🔍 Dora 的觀察與建議\n\n### 趨勢分析\n\n- **🤖 Agent 熱潮持續升溫：** 今日 36 個專案直接與 AI Agent 相關\n- **✨ 新血湧入：** 今日共有 29 個專案為首次進入觀測站雷達\n- **📋 Skill 機制成為共識：** 6 個專案聚焦於 Skills/能力模組化\n\n### 值得深入研究的 TOP 3\n\n1. **[vectorize-io/hindsight](https://github.com/vectorize-io/hindsight)** — 事後諸葛亮：智能體的學習記憶\n2. **[google/ax](https://github.com/google/ax)** — Google 的開放代理程式編排運行時\n3. **[dream-num/univer](https://github.com/dream-num/univer)** — AI 代理程式的 Office 工具 — 在一個執行階段中處理電子表格、文件、投影片、畫布、關係表和 PDF。\n\n---\n\n*報告由 Hermes Agent Dora 自動生成 | 下次執行: 明日同一時間*\n",
+  "markdown_report": "# 📊 每日 GitHub 開源雷達與趨勢報告\n**日期：** 2026-09-24 (Thursday)\n**來源：** GitHub Trending 多語言子榜 (Python, TS, JS, Rust, Go, C++, Jupyter)\n**去重總計：** ✅ 本日監控 117 個不重複專案\n\n---\n\n## 💡 Dora 的精選推薦 (對 Hermes 自我進化最有價值)\n\n### 1. 🔴 [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) ✨ NEW\n- **Stars:** 26,924 (今日 +1,607)\n- **分類:** CRITICAL | **語言:** Python\n- **簡介:** 事後諸葛亮：AI Agent的學習記憶\n\n### 2. 🔴 [google/ax](https://github.com/google/ax) 🔥 連續 3 天\n- **Stars:** 9,679 (今日 +1,543)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Google 的開放代理程式編排Runtime\n\n### 3. 🔴 [dream-num/univer](https://github.com/dream-num/univer) 🔥 連續 3 天\n- **Stars:** 17,058 (今日 +1,142)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** AI 代理程式的 Office 工具 — 在一個執行階段中處理電子表格、文件、投影片、畫布、關係表和 PDF。\n\n### 4. 🔴 [farion1231/cc-switch](https://github.com/farion1231/cc-switch) 🔥 連續 1 天\n- **Stars:** 136,273 (今日 +957)\n- **分類:** CRITICAL | **語言:** Rust\n- **簡介:** 一款跨平台桌面一體式助手，適用於 Claude Code、Codex、OpenCode、OpenClaw、Grok Build 和 Hermes Agent。唯一官方網站：ccswitch.io\n\n### 5. 🔴 [stablyai/orca](https://github.com/stablyai/orca) 🔥 連續 1 天\n- **Stars:** 77,083 (今日 +942)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端Runtime使用。\n\n### 6. 🔴 [agent-substrate/substrate](https://github.com/agent-substrate/substrate) 🔥 連續 4 天\n- **Stars:** 3,686 (今日 +558)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Agent Substrate：核心系統\n\n### 7. 🔴 [superdesigndev/treg](https://github.com/superdesigndev/treg) 🔥 連續 3 天\n- **Stars:** 2,943 (今日 +506)\n- **分類:** CRITICAL | **語言:** Python\n- **簡介:** 用於代理工具的 OpenRouter。在此加入社群：https://discord.gg/6mQYYfFMAn\n\n### 8. 🔴 [obra/superpowers](https://github.com/obra/superpowers) 🔥 連續 2 天\n- **Stars:** 290,983 (今日 +474)\n- **分類:** CRITICAL | **語言:** Shell\n- **簡介:** 有效的代理技能架構和軟體開發方法。\n\n---\n\n## ✨ 今日首發新面孔 (首次上榜，共 29 個)\n\n| # | 新進專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|----------|------|----------|----------|--------|\n| 1 | [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) | Python | 26,924 | +1,607 | 🔴 critical |\n| 2 | [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) | Python | 18,343 | +290 | 🔴 critical |\n| 3 | [FxEmbed/FxEmbed](https://github.com/FxEmbed/FxEmbed) | TypeScript | 5,262 | +165 | ⚪ low |\n| 4 | [zeronsh/zeron](https://github.com/zeronsh/zeron) | Rust | 2,200 | +129 | 🔴 critical |\n| 5 | [androoAGI/starnet](https://github.com/androoAGI/starnet) | JavaScript | 201 | +95 | 🔴 critical |\n| 6 | [ArvinLovegood/go-stock](https://github.com/ArvinLovegood/go-stock) | Go | 7,688 | +87 | 🟡 medium |\n| 7 | [aayushch/laya](https://github.com/aayushch/laya) | Python | 253 | +79 | 🟠 high |\n| 8 | [julyx10/lap](https://github.com/julyx10/lap) | Vue | 2,684 | +71 | ⚪ low |\n| 9 | [astral-sh/uv](https://github.com/astral-sh/uv) | Rust | 90,131 | +43 | ⚪ low |\n| 10 | [stepfun-ai/Step-Code](https://github.com/stepfun-ai/Step-Code) | TypeScript | 386 | +37 | ⚪ low |\n\n---\n\n## 📈 今日 GitHub Trending 全覽 TOP 20\n\n| # | 專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|------|------|----------|----------|--------|\n| 1 | [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) | Python | 26,924 | +1,607 | 🔴 critical |\n| 2 | [google/ax](https://github.com/google/ax) | Go | 9,679 | +1,543 | 🔴 critical |\n| 3 | [dream-num/univer](https://github.com/dream-num/univer) | TypeScript | 17,058 | +1,142 | 🔴 critical |\n| 4 | [farion1231/cc-switch](https://github.com/farion1231/cc-switch) | Rust | 136,273 | +957 | 🔴 critical |\n| 5 | [stablyai/orca](https://github.com/stablyai/orca) | TypeScript | 77,083 | +942 | 🔴 critical |\n| 6 | [experientiallabs/experiential](https://github.com/experientiallabs/experiential) | Python | 6,663 | +774 | ⚪ low |\n| 7 | [anthropics/financial-services](https://github.com/anthropics/financial-services) | Python | 37,195 | +664 | ⚪ low |\n| 8 | [flexprice/flexprice](https://github.com/flexprice/flexprice) | Go | 6,935 | +617 | ⚪ low |\n| 9 | [agent-substrate/substrate](https://github.com/agent-substrate/substrate) | Go | 3,686 | +558 | 🔴 critical |\n| 10 | [mvt-project/mvt](https://github.com/mvt-project/mvt) | Python | 14,602 | +543 | ⚪ low |\n| 11 | [superdesigndev/treg](https://github.com/superdesigndev/treg) | Python | 2,943 | +506 | 🔴 critical |\n| 12 | [obra/superpowers](https://github.com/obra/superpowers) | Shell | 290,983 | +474 | 🔴 critical |\n| 13 | [laoma2053/awesome-zhuiju-free](https://github.com/laoma2053/awesome-zhuiju-free) | JavaScript | 10,171 | +432 | ⚪ low |\n| 14 | [every-app/open-seo](https://github.com/every-app/open-seo) | TypeScript | 20,736 | +426 | ⚪ low |\n| 15 | [clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) | Rust | 147,032 | +396 | 🟡 medium |\n| 16 | [davila7/claude-code-templates](https://github.com/davila7/claude-code-templates) | Python | 31,684 | +389 | 🔴 critical |\n| 17 | [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) | TypeScript | 33,122 | +371 | 🔴 critical |\n| 18 | [rohitg00/ai-engineering-from-scratch](https://github.com/rohitg00/ai-engineering-from-scratch) | Python | 55,913 | +310 | ⚪ low |\n| 19 | [hydra-db/hydradb](https://github.com/hydra-db/hydradb) | Rust | 5,531 | +305 | 🟡 medium |\n| 20 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | JavaScript | 70,620 | +304 | ⚪ low |\n\n---\n\n## 🔍 Dora 的觀察與建議\n\n### 趨勢分析\n\n- **🤖 Agent 熱潮持續升溫：** 今日 36 個專案直接與 AI Agent 相關\n- **✨ 新血湧入：** 今日共有 29 個專案為首次進入觀測站雷達\n- **📋 Skill 機制成為共識：** 6 個專案聚焦於 Skills/能力模組化\n\n### 值得深入研究的 TOP 3\n\n1. **[vectorize-io/hindsight](https://github.com/vectorize-io/hindsight)** — 事後諸葛亮：AI Agent的學習記憶\n2. **[google/ax](https://github.com/google/ax)** — Google 的開放代理程式編排Runtime\n3. **[dream-num/univer](https://github.com/dream-num/univer)** — AI 代理程式的 Office 工具 — 在一個執行階段中處理電子表格、文件、投影片、畫布、關係表和 PDF。\n\n---\n\n*報告由 Hermes Agent Dora 自動生成 | 下次執行: 明日同一時間*\n",
   "total_repos": 117
 }

@@ -16,7 +16,7 @@
         "All",
         "Go"
       ],
-      "desc_zh": "Google 的開放代理程式編排運行時",
+      "desc_zh": "Google 的開放代理程式編排Runtime",
       "is_new": true,
       "consecutive_days": 1,
       "growth_rate": 34.33,
@@ -27,7 +27,7 @@
       ],
       "today_stars_num": 2324,
       "total_stars_num": 6769,
-      "description_zh": "Google 的開放代理程式編排運行時"
+      "description_zh": "Google 的開放代理程式編排Runtime"
     },
     {
       "name": "stablyai/orca",
@@ -42,7 +42,7 @@
       "channels": [
         "TypeScript"
       ],
-      "desc_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。",
+      "desc_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端Runtime使用。",
       "is_new": false,
       "consecutive_days": 1,
       "growth_rate": 1.31,
@@ -53,7 +53,7 @@
       ],
       "today_stars_num": 985,
       "total_stars_num": 75159,
-      "description_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。"
+      "description_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端Runtime使用。"
     },
     {
       "name": "affaan-m/ECC",
@@ -68,7 +68,7 @@
       "channels": [
         "JavaScript"
       ],
-      "desc_zh": "代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。",
+      "desc_zh": "代理利用性能最佳化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。",
       "is_new": false,
       "consecutive_days": 1,
       "growth_rate": 0.3,
@@ -82,7 +82,7 @@
       ],
       "today_stars_num": 805,
       "total_stars_num": 265045,
-      "description_zh": "代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。"
+      "description_zh": "代理利用性能最佳化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。"
     },
     {
       "name": "Nasiko-Labs/nasiko",
@@ -230,7 +230,7 @@
         "All",
         "Go"
       ],
-      "desc_zh": "Google 的開放代理程式編排運行時",
+      "desc_zh": "Google 的開放代理程式編排Runtime",
       "is_new": true,
       "consecutive_days": 1,
       "growth_rate": 34.33,
@@ -241,7 +241,7 @@
       ],
       "today_stars_num": 2324,
       "total_stars_num": 6769,
-      "description_zh": "Google 的開放代理程式編排運行時"
+      "description_zh": "Google 的開放代理程式編排Runtime"
     },
     {
       "name": "hydra-db/hydradb",
@@ -413,7 +413,7 @@
       "channels": [
         "JavaScript"
       ],
-      "desc_zh": "自託管健身房和體重追蹤器 — 規劃日常活動、記錄運動（超級組、熱身、有氧運動）、查看哪些肌肉經過訓練、疲勞或失去訓練、從 FitNotes/Strong/Hevy 匯入、密碼登入。您的數據，您的伺服器。",
+      "desc_zh": "自託管健身房和體重追蹤器 — 規劃日常活動、記錄運動（超級組、熱身、有氧運動）、查看哪些肌肉經過訓練、疲勞或失去訓練、從 FitNotes/Strong/Hevy 匯入、密碼登入。您的資料，您的伺服器。",
       "is_new": true,
       "consecutive_days": 1,
       "growth_rate": 9.42,
@@ -423,12 +423,12 @@
       ],
       "today_stars_num": 111,
       "total_stars_num": 1178,
-      "description_zh": "自託管健身房和體重追蹤器 — 規劃日常活動、記錄運動（超級組、熱身、有氧運動）、查看哪些肌肉經過訓練、疲勞或失去訓練、從 FitNotes/Strong/Hevy 匯入、密碼登入。您的數據，您的伺服器。"
+      "description_zh": "自託管健身房和體重追蹤器 — 規劃日常活動、記錄運動（超級組、熱身、有氧運動）、查看哪些肌肉經過訓練、疲勞或失去訓練、從 FitNotes/Strong/Hevy 匯入、密碼登入。您的資料，您的伺服器。"
     },
     {
       "name": "flipped-aurora/gin-vue-admin",
       "url": "https://github.com/flipped-aurora/gin-vue-admin",
-      "desc": "🚀Vite+Vue3+Gin拥有AI辅助的基础开发平台，企业级业务AI+开发解决方案，内置mcp辅助服务，内置skills管理，支持TS和JS混用。它集成了JWT鉴权、权限管理、动态路由、显隐可控组件、分页封装、多点登录拦截、资源权限、上传下载、代码生成器、表单生成器和可配置的导入导出等开发必备功能。",
+      "desc": "🚀Vite+Vue3+Gin拥有AI辅助的基础开发平台，企业级业务AI+开发解决方案，内置mcp辅助服务，内置skills管理，支援TS和JS混用。它集成了JWT鉴权、权限管理、动态路由、显隐可控组件、分页封装、多点登录拦截、资源权限、上传下载、代码生成器、表单生成器和可配置的导入导出等开发必备功能。",
       "total_stars": "25,041",
       "today_stars": "26",
       "forks": "7,118",
@@ -497,7 +497,7 @@
         "All",
         "Go"
       ],
-      "desc_zh": "Google 的開放代理程式編排運行時",
+      "desc_zh": "Google 的開放代理程式編排Runtime",
       "is_new": true,
       "consecutive_days": 1,
       "growth_rate": 34.33,
@@ -508,7 +508,7 @@
       ],
       "today_stars_num": 2324,
       "total_stars_num": 6769,
-      "description_zh": "Google 的開放代理程式編排運行時"
+      "description_zh": "Google 的開放代理程式編排Runtime"
     },
     {
       "name": "stablyai/orca",
@@ -523,7 +523,7 @@
       "channels": [
         "TypeScript"
       ],
-      "desc_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。",
+      "desc_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端Runtime使用。",
       "is_new": false,
       "consecutive_days": 1,
       "growth_rate": 1.31,
@@ -534,7 +534,7 @@
       ],
       "today_stars_num": 985,
       "total_stars_num": 75159,
-      "description_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。"
+      "description_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端Runtime使用。"
     },
     {
       "name": "affaan-m/ECC",
@@ -549,7 +549,7 @@
       "channels": [
         "JavaScript"
       ],
-      "desc_zh": "代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。",
+      "desc_zh": "代理利用性能最佳化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。",
       "is_new": false,
       "consecutive_days": 1,
       "growth_rate": 0.3,
@@ -563,9 +563,9 @@
       ],
       "today_stars_num": 805,
       "total_stars_num": 265045,
-      "description_zh": "代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。"
+      "description_zh": "代理利用性能最佳化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。"
     }
   ],
-  "markdown_report": "# 📊 每日 GitHub 開源雷達與趨勢報告\n**日期：** 2026-09-22 (Tuesday)\n**來源：** GitHub Trending 多語言子榜 (Python, TS, JS, Rust, Go, C++, Jupyter)\n**去重總計：** ✅ 本日監控 105 個不重複專案\n\n---\n\n## 💡 Dora 的精選推薦 (對 Hermes 自我進化最有價值)\n\n### 1. 🔴 [google/ax](https://github.com/google/ax) ✨ NEW\n- **Stars:** 6,769 (今日 +2,324)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Google 的開放代理程式編排運行時\n\n### 2. 🔴 [stablyai/orca](https://github.com/stablyai/orca) 🔥 連續 1 天\n- **Stars:** 75,159 (今日 +985)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。\n\n### 3. 🔴 [affaan-m/ECC](https://github.com/affaan-m/ECC) 🔥 連續 1 天\n- **Stars:** 265,045 (今日 +805)\n- **分類:** CRITICAL | **語言:** JavaScript\n- **簡介:** 代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。\n\n### 4. 🔴 [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) ✨ NEW\n- **Stars:** 7,463 (今日 +734)\n- **分類:** CRITICAL | **語言:** Rust\n- **簡介:** 人工智慧代理的開發者控制平面\n\n### 5. 🔴 [BuilderIO/agent-native](https://github.com/BuilderIO/agent-native) 🔥 連續 2 天\n- **Stars:** 6,280 (今日 +607)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** 用於建立代理應用程式的框架\n\n### 6. 🔴 [agent-substrate/substrate](https://github.com/agent-substrate/substrate) 🔥 連續 2 天\n- **Stars:** 2,689 (今日 +498)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Agent Substrate：核心系統\n\n### 7. 🔴 [anthropics/claude-code](https://github.com/anthropics/claude-code) 🔥 連續 2 天\n- **Stars:** 147,569 (今日 +468)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** Claude Code 是一種代理程式編碼工具，它位於您的終端中，了解您的程式碼庫，並透過執行例行任務、解釋複雜程式碼和處理 git 工作流程來幫助您更快地編碼 - 所有這些都透過自然語言命令進行。\n\n### 8. 🔴 [coder/coder](https://github.com/coder/coder) 🔥 連續 2 天\n- **Stars:** 16,576 (今日 +460)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** 為開發人員及其代理商提供安全的環境\n\n---\n\n## ✨ 今日首發新面孔 (首次上榜，共 26 個)\n\n| # | 新進專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|----------|------|----------|----------|--------|\n| 1 | [google/ax](https://github.com/google/ax) | Go | 6,769 | +2,324 | 🔴 critical |\n| 2 | [hydra-db/hydradb](https://github.com/hydra-db/hydradb) | Rust | 4,043 | +794 | 🟡 medium |\n| 3 | [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) | Rust | 7,463 | +734 | 🔴 critical |\n| 4 | [dream-num/univer](https://github.com/dream-num/univer) | TypeScript | 14,914 | +202 | 🔴 critical |\n| 5 | [superdesigndev/treg](https://github.com/superdesigndev/treg) | Python | 1,973 | +197 | 🔴 critical |\n| 6 | [upscayl/upscayl](https://github.com/upscayl/upscayl) | TypeScript | 49,736 | +197 | ⚪ low |\n| 7 | [xiaolai/the-craft-of-selfteaching](https://github.com/xiaolai/the-craft-of-selfteaching) | Jupyter Notebook | 16,991 | +147 | ⚪ low |\n| 8 | [DuarteSantos8/openGym](https://github.com/DuarteSantos8/openGym) | JavaScript | 1,178 | +111 | ⚪ low |\n| 9 | [flipped-aurora/gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin) | Go | 25,041 | +26 | 🔴 critical |\n| 10 | [openbkn-ai/bkn-foundry](https://github.com/openbkn-ai/bkn-foundry) | Go | 528 | +22 | ⚪ low |\n\n---\n\n## 📈 今日 GitHub Trending 全覽 TOP 20\n\n| # | 專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|------|------|----------|----------|--------|\n| 1 | [google/ax](https://github.com/google/ax) | Go | 6,769 | +2,324 | 🔴 critical |\n| 2 | [stablyai/orca](https://github.com/stablyai/orca) | TypeScript | 75,159 | +985 | 🔴 critical |\n| 3 | [Open-Dev-Society/OpenStock](https://github.com/Open-Dev-Society/OpenStock) | TypeScript | 18,211 | +844 | ⚪ low |\n| 4 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | JavaScript | 265,045 | +805 | 🔴 critical |\n| 5 | [hydra-db/hydradb](https://github.com/hydra-db/hydradb) | Rust | 4,043 | +794 | 🟡 medium |\n| 6 | [vercel-labs/json-render](https://github.com/vercel-labs/json-render) | TypeScript | 18,034 | +763 | ⚪ low |\n| 7 | [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) | Rust | 7,463 | +734 | 🔴 critical |\n| 8 | [BuilderIO/agent-native](https://github.com/BuilderIO/agent-native) | TypeScript | 6,280 | +607 | 🔴 critical |\n| 9 | [agent-substrate/substrate](https://github.com/agent-substrate/substrate) | Go | 2,689 | +498 | 🔴 critical |\n| 10 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | TypeScript | 147,569 | +468 | 🔴 critical |\n| 11 | [clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) | Rust | 146,346 | +466 | 🟡 medium |\n| 12 | [coder/coder](https://github.com/coder/coder) | Go | 16,576 | +460 | 🔴 critical |\n| 13 | [anthropics/financial-services](https://github.com/anthropics/financial-services) | Python | 36,036 | +424 | ⚪ low |\n| 14 | [Crosstalk-Solutions/project-nomad](https://github.com/Crosstalk-Solutions/project-nomad) | TypeScript | 38,104 | +394 | ⚪ low |\n| 15 | [paperless-ngx/paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) | Python | 45,880 | +377 | ⚪ low |\n| 16 | [OpenCut-app/OpenCut](https://github.com/OpenCut-app/OpenCut) | TypeScript | 90,391 | +352 | ⚪ low |\n| 17 | [higgsfield-ai/higgsfield](https://github.com/higgsfield-ai/higgsfield) | Jupyter Notebook | 5,612 | +328 | 🔴 critical |\n| 18 | [zhouxiaoka/autoclip](https://github.com/zhouxiaoka/autoclip) | Python | 8,644 | +250 | 🟡 medium |\n| 19 | [laoma2053/awesome-zhuiju-free](https://github.com/laoma2053/awesome-zhuiju-free) | JavaScript | 9,545 | +235 | ⚪ low |\n| 20 | [FareedKhan-dev/train-llm-from-scratch](https://github.com/FareedKhan-dev/train-llm-from-scratch) | Python | 10,778 | +220 | 🟡 medium |\n\n---\n\n## 🔍 Dora 的觀察與建議\n\n### 趨勢分析\n\n- **🤖 Agent 熱潮持續升溫：** 今日 38 個專案直接與 AI Agent 相關\n- **✨ 新血湧入：** 今日共有 26 個專案為首次進入觀測站雷達\n- **📋 Skill 機制成為共識：** 6 個專案聚焦於 Skills/能力模組化\n\n### 值得深入研究的 TOP 3\n\n1. **[google/ax](https://github.com/google/ax)** — Google 的開放代理程式編排運行時\n2. **[stablyai/orca](https://github.com/stablyai/orca)** — Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。\n3. **[affaan-m/ECC](https://github.com/affaan-m/ECC)** — 代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。\n\n---\n\n*報告由 Hermes Agent Dora 自動生成 | 下次執行: 明日同一時間*\n",
+  "markdown_report": "# 📊 每日 GitHub 開源雷達與趨勢報告\n**日期：** 2026-09-22 (Tuesday)\n**來源：** GitHub Trending 多語言子榜 (Python, TS, JS, Rust, Go, C++, Jupyter)\n**去重總計：** ✅ 本日監控 105 個不重複專案\n\n---\n\n## 💡 Dora 的精選推薦 (對 Hermes 自我進化最有價值)\n\n### 1. 🔴 [google/ax](https://github.com/google/ax) ✨ NEW\n- **Stars:** 6,769 (今日 +2,324)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Google 的開放代理程式編排Runtime\n\n### 2. 🔴 [stablyai/orca](https://github.com/stablyai/orca) 🔥 連續 1 天\n- **Stars:** 75,159 (今日 +985)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端Runtime使用。\n\n### 3. 🔴 [affaan-m/ECC](https://github.com/affaan-m/ECC) 🔥 連續 1 天\n- **Stars:** 265,045 (今日 +805)\n- **分類:** CRITICAL | **語言:** JavaScript\n- **簡介:** 代理利用性能最佳化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。\n\n### 4. 🔴 [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) ✨ NEW\n- **Stars:** 7,463 (今日 +734)\n- **分類:** CRITICAL | **語言:** Rust\n- **簡介:** 人工智慧代理的開發者控制平面\n\n### 5. 🔴 [BuilderIO/agent-native](https://github.com/BuilderIO/agent-native) 🔥 連續 2 天\n- **Stars:** 6,280 (今日 +607)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** 用於建立代理應用程式的框架\n\n### 6. 🔴 [agent-substrate/substrate](https://github.com/agent-substrate/substrate) 🔥 連續 2 天\n- **Stars:** 2,689 (今日 +498)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Agent Substrate：核心系統\n\n### 7. 🔴 [anthropics/claude-code](https://github.com/anthropics/claude-code) 🔥 連續 2 天\n- **Stars:** 147,569 (今日 +468)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** Claude Code 是一種代理程式編碼工具，它位於您的終端中，了解您的程式碼庫，並透過執行例行任務、解釋複雜程式碼和處理 git 工作流程來幫助您更快地編碼 - 所有這些都透過自然語言命令進行。\n\n### 8. 🔴 [coder/coder](https://github.com/coder/coder) 🔥 連續 2 天\n- **Stars:** 16,576 (今日 +460)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** 為開發人員及其代理商提供安全的環境\n\n---\n\n## ✨ 今日首發新面孔 (首次上榜，共 26 個)\n\n| # | 新進專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|----------|------|----------|----------|--------|\n| 1 | [google/ax](https://github.com/google/ax) | Go | 6,769 | +2,324 | 🔴 critical |\n| 2 | [hydra-db/hydradb](https://github.com/hydra-db/hydradb) | Rust | 4,043 | +794 | 🟡 medium |\n| 3 | [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) | Rust | 7,463 | +734 | 🔴 critical |\n| 4 | [dream-num/univer](https://github.com/dream-num/univer) | TypeScript | 14,914 | +202 | 🔴 critical |\n| 5 | [superdesigndev/treg](https://github.com/superdesigndev/treg) | Python | 1,973 | +197 | 🔴 critical |\n| 6 | [upscayl/upscayl](https://github.com/upscayl/upscayl) | TypeScript | 49,736 | +197 | ⚪ low |\n| 7 | [xiaolai/the-craft-of-selfteaching](https://github.com/xiaolai/the-craft-of-selfteaching) | Jupyter Notebook | 16,991 | +147 | ⚪ low |\n| 8 | [DuarteSantos8/openGym](https://github.com/DuarteSantos8/openGym) | JavaScript | 1,178 | +111 | ⚪ low |\n| 9 | [flipped-aurora/gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin) | Go | 25,041 | +26 | 🔴 critical |\n| 10 | [openbkn-ai/bkn-foundry](https://github.com/openbkn-ai/bkn-foundry) | Go | 528 | +22 | ⚪ low |\n\n---\n\n## 📈 今日 GitHub Trending 全覽 TOP 20\n\n| # | 專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|------|------|----------|----------|--------|\n| 1 | [google/ax](https://github.com/google/ax) | Go | 6,769 | +2,324 | 🔴 critical |\n| 2 | [stablyai/orca](https://github.com/stablyai/orca) | TypeScript | 75,159 | +985 | 🔴 critical |\n| 3 | [Open-Dev-Society/OpenStock](https://github.com/Open-Dev-Society/OpenStock) | TypeScript | 18,211 | +844 | ⚪ low |\n| 4 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | JavaScript | 265,045 | +805 | 🔴 critical |\n| 5 | [hydra-db/hydradb](https://github.com/hydra-db/hydradb) | Rust | 4,043 | +794 | 🟡 medium |\n| 6 | [vercel-labs/json-render](https://github.com/vercel-labs/json-render) | TypeScript | 18,034 | +763 | ⚪ low |\n| 7 | [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) | Rust | 7,463 | +734 | 🔴 critical |\n| 8 | [BuilderIO/agent-native](https://github.com/BuilderIO/agent-native) | TypeScript | 6,280 | +607 | 🔴 critical |\n| 9 | [agent-substrate/substrate](https://github.com/agent-substrate/substrate) | Go | 2,689 | +498 | 🔴 critical |\n| 10 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | TypeScript | 147,569 | +468 | 🔴 critical |\n| 11 | [clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) | Rust | 146,346 | +466 | 🟡 medium |\n| 12 | [coder/coder](https://github.com/coder/coder) | Go | 16,576 | +460 | 🔴 critical |\n| 13 | [anthropics/financial-services](https://github.com/anthropics/financial-services) | Python | 36,036 | +424 | ⚪ low |\n| 14 | [Crosstalk-Solutions/project-nomad](https://github.com/Crosstalk-Solutions/project-nomad) | TypeScript | 38,104 | +394 | ⚪ low |\n| 15 | [paperless-ngx/paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) | Python | 45,880 | +377 | ⚪ low |\n| 16 | [OpenCut-app/OpenCut](https://github.com/OpenCut-app/OpenCut) | TypeScript | 90,391 | +352 | ⚪ low |\n| 17 | [higgsfield-ai/higgsfield](https://github.com/higgsfield-ai/higgsfield) | Jupyter Notebook | 5,612 | +328 | 🔴 critical |\n| 18 | [zhouxiaoka/autoclip](https://github.com/zhouxiaoka/autoclip) | Python | 8,644 | +250 | 🟡 medium |\n| 19 | [laoma2053/awesome-zhuiju-free](https://github.com/laoma2053/awesome-zhuiju-free) | JavaScript | 9,545 | +235 | ⚪ low |\n| 20 | [FareedKhan-dev/train-llm-from-scratch](https://github.com/FareedKhan-dev/train-llm-from-scratch) | Python | 10,778 | +220 | 🟡 medium |\n\n---\n\n## 🔍 Dora 的觀察與建議\n\n### 趨勢分析\n\n- **🤖 Agent 熱潮持續升溫：** 今日 38 個專案直接與 AI Agent 相關\n- **✨ 新血湧入：** 今日共有 26 個專案為首次進入觀測站雷達\n- **📋 Skill 機制成為共識：** 6 個專案聚焦於 Skills/能力模組化\n\n### 值得深入研究的 TOP 3\n\n1. **[google/ax](https://github.com/google/ax)** — Google 的開放代理程式編排Runtime\n2. **[stablyai/orca](https://github.com/stablyai/orca)** — Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端Runtime使用。\n3. **[affaan-m/ECC](https://github.com/affaan-m/ECC)** — 代理利用性能最佳化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。\n\n---\n\n*報告由 Hermes Agent Dora 自動生成 | 下次執行: 明日同一時間*\n",
   "total_repos": 105
 }

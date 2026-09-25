@@ -1,6 +1,6 @@
 # Loop State — Dora Dashboard
 
-> 狀態主幹檔案。每次 Daily Triage 運行後更新。
+> 狀態主幹檔案。每次 Daily Triage 執行後更新。
 
 ---
 
@@ -42,7 +42,7 @@ Next scheduled: daily 20:00 via Hermes gateway cron (job `8dbd0d2806a5`)
 | 2026-09-20 | automated | 106 | Daily scrape + analysis |
 | 2026-09-19 | manual | 138 | Data refresh (scrape+store) |
 
-## Completed Optimizations
+## 已完成最佳化項目 (Completed Optimizations)
 
 | # | Item | Status | When | Notes |
 |---|------|--------|------|-------|

@@ -297,8 +297,60 @@ def classify_relevance(repo: dict) -> tuple[str, list[str]]:
         return "low", deduped_reasons
 
 
+TW_TERMS_MAP = [
+    ("智能體", "AI Agent"),
+    ("智能", "智慧"),
+    ("代碼", "程式碼"),
+    ("接口", "介面"),
+    ("網絡", "網路"),
+    ("服務器", "伺服器"),
+    ("數據庫", "資料庫"),
+    ("大數據", "巨量資料"),
+    ("數據", "資料"),
+    ("用戶", "使用者"),
+    ("項目", "專案"),
+    ("內存", "記憶體"),
+    ("進程", "程序"),
+    ("線程", "執行緒"),
+    ("緩存", "快取"),
+    ("異步", "非同步"),
+    ("運行時", "Runtime"),
+    ("編程", "程式設計"),
+    ("默認", "預設"),
+    ("支持", "支援"),
+    ("鏈接", "連結"),
+    ("高清", "高畫質"),
+    ("屏幕", "螢幕"),
+    ("信息", "資訊"),
+    ("優化", "最佳化"),
+    ("算法", "演算法"),
+    ("字節", "位元組"),
+    ("圖標", "圖示"),
+    ("文檔", "文件"),
+    ("彈窗", "彈跳視窗"),
+    ("雲計算", "雲端運算"),
+    ("硬件", "硬體"),
+    ("軟件", "軟體"),
+    ("移動端", "行動端"),
+    ("客戶端", "客戶端"),
+    ("數組", "陣列"),
+    ("變量", "變數"),
+    ("函數", "函式"),
+    ("日誌", "紀錄"),
+]
+
+
+def to_taiwan_terms(text: str) -> str:
+    """Normalize translated Chinese text to Taiwan technical terms."""
+    if not text:
+        return ""
+    for cn, tw in TW_TERMS_MAP:
+        text = text.replace(cn, tw)
+    return text
+
+
 def translate_en_to_zhtw(text: str) -> str:
-    """Translate English text to Traditional Chinese (zh-TW) with multi-tier fallback."""
+    """Translate English text to Traditional Chinese (zh-TW) with multi-tier fallback and Taiwan terminology normalization."""
     if not text or not text.strip():
         return ""
     text = text.strip()
@@ -311,9 +363,9 @@ def translate_en_to_zhtw(text: str) -> str:
             data = json.loads(r.read().decode("utf-8"))
             if isinstance(data, list) and len(data) > 0:
                 if isinstance(data[0], list):
-                    return "".join(data[0])
+                    return to_taiwan_terms("".join(data[0]))
                 elif isinstance(data[0], str):
-                    return data[0]
+                    return to_taiwan_terms(data[0])
     except Exception:
         pass
 
@@ -325,7 +377,7 @@ def translate_en_to_zhtw(text: str) -> str:
             res = json.loads(r.read().decode("utf-8"))
             translated = res.get("responseData", {}).get("translatedText")
             if translated and not translated.startswith("MYMEMORY WARNING"):
-                return translated
+                return to_taiwan_terms(translated)
     except Exception:
         pass
         
