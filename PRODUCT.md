@@ -6,11 +6,11 @@ product
 
 ## Users
 
-永全（屏實力公司總監）和團隊成員，需要即時掌握 GitHub 熱門專案的動態與趨勢。
+技術決策者、開源探勘者與工程團隊成員，需要即時掌握 GitHub 熱門專案的動態與趨勢。
 
 ## Product Purpose
 
-Dora GitHub Trending Dashboard 是一套自動化監控 GitHub 熱門專案的工具。透過每日 20:00 自動爬取 GitHub Trending 資料，存入 Supabase 資料庫，並以儀表板呈現每日、每週、每月熱門專案的星數變化。讓永全能快速掌握各語言、各領域的熱門專案趨勢，作為投資、合作、技術選型的參考依據。
+Dora GitHub Trending Dashboard 是一套自動化監控 GitHub 熱門專案的工具。透過每日 20:00 自動爬取 GitHub Trending 資料，存入 Supabase 資料庫，並以儀表板呈現每日、每週、每月熱門專案的星數變化。讓技術決策團隊能快速掌握各語言、各領域的熱門專案趨勢，作為技術選型、專案架構與生態投資的參考依據。
 
 ## Brand Personality
 

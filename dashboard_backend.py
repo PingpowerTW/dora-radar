@@ -923,8 +923,7 @@ async def get_cron_status():
                     "last_run_at": target_job.get("last_run_at"),
                     "last_status": target_job.get("last_status"),
                     "completed_times": target_job.get("repeat", {}).get("completed", 0),
-                    "platform": target_job.get("origin", {}).get("platform"),
-                    "chat_name": target_job.get("origin", {}).get("chat_name")
+                    "platform": target_job.get("origin", {}).get("platform")
                 }
     except Exception as e:
         print(f"⚠️ Error reading cron status: {e}", file=sys.stderr)

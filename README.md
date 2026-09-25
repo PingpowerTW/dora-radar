@@ -105,7 +105,7 @@ flowchart TD
 
     subgraph AutomationLayer ["⏰ 定時自動化與推播 (Hermes Gateway)"]
         Cron["Hermes Cron Scheduler (每日 20:00 CST)"]
-        TG["Telegram 頻道推播 (@永全 PIP)"]
+        TG["Telegram 頻道 / 群組推播"]
         Cron -->|定時觸發| Scraper
         Lifecycle -->|產出 latest_insight.json| TG
     end
@@ -336,7 +336,7 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/pipadmin/.hermes/scripts
+WorkingDirectory=/path/to/dora-radar
 ExecStart=/usr/bin/python3 -m uvicorn dashboard_backend:app --host 0.0.0.0 --port 8081
 Restart=always
 RestartSec=5
