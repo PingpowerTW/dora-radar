@@ -1,119 +1,173 @@
 {
   "date": "2026-09-22",
-  "updated_at": "2026-09-22T14:44:26.843149",
+  "updated_at": "2026-09-22T20:01:11.074175",
   "top_picks": [
     {
-      "name": "trycua/cua",
-      "url": "https://github.com/trycua/cua",
-      "desc": "Scale computer-use 2.0 with open-source drivers, cross-OS fleets, and benchmarks for training, evaluation, and data generation.",
-      "total_stars": "25,816",
-      "today_stars": "609",
-      "forks": "1,777",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "channel": "All",
-      "channels": [
-        "All"
-      ],
-      "desc_zh": "透過開源驅動程式、跨作業系統佇列以及培訓、評估和資料生成基準來擴展電腦使用 2.0。",
-      "is_new": false,
-      "consecutive_days": 2,
-      "growth_rate": 2.36,
-      "relevance": "high",
-      "reasons": [
-        "🔧 training",
-        "🔧 benchmark",
-        "🔧 evaluat"
-      ],
-      "today_stars_num": 609,
-      "total_stars_num": 25816,
-      "description_zh": "透過開源驅動程式、跨作業系統佇列以及培訓、評估和資料生成基準來擴展電腦使用 2.0。"
-    },
-    {
-      "name": "BuilderIO/agent-native",
-      "url": "https://github.com/BuilderIO/agent-native",
-      "desc": "A framework for building agentic apps",
-      "total_stars": "6,108",
-      "today_stars": "607",
-      "forks": "556",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
+      "name": "google/ax",
+      "url": "https://github.com/google/ax",
+      "desc": "Google's open agentic orchestration runtime",
+      "total_stars": "6,769",
+      "today_stars": "2,324",
+      "forks": "319",
+      "language": "Go",
+      "language_color": "#00ADD8",
       "channel": "All",
       "channels": [
         "All",
-        "TypeScript"
+        "Go"
       ],
-      "desc_zh": "用於建立代理應用程式的框架",
-      "is_new": false,
-      "consecutive_days": 2,
-      "growth_rate": 9.94,
+      "desc_zh": "Google 的開放代理程式編排運行時",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 34.33,
       "relevance": "critical",
       "reasons": [
-        "🤖 agent"
+        "🤖 agent",
+        "🤖 orchestrat"
       ],
-      "today_stars_num": 607,
-      "total_stars_num": 6108,
-      "description_zh": "用於建立代理應用程式的框架"
+      "today_stars_num": 2324,
+      "total_stars_num": 6769,
+      "description_zh": "Google 的開放代理程式編排運行時"
     },
     {
-      "name": "addyosmani/agent-skills",
-      "url": "https://github.com/addyosmani/agent-skills",
-      "desc": "Production-grade engineering skills for AI coding agents.",
-      "total_stars": "98,216",
-      "today_stars": "568",
-      "forks": "10,326",
+      "name": "stablyai/orca",
+      "url": "https://github.com/stablyai/orca",
+      "desc": "Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
+      "total_stars": "75,159",
+      "today_stars": "985",
+      "forks": "4,916",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。",
+      "is_new": false,
+      "consecutive_days": 1,
+      "growth_rate": 1.31,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 coding agent"
+      ],
+      "today_stars_num": 985,
+      "total_stars_num": 75159,
+      "description_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。"
+    },
+    {
+      "name": "affaan-m/ECC",
+      "url": "https://github.com/affaan-m/ECC",
+      "desc": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+      "total_stars": "265,045",
+      "today_stars": "805",
+      "forks": "39,594",
       "language": "JavaScript",
       "language_color": "#f1e05a",
       "channel": "JavaScript",
       "channels": [
         "JavaScript"
       ],
-      "desc_zh": "AI 編碼代理的生產級工程技能。",
+      "desc_zh": "代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。",
       "is_new": false,
-      "consecutive_days": 2,
-      "growth_rate": 0.58,
+      "consecutive_days": 1,
+      "growth_rate": 0.3,
       "relevance": "critical",
       "reasons": [
         "🤖 agent",
-        "🤖 coding agent",
-        "📋 skill"
+        "🤖 claude code",
+        "🤖 cursor",
+        "📋 skill",
+        "📋 memory"
       ],
-      "today_stars_num": 568,
-      "total_stars_num": 98216,
-      "description_zh": "AI 編碼代理的生產級工程技能。"
+      "today_stars_num": 805,
+      "total_stars_num": 265045,
+      "description_zh": "代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。"
+    },
+    {
+      "name": "Nasiko-Labs/nasiko",
+      "url": "https://github.com/Nasiko-Labs/nasiko",
+      "desc": "Developer Control Plane for your AI Agents",
+      "total_stars": "7,463",
+      "today_stars": "734",
+      "forks": "1,602",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "channel": "Rust",
+      "channels": [
+        "Rust"
+      ],
+      "desc_zh": "人工智慧代理的開發者控制平面",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 9.84,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 ai agent"
+      ],
+      "today_stars_num": 734,
+      "total_stars_num": 7463,
+      "description_zh": "人工智慧代理的開發者控制平面"
+    },
+    {
+      "name": "BuilderIO/agent-native",
+      "url": "https://github.com/BuilderIO/agent-native",
+      "desc": "A framework for building agentic apps",
+      "total_stars": "6,280",
+      "today_stars": "607",
+      "forks": "566",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "用於建立代理應用程式的框架",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 9.67,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent"
+      ],
+      "today_stars_num": 607,
+      "total_stars_num": 6280,
+      "description_zh": "用於建立代理應用程式的框架"
     },
     {
       "name": "agent-substrate/substrate",
       "url": "https://github.com/agent-substrate/substrate",
       "desc": "Agent Substrate: the core system",
-      "total_stars": "2,642",
+      "total_stars": "2,689",
       "today_stars": "498",
-      "forks": "365",
+      "forks": "366",
       "language": "Go",
       "language_color": "#00ADD8",
-      "channel": "Go",
+      "channel": "All",
       "channels": [
+        "All",
         "Go"
       ],
       "desc_zh": "Agent Substrate：核心系統",
       "is_new": false,
       "consecutive_days": 2,
-      "growth_rate": 18.85,
+      "growth_rate": 18.52,
       "relevance": "critical",
       "reasons": [
         "🤖 agent"
       ],
       "today_stars_num": 498,
-      "total_stars_num": 2642,
+      "total_stars_num": 2689,
       "description_zh": "Agent Substrate：核心系統"
     },
     {
       "name": "anthropics/claude-code",
       "url": "https://github.com/anthropics/claude-code",
       "desc": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
-      "total_stars": "147,518",
+      "total_stars": "147,569",
       "today_stars": "468",
-      "forks": "24,119",
+      "forks": "24,123",
       "language": "TypeScript",
       "language_color": "#3178c6",
       "channel": "TypeScript",
@@ -132,186 +186,122 @@
         "🛠 terminal"
       ],
       "today_stars_num": 468,
-      "total_stars_num": 147518,
+      "total_stars_num": 147569,
       "description_zh": "Claude Code 是一種代理程式編碼工具，它位於您的終端中，了解您的程式碼庫，並透過執行例行任務、解釋複雜程式碼和處理 git 工作流程來幫助您更快地編碼 - 所有這些都透過自然語言命令進行。"
     },
     {
       "name": "coder/coder",
       "url": "https://github.com/coder/coder",
       "desc": "Secure environments for developers and their agents",
-      "total_stars": "16,513",
+      "total_stars": "16,576",
       "today_stars": "460",
-      "forks": "1,569",
-      "language": "Go",
-      "language_color": "#00ADD8",
-      "channel": "All",
-      "channels": [
-        "All",
-        "Go"
-      ],
-      "desc_zh": "為開發人員及其代理商提供安全的環境",
-      "is_new": false,
-      "consecutive_days": 2,
-      "growth_rate": 2.79,
-      "relevance": "critical",
-      "reasons": [
-        "🤖 agent"
-      ],
-      "today_stars_num": 460,
-      "total_stars_num": 16513,
-      "description_zh": "為開發人員及其代理商提供安全的環境"
-    },
-    {
-      "name": "earendil-works/pi",
-      "url": "https://github.com/earendil-works/pi",
-      "desc": "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI",
-      "total_stars": "108,269",
-      "today_stars": "432",
-      "forks": "13,713",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "channel": "TypeScript",
-      "channels": [
-        "TypeScript"
-      ],
-      "desc_zh": "AI代理工具包：統一LLM API、代理循環、TUI、編碼代理CLI",
-      "is_new": false,
-      "consecutive_days": 2,
-      "growth_rate": 0.4,
-      "relevance": "critical",
-      "reasons": [
-        "🤖 agent",
-        "🤖 ai agent",
-        "🤖 coding agent",
-        "🔧 llm",
-        "🛠 cli"
-      ],
-      "today_stars_num": 432,
-      "total_stars_num": 108269,
-      "description_zh": "AI代理工具包：統一LLM API、代理循環、TUI、編碼代理CLI"
-    },
-    {
-      "name": "higgsfield-ai/higgsfield",
-      "url": "https://github.com/higgsfield-ai/higgsfield",
-      "desc": "Fault-tolerant, highly scalable GPU orchestration, and a machine learning framework designed for training models with billions to trillions of parameters",
-      "total_stars": "5,607",
-      "today_stars": "328",
-      "forks": "981",
-      "language": "Jupyter Notebook",
-      "language_color": "#DA5B0B",
-      "channel": "Jupyter",
-      "channels": [
-        "Jupyter"
-      ],
-      "desc_zh": "容錯、高度可擴展的 GPU 編排以及專為訓練具有數十億至數萬億參數的模型而設計的機器學習框架",
-      "is_new": false,
-      "consecutive_days": 2,
-      "growth_rate": 5.85,
-      "relevance": "critical",
-      "reasons": [
-        "🤖 orchestrat",
-        "🔧 model",
-        "🔧 training",
-        "🛠 design"
-      ],
-      "today_stars_num": 328,
-      "total_stars_num": 5607,
-      "description_zh": "容錯、高度可擴展的 GPU 編排以及專為訓練具有數十億至數萬億參數的模型而設計的機器學習框架"
-    }
-  ],
-  "new_repos": [
-    {
-      "name": "bendlang/bend",
-      "url": "https://github.com/bendlang/bend",
-      "desc": "Bend 2: a fast language that blocks AI mistakes via proof. Install: curl -fsSL https://bend-lang.com/install.sh | sh",
-      "total_stars": "22,377",
-      "today_stars": "193",
-      "forks": "672",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "channel": "TypeScript",
-      "channels": [
-        "TypeScript"
-      ],
-      "desc_zh": "Bend 2：一種透過證明阻止人工智慧錯誤的快速語言。安裝：curl -fsSL https://bend-lang.com/install.sh |噓",
-      "is_new": true,
-      "consecutive_days": 1,
-      "growth_rate": 0.86,
-      "relevance": "low",
-      "reasons": [
-        "通用開源專案"
-      ],
-      "today_stars_num": 193,
-      "total_stars_num": 22377,
-      "description_zh": "Bend 2：一種透過證明阻止人工智慧錯誤的快速語言。安裝：curl -fsSL https://bend-lang.com/install.sh |噓"
-    },
-    {
-      "name": "elvisun/newsjack",
-      "url": "https://github.com/elvisun/newsjack",
-      "desc": "The open-source skills that turn your agent into a full PR team.",
-      "total_stars": "1,295",
-      "today_stars": "29",
-      "forks": "115",
+      "forks": "1,575",
       "language": "Go",
       "language_color": "#00ADD8",
       "channel": "Go",
       "channels": [
         "Go"
       ],
-      "desc_zh": "開源技能可將您的代理商轉變為完整的公關團隊。",
+      "desc_zh": "為開發人員及其代理商提供安全的環境",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 2.78,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent"
+      ],
+      "today_stars_num": 460,
+      "total_stars_num": 16576,
+      "description_zh": "為開發人員及其代理商提供安全的環境"
+    }
+  ],
+  "new_repos": [
+    {
+      "name": "google/ax",
+      "url": "https://github.com/google/ax",
+      "desc": "Google's open agentic orchestration runtime",
+      "total_stars": "6,769",
+      "today_stars": "2,324",
+      "forks": "319",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "All",
+      "channels": [
+        "All",
+        "Go"
+      ],
+      "desc_zh": "Google 的開放代理程式編排運行時",
       "is_new": true,
       "consecutive_days": 1,
-      "growth_rate": 2.24,
+      "growth_rate": 34.33,
       "relevance": "critical",
       "reasons": [
         "🤖 agent",
-        "📋 skill"
+        "🤖 orchestrat"
       ],
-      "today_stars_num": 29,
-      "total_stars_num": 1295,
-      "description_zh": "開源技能可將您的代理商轉變為完整的公關團隊。"
-    }
-  ],
-  "trends": {
-    "agent_count": 32,
-    "skill_count": 8,
-    "new_count": 2
-  },
-  "top3": [
-    {
-      "name": "trycua/cua",
-      "url": "https://github.com/trycua/cua",
-      "desc": "Scale computer-use 2.0 with open-source drivers, cross-OS fleets, and benchmarks for training, evaluation, and data generation.",
-      "total_stars": "25,816",
-      "today_stars": "609",
-      "forks": "1,777",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "channel": "All",
-      "channels": [
-        "All"
-      ],
-      "desc_zh": "透過開源驅動程式、跨作業系統佇列以及培訓、評估和資料生成基準來擴展電腦使用 2.0。",
-      "is_new": false,
-      "consecutive_days": 2,
-      "growth_rate": 2.36,
-      "relevance": "high",
-      "reasons": [
-        "🔧 training",
-        "🔧 benchmark",
-        "🔧 evaluat"
-      ],
-      "today_stars_num": 609,
-      "total_stars_num": 25816,
-      "description_zh": "透過開源驅動程式、跨作業系統佇列以及培訓、評估和資料生成基準來擴展電腦使用 2.0。"
+      "today_stars_num": 2324,
+      "total_stars_num": 6769,
+      "description_zh": "Google 的開放代理程式編排運行時"
     },
     {
-      "name": "BuilderIO/agent-native",
-      "url": "https://github.com/BuilderIO/agent-native",
-      "desc": "A framework for building agentic apps",
-      "total_stars": "6,108",
-      "today_stars": "607",
-      "forks": "556",
+      "name": "hydra-db/hydradb",
+      "url": "https://github.com/hydra-db/hydradb",
+      "desc": "HydraDB - fast graph database on object storage",
+      "total_stars": "4,043",
+      "today_stars": "794",
+      "forks": "1,158",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "channel": "Rust",
+      "channels": [
+        "Rust"
+      ],
+      "desc_zh": "HydraDB - 物件儲存上的快速圖形資料庫",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 19.64,
+      "relevance": "medium",
+      "reasons": [
+        "🔧 rag",
+        "🛠 database"
+      ],
+      "today_stars_num": 794,
+      "total_stars_num": 4043,
+      "description_zh": "HydraDB - 物件儲存上的快速圖形資料庫"
+    },
+    {
+      "name": "Nasiko-Labs/nasiko",
+      "url": "https://github.com/Nasiko-Labs/nasiko",
+      "desc": "Developer Control Plane for your AI Agents",
+      "total_stars": "7,463",
+      "today_stars": "734",
+      "forks": "1,602",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "channel": "Rust",
+      "channels": [
+        "Rust"
+      ],
+      "desc_zh": "人工智慧代理的開發者控制平面",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 9.84,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 ai agent"
+      ],
+      "today_stars_num": 734,
+      "total_stars_num": 7463,
+      "description_zh": "人工智慧代理的開發者控制平面"
+    },
+    {
+      "name": "dream-num/univer",
+      "url": "https://github.com/dream-num/univer",
+      "desc": "The Office Harness for AI Agents — Spreadsheets, Docs, Slides, Canvas, Relational Tables, and PDF in one runtime.",
+      "total_stars": "14,914",
+      "today_stars": "202",
+      "forks": "1,352",
       "language": "TypeScript",
       "language_color": "#3178c6",
       "channel": "All",
@@ -319,46 +309,263 @@
         "All",
         "TypeScript"
       ],
-      "desc_zh": "用於建立代理應用程式的框架",
-      "is_new": false,
-      "consecutive_days": 2,
-      "growth_rate": 9.94,
+      "desc_zh": "AI 代理程式的 Office 工具 — 在一個執行階段中處理電子表格、文件、投影片、畫布、關係表和 PDF。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 1.35,
       "relevance": "critical",
       "reasons": [
-        "🤖 agent"
+        "🤖 agent",
+        "🤖 ai agent",
+        "🛠 pdf"
       ],
-      "today_stars_num": 607,
-      "total_stars_num": 6108,
-      "description_zh": "用於建立代理應用程式的框架"
+      "today_stars_num": 202,
+      "total_stars_num": 14914,
+      "description_zh": "AI 代理程式的 Office 工具 — 在一個執行階段中處理電子表格、文件、投影片、畫布、關係表和 PDF。"
     },
     {
-      "name": "addyosmani/agent-skills",
-      "url": "https://github.com/addyosmani/agent-skills",
-      "desc": "Production-grade engineering skills for AI coding agents.",
-      "total_stars": "98,216",
-      "today_stars": "568",
-      "forks": "10,326",
+      "name": "superdesigndev/treg",
+      "url": "https://github.com/superdesigndev/treg",
+      "desc": "OpenRouter for agent tools. Join community here: https://discord.gg/6mQYYfFMAn",
+      "total_stars": "1,973",
+      "today_stars": "197",
+      "forks": "206",
+      "language": "Python",
+      "language_color": "#3572A5",
+      "channel": "All",
+      "channels": [
+        "All",
+        "Python"
+      ],
+      "desc_zh": "用於代理工具的 OpenRouter。在此加入社群：https://discord.gg/6mQYYfFMAn",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 9.98,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🛠 design"
+      ],
+      "today_stars_num": 197,
+      "total_stars_num": 1973,
+      "description_zh": "用於代理工具的 OpenRouter。在此加入社群：https://discord.gg/6mQYYfFMAn"
+    },
+    {
+      "name": "upscayl/upscayl",
+      "url": "https://github.com/upscayl/upscayl",
+      "desc": "🆙 Upscayl - #1 Free and Open Source AI Image Upscaler for Linux, MacOS and Windows.",
+      "total_stars": "49,736",
+      "today_stars": "197",
+      "forks": "2,514",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "🆙 Upscayl - 適用於 Linux、MacOS 和 Windows 的 #1 免費開源 AI 映像升級器。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.4,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 197,
+      "total_stars_num": 49736,
+      "description_zh": "🆙 Upscayl - 適用於 Linux、MacOS 和 Windows 的 #1 免費開源 AI 映像升級器。"
+    },
+    {
+      "name": "xiaolai/the-craft-of-selfteaching",
+      "url": "https://github.com/xiaolai/the-craft-of-selfteaching",
+      "desc": "One has no future if one couldn't teach themself.",
+      "total_stars": "16,991",
+      "today_stars": "147",
+      "forks": "17,660",
+      "language": "Jupyter Notebook",
+      "language_color": "#DA5B0B",
+      "channel": "Jupyter",
+      "channels": [
+        "Jupyter"
+      ],
+      "desc_zh": "一個人如果不能自學，就沒有未來。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.87,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 147,
+      "total_stars_num": 16991,
+      "description_zh": "一個人如果不能自學，就沒有未來。"
+    },
+    {
+      "name": "DuarteSantos8/openGym",
+      "url": "https://github.com/DuarteSantos8/openGym",
+      "desc": "Self-hosted gym &amp; body-weight tracker — plan routines, log workouts (supersets, warm-ups, cardio), see which muscles are trained, fatigued or detrained, import from FitNotes/Strong/Hevy, passkey login. Your data, your server.",
+      "total_stars": "1,178",
+      "today_stars": "111",
+      "forks": "286",
       "language": "JavaScript",
       "language_color": "#f1e05a",
       "channel": "JavaScript",
       "channels": [
         "JavaScript"
       ],
-      "desc_zh": "AI 編碼代理的生產級工程技能。",
-      "is_new": false,
-      "consecutive_days": 2,
-      "growth_rate": 0.58,
+      "desc_zh": "自託管健身房和體重追蹤器 — 規劃日常活動、記錄運動（超級組、熱身、有氧運動）、查看哪些肌肉經過訓練、疲勞或失去訓練、從 FitNotes/Strong/Hevy 匯入、密碼登入。您的數據，您的伺服器。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 9.42,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 111,
+      "total_stars_num": 1178,
+      "description_zh": "自託管健身房和體重追蹤器 — 規劃日常活動、記錄運動（超級組、熱身、有氧運動）、查看哪些肌肉經過訓練、疲勞或失去訓練、從 FitNotes/Strong/Hevy 匯入、密碼登入。您的數據，您的伺服器。"
+    },
+    {
+      "name": "flipped-aurora/gin-vue-admin",
+      "url": "https://github.com/flipped-aurora/gin-vue-admin",
+      "desc": "🚀Vite+Vue3+Gin拥有AI辅助的基础开发平台，企业级业务AI+开发解决方案，内置mcp辅助服务，内置skills管理，支持TS和JS混用。它集成了JWT鉴权、权限管理、动态路由、显隐可控组件、分页封装、多点登录拦截、资源权限、上传下载、代码生成器、表单生成器和可配置的导入导出等开发必备功能。",
+      "total_stars": "25,041",
+      "today_stars": "26",
+      "forks": "7,118",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "Go",
+      "channels": [
+        "Go"
+      ],
+      "desc_zh": "🚀Vite+Vue3+Gin擁有AI輔助的基礎開發平台，企業級業務AI+開發解決方案，內建mcp輔助服務，內建技能管理，支援TS和JS混用。它整合了JWT鑑權、權限管理、動態路由、顯隱可控元件、分頁封裝、多點登入攔截、資源權限、上傳下載、程式碼產生器、產生表單器和可設定的遷移重定向等開發必備功能。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.1,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 mcp",
+        "📋 skill"
+      ],
+      "today_stars_num": 26,
+      "total_stars_num": 25041,
+      "description_zh": "🚀Vite+Vue3+Gin擁有AI輔助的基礎開發平台，企業級業務AI+開發解決方案，內建mcp輔助服務，內建技能管理，支援TS和JS混用。它整合了JWT鑑權、權限管理、動態路由、顯隱可控元件、分頁封裝、多點登入攔截、資源權限、上傳下載、程式碼產生器、產生表單器和可設定的遷移重定向等開發必備功能。"
+    },
+    {
+      "name": "openbkn-ai/bkn-foundry",
+      "url": "https://github.com/openbkn-ai/bkn-foundry",
+      "desc": "BKN Foundry is the Ontology back-end foundation of OpenBKN. It transforms ontology-driven business semantics into runtime services: data, logic, actions, security governance, and observability.",
+      "total_stars": "528",
+      "today_stars": "22",
+      "forks": "51",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "Go",
+      "channels": [
+        "Go"
+      ],
+      "desc_zh": "BKN Foundry 是 OpenBKN 的 Ontology 後端基礎。它將本體驅動的業務語意轉換為執行時間服務：資料、邏輯、操作、安全治理和可觀察性。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 4.17,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 22,
+      "total_stars_num": 528,
+      "description_zh": "BKN Foundry 是 OpenBKN 的 Ontology 後端基礎。它將本體驅動的業務語意轉換為執行時間服務：資料、邏輯、操作、安全治理和可觀察性。"
+    }
+  ],
+  "trends": {
+    "agent_count": 38,
+    "skill_count": 6,
+    "new_count": 26
+  },
+  "top3": [
+    {
+      "name": "google/ax",
+      "url": "https://github.com/google/ax",
+      "desc": "Google's open agentic orchestration runtime",
+      "total_stars": "6,769",
+      "today_stars": "2,324",
+      "forks": "319",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "All",
+      "channels": [
+        "All",
+        "Go"
+      ],
+      "desc_zh": "Google 的開放代理程式編排運行時",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 34.33,
       "relevance": "critical",
       "reasons": [
         "🤖 agent",
-        "🤖 coding agent",
-        "📋 skill"
+        "🤖 orchestrat"
       ],
-      "today_stars_num": 568,
-      "total_stars_num": 98216,
-      "description_zh": "AI 編碼代理的生產級工程技能。"
+      "today_stars_num": 2324,
+      "total_stars_num": 6769,
+      "description_zh": "Google 的開放代理程式編排運行時"
+    },
+    {
+      "name": "stablyai/orca",
+      "url": "https://github.com/stablyai/orca",
+      "desc": "Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and remote runtime.",
+      "total_stars": "75,159",
+      "today_stars": "985",
+      "forks": "4,916",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。",
+      "is_new": false,
+      "consecutive_days": 1,
+      "growth_rate": 1.31,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 coding agent"
+      ],
+      "today_stars_num": 985,
+      "total_stars_num": 75159,
+      "description_zh": "Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。"
+    },
+    {
+      "name": "affaan-m/ECC",
+      "url": "https://github.com/affaan-m/ECC",
+      "desc": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+      "total_stars": "265,045",
+      "today_stars": "805",
+      "forks": "39,594",
+      "language": "JavaScript",
+      "language_color": "#f1e05a",
+      "channel": "JavaScript",
+      "channels": [
+        "JavaScript"
+      ],
+      "desc_zh": "代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。",
+      "is_new": false,
+      "consecutive_days": 1,
+      "growth_rate": 0.3,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 claude code",
+        "🤖 cursor",
+        "📋 skill",
+        "📋 memory"
+      ],
+      "today_stars_num": 805,
+      "total_stars_num": 265045,
+      "description_zh": "代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。"
     }
   ],
-  "markdown_report": "# 📊 每日 GitHub 開源雷達與趨勢報告\n**日期：** 2026-09-22 (Tuesday)\n**來源：** GitHub Trending 多語言子榜 (Python, TS, JS, Rust, Go, C++, Jupyter)\n**去重總計：** ✅ 本日監控 110 個不重複專案\n\n---\n\n## 💡 Dora 的精選推薦 (對 Hermes 自我進化最有價值)\n\n### 1. 🟠 [trycua/cua](https://github.com/trycua/cua) 🔥 連續 2 天\n- **Stars:** 25,816 (今日 +609)\n- **分類:** HIGH | **語言:** HTML\n- **簡介:** 透過開源驅動程式、跨作業系統佇列以及培訓、評估和資料生成基準來擴展電腦使用 2.0。\n\n### 2. 🔴 [BuilderIO/agent-native](https://github.com/BuilderIO/agent-native) 🔥 連續 2 天\n- **Stars:** 6,108 (今日 +607)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** 用於建立代理應用程式的框架\n\n### 3. 🔴 [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) 🔥 連續 2 天\n- **Stars:** 98,216 (今日 +568)\n- **分類:** CRITICAL | **語言:** JavaScript\n- **簡介:** AI 編碼代理的生產級工程技能。\n\n### 4. 🔴 [agent-substrate/substrate](https://github.com/agent-substrate/substrate) 🔥 連續 2 天\n- **Stars:** 2,642 (今日 +498)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Agent Substrate：核心系統\n\n### 5. 🔴 [anthropics/claude-code](https://github.com/anthropics/claude-code) 🔥 連續 2 天\n- **Stars:** 147,518 (今日 +468)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** Claude Code 是一種代理程式編碼工具，它位於您的終端中，了解您的程式碼庫，並透過執行例行任務、解釋複雜程式碼和處理 git 工作流程來幫助您更快地編碼 - 所有這些都透過自然語言命令進行。\n\n### 6. 🔴 [coder/coder](https://github.com/coder/coder) 🔥 連續 2 天\n- **Stars:** 16,513 (今日 +460)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** 為開發人員及其代理商提供安全的環境\n\n### 7. 🔴 [earendil-works/pi](https://github.com/earendil-works/pi) 🔥 連續 2 天\n- **Stars:** 108,269 (今日 +432)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** AI代理工具包：統一LLM API、代理循環、TUI、編碼代理CLI\n\n### 8. 🔴 [higgsfield-ai/higgsfield](https://github.com/higgsfield-ai/higgsfield) 🔥 連續 2 天\n- **Stars:** 5,607 (今日 +328)\n- **分類:** CRITICAL | **語言:** Jupyter Notebook\n- **簡介:** 容錯、高度可擴展的 GPU 編排以及專為訓練具有數十億至數萬億參數的模型而設計的機器學習框架\n\n---\n\n## ✨ 今日首發新面孔 (首次上榜，共 2 個)\n\n| # | 新進專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|----------|------|----------|----------|--------|\n| 1 | [bendlang/bend](https://github.com/bendlang/bend) | TypeScript | 22,377 | +193 | ⚪ low |\n| 2 | [elvisun/newsjack](https://github.com/elvisun/newsjack) | Go | 1,295 | +29 | 🔴 critical |\n\n---\n\n## 📈 今日 GitHub Trending 全覽 TOP 20\n\n| # | 專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|------|------|----------|----------|--------|\n| 1 | [Open-Dev-Society/OpenStock](https://github.com/Open-Dev-Society/OpenStock) | TypeScript | 18,016 | +844 | ⚪ low |\n| 2 | [vercel-labs/json-render](https://github.com/vercel-labs/json-render) | TypeScript | 17,992 | +763 | ⚪ low |\n| 3 | [trycua/cua](https://github.com/trycua/cua) | HTML | 25,816 | +609 | 🟠 high |\n| 4 | [BuilderIO/agent-native](https://github.com/BuilderIO/agent-native) | TypeScript | 6,108 | +607 | 🔴 critical |\n| 5 | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | JavaScript | 98,216 | +568 | 🔴 critical |\n| 6 | [agent-substrate/substrate](https://github.com/agent-substrate/substrate) | Go | 2,642 | +498 | 🔴 critical |\n| 7 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | TypeScript | 147,518 | +468 | 🔴 critical |\n| 8 | [clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) | Rust | 146,269 | +466 | 🟡 medium |\n| 9 | [coder/coder](https://github.com/coder/coder) | Go | 16,513 | +460 | 🔴 critical |\n| 10 | [earendil-works/pi](https://github.com/earendil-works/pi) | TypeScript | 108,269 | +432 | 🔴 critical |\n| 11 | [anthropics/financial-services](https://github.com/anthropics/financial-services) | Python | 35,937 | +424 | ⚪ low |\n| 12 | [Crosstalk-Solutions/project-nomad](https://github.com/Crosstalk-Solutions/project-nomad) | TypeScript | 37,988 | +394 | ⚪ low |\n| 13 | [paperless-ngx/paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) | Python | 45,860 | +377 | ⚪ low |\n| 14 | [OpenCut-app/OpenCut](https://github.com/OpenCut-app/OpenCut) | TypeScript | 90,374 | +352 | ⚪ low |\n| 15 | [higgsfield-ai/higgsfield](https://github.com/higgsfield-ai/higgsfield) | Jupyter Notebook | 5,607 | +328 | 🔴 critical |\n| 16 | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | JavaScript | 89,128 | +269 | 🟠 high |\n| 17 | [zhouxiaoka/autoclip](https://github.com/zhouxiaoka/autoclip) | Python | 8,465 | +250 | 🟡 medium |\n| 18 | [browser-use/browser-use](https://github.com/browser-use/browser-use) | Python | 115,831 | +248 | 🔴 critical |\n| 19 | [laoma2053/awesome-zhuiju-free](https://github.com/laoma2053/awesome-zhuiju-free) | JavaScript | 9,355 | +235 | ⚪ low |\n| 20 | [virgiliojr94/book-to-skill](https://github.com/virgiliojr94/book-to-skill) | Python | 31,879 | +210 | 🔴 critical |\n\n---\n\n## 🔍 Dora 的觀察與建議\n\n### 趨勢分析\n\n- **🤖 Agent 熱潮持續升溫：** 今日 32 個專案直接與 AI Agent 相關\n- **✨ 新血湧入：** 今日共有 2 個專案為首次進入觀測站雷達\n- **📋 Skill 機制成為共識：** 8 個專案聚焦於 Skills/能力模組化\n\n### 值得深入研究的 TOP 3\n\n1. **[trycua/cua](https://github.com/trycua/cua)** — 透過開源驅動程式、跨作業系統佇列以及培訓、評估和資料生成基準來擴展電腦使用 2.0。\n2. **[BuilderIO/agent-native](https://github.com/BuilderIO/agent-native)** — 用於建立代理應用程式的框架\n3. **[addyosmani/agent-skills](https://github.com/addyosmani/agent-skills)** — AI 編碼代理的生產級工程技能。\n\n---\n\n*報告由 Hermes Agent Dora 自動生成 | 下次執行: 明日同一時間*\n",
-  "total_repos": 110
+  "markdown_report": "# 📊 每日 GitHub 開源雷達與趨勢報告\n**日期：** 2026-09-22 (Tuesday)\n**來源：** GitHub Trending 多語言子榜 (Python, TS, JS, Rust, Go, C++, Jupyter)\n**去重總計：** ✅ 本日監控 105 個不重複專案\n\n---\n\n## 💡 Dora 的精選推薦 (對 Hermes 自我進化最有價值)\n\n### 1. 🔴 [google/ax](https://github.com/google/ax) ✨ NEW\n- **Stars:** 6,769 (今日 +2,324)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Google 的開放代理程式編排運行時\n\n### 2. 🔴 [stablyai/orca](https://github.com/stablyai/orca) 🔥 連續 1 天\n- **Stars:** 75,159 (今日 +985)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。\n\n### 3. 🔴 [affaan-m/ECC](https://github.com/affaan-m/ECC) 🔥 連續 1 天\n- **Stars:** 265,045 (今日 +805)\n- **分類:** CRITICAL | **語言:** JavaScript\n- **簡介:** 代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。\n\n### 4. 🔴 [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) ✨ NEW\n- **Stars:** 7,463 (今日 +734)\n- **分類:** CRITICAL | **語言:** Rust\n- **簡介:** 人工智慧代理的開發者控制平面\n\n### 5. 🔴 [BuilderIO/agent-native](https://github.com/BuilderIO/agent-native) 🔥 連續 2 天\n- **Stars:** 6,280 (今日 +607)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** 用於建立代理應用程式的框架\n\n### 6. 🔴 [agent-substrate/substrate](https://github.com/agent-substrate/substrate) 🔥 連續 2 天\n- **Stars:** 2,689 (今日 +498)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Agent Substrate：核心系統\n\n### 7. 🔴 [anthropics/claude-code](https://github.com/anthropics/claude-code) 🔥 連續 2 天\n- **Stars:** 147,569 (今日 +468)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** Claude Code 是一種代理程式編碼工具，它位於您的終端中，了解您的程式碼庫，並透過執行例行任務、解釋複雜程式碼和處理 git 工作流程來幫助您更快地編碼 - 所有這些都透過自然語言命令進行。\n\n### 8. 🔴 [coder/coder](https://github.com/coder/coder) 🔥 連續 2 天\n- **Stars:** 16,576 (今日 +460)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** 為開發人員及其代理商提供安全的環境\n\n---\n\n## ✨ 今日首發新面孔 (首次上榜，共 26 個)\n\n| # | 新進專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|----------|------|----------|----------|--------|\n| 1 | [google/ax](https://github.com/google/ax) | Go | 6,769 | +2,324 | 🔴 critical |\n| 2 | [hydra-db/hydradb](https://github.com/hydra-db/hydradb) | Rust | 4,043 | +794 | 🟡 medium |\n| 3 | [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) | Rust | 7,463 | +734 | 🔴 critical |\n| 4 | [dream-num/univer](https://github.com/dream-num/univer) | TypeScript | 14,914 | +202 | 🔴 critical |\n| 5 | [superdesigndev/treg](https://github.com/superdesigndev/treg) | Python | 1,973 | +197 | 🔴 critical |\n| 6 | [upscayl/upscayl](https://github.com/upscayl/upscayl) | TypeScript | 49,736 | +197 | ⚪ low |\n| 7 | [xiaolai/the-craft-of-selfteaching](https://github.com/xiaolai/the-craft-of-selfteaching) | Jupyter Notebook | 16,991 | +147 | ⚪ low |\n| 8 | [DuarteSantos8/openGym](https://github.com/DuarteSantos8/openGym) | JavaScript | 1,178 | +111 | ⚪ low |\n| 9 | [flipped-aurora/gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin) | Go | 25,041 | +26 | 🔴 critical |\n| 10 | [openbkn-ai/bkn-foundry](https://github.com/openbkn-ai/bkn-foundry) | Go | 528 | +22 | ⚪ low |\n\n---\n\n## 📈 今日 GitHub Trending 全覽 TOP 20\n\n| # | 專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|------|------|----------|----------|--------|\n| 1 | [google/ax](https://github.com/google/ax) | Go | 6,769 | +2,324 | 🔴 critical |\n| 2 | [stablyai/orca](https://github.com/stablyai/orca) | TypeScript | 75,159 | +985 | 🔴 critical |\n| 3 | [Open-Dev-Society/OpenStock](https://github.com/Open-Dev-Society/OpenStock) | TypeScript | 18,211 | +844 | ⚪ low |\n| 4 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | JavaScript | 265,045 | +805 | 🔴 critical |\n| 5 | [hydra-db/hydradb](https://github.com/hydra-db/hydradb) | Rust | 4,043 | +794 | 🟡 medium |\n| 6 | [vercel-labs/json-render](https://github.com/vercel-labs/json-render) | TypeScript | 18,034 | +763 | ⚪ low |\n| 7 | [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) | Rust | 7,463 | +734 | 🔴 critical |\n| 8 | [BuilderIO/agent-native](https://github.com/BuilderIO/agent-native) | TypeScript | 6,280 | +607 | 🔴 critical |\n| 9 | [agent-substrate/substrate](https://github.com/agent-substrate/substrate) | Go | 2,689 | +498 | 🔴 critical |\n| 10 | [anthropics/claude-code](https://github.com/anthropics/claude-code) | TypeScript | 147,569 | +468 | 🔴 critical |\n| 11 | [clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) | Rust | 146,346 | +466 | 🟡 medium |\n| 12 | [coder/coder](https://github.com/coder/coder) | Go | 16,576 | +460 | 🔴 critical |\n| 13 | [anthropics/financial-services](https://github.com/anthropics/financial-services) | Python | 36,036 | +424 | ⚪ low |\n| 14 | [Crosstalk-Solutions/project-nomad](https://github.com/Crosstalk-Solutions/project-nomad) | TypeScript | 38,104 | +394 | ⚪ low |\n| 15 | [paperless-ngx/paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) | Python | 45,880 | +377 | ⚪ low |\n| 16 | [OpenCut-app/OpenCut](https://github.com/OpenCut-app/OpenCut) | TypeScript | 90,391 | +352 | ⚪ low |\n| 17 | [higgsfield-ai/higgsfield](https://github.com/higgsfield-ai/higgsfield) | Jupyter Notebook | 5,612 | +328 | 🔴 critical |\n| 18 | [zhouxiaoka/autoclip](https://github.com/zhouxiaoka/autoclip) | Python | 8,644 | +250 | 🟡 medium |\n| 19 | [laoma2053/awesome-zhuiju-free](https://github.com/laoma2053/awesome-zhuiju-free) | JavaScript | 9,545 | +235 | ⚪ low |\n| 20 | [FareedKhan-dev/train-llm-from-scratch](https://github.com/FareedKhan-dev/train-llm-from-scratch) | Python | 10,778 | +220 | 🟡 medium |\n\n---\n\n## 🔍 Dora 的觀察與建議\n\n### 趨勢分析\n\n- **🤖 Agent 熱潮持續升溫：** 今日 38 個專案直接與 AI Agent 相關\n- **✨ 新血湧入：** 今日共有 26 個專案為首次進入觀測站雷達\n- **📋 Skill 機制成為共識：** 6 個專案聚焦於 Skills/能力模組化\n\n### 值得深入研究的 TOP 3\n\n1. **[google/ax](https://github.com/google/ax)** — Google 的開放代理程式編排運行時\n2. **[stablyai/orca](https://github.com/stablyai/orca)** — Orca 是與一組平行代理一起工作的 ADE。使用您自己的訂閱運行任何編碼代理。可在桌面、行動和遠端運行時使用。\n3. **[affaan-m/ECC](https://github.com/affaan-m/ECC)** — 代理利用性能優化系統。 Claude Code、Codex、Opencode、Cursor 等的技能、直覺、記憶、安全性和研究優先的發展。\n\n---\n\n*報告由 Hermes Agent Dora 自動生成 | 下次執行: 明日同一時間*\n",
+  "total_repos": 105
 }

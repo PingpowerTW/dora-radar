@@ -1,0 +1,571 @@
+{
+  "date": "2026-09-23",
+  "updated_at": "2026-09-23T20:00:32.244769",
+  "top_picks": [
+    {
+      "name": "google/ax",
+      "url": "https://github.com/google/ax",
+      "desc": "Google's open agentic orchestration runtime",
+      "total_stars": "8,314",
+      "today_stars": "2,305",
+      "forks": "383",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "All",
+      "channels": [
+        "All",
+        "Go"
+      ],
+      "desc_zh": "Google 的開放代理程式編排運行時",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 27.72,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 orchestrat"
+      ],
+      "today_stars_num": 2305,
+      "total_stars_num": 8314,
+      "description_zh": "Google 的開放代理程式編排運行時"
+    },
+    {
+      "name": "Nasiko-Labs/nasiko",
+      "url": "https://github.com/Nasiko-Labs/nasiko",
+      "desc": "Developer Control Plane for your AI Agents",
+      "total_stars": "7,679",
+      "today_stars": "766",
+      "forks": "1,646",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "channel": "Rust",
+      "channels": [
+        "Rust"
+      ],
+      "desc_zh": "人工智慧代理的開發者控制平面",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 9.98,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 ai agent"
+      ],
+      "today_stars_num": 766,
+      "total_stars_num": 7679,
+      "description_zh": "人工智慧代理的開發者控制平面"
+    },
+    {
+      "name": "BuilderIO/agent-native",
+      "url": "https://github.com/BuilderIO/agent-native",
+      "desc": "A framework for building agentic apps",
+      "total_stars": "6,364",
+      "today_stars": "609",
+      "forks": "575",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "All",
+      "channels": [
+        "All",
+        "TypeScript"
+      ],
+      "desc_zh": "用於建立代理應用程式的框架",
+      "is_new": false,
+      "consecutive_days": 3,
+      "growth_rate": 9.57,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent"
+      ],
+      "today_stars_num": 609,
+      "total_stars_num": 6364,
+      "description_zh": "用於建立代理應用程式的框架"
+    },
+    {
+      "name": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "desc": "An agentic skills framework &amp; software development methodology that works.",
+      "total_stars": "290,429",
+      "today_stars": "528",
+      "forks": "25,985",
+      "language": "Shell",
+      "language_color": "#89e051",
+      "channel": "All",
+      "channels": [
+        "All"
+      ],
+      "desc_zh": "有效的代理技能架構和軟體開發方法。",
+      "is_new": false,
+      "consecutive_days": 1,
+      "growth_rate": 0.18,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "📋 skill"
+      ],
+      "today_stars_num": 528,
+      "total_stars_num": 290429,
+      "description_zh": "有效的代理技能架構和軟體開發方法。"
+    },
+    {
+      "name": "akitaonrails/ai-memory",
+      "url": "https://github.com/akitaonrails/ai-memory",
+      "desc": "Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
+      "total_stars": "8,149",
+      "today_stars": "520",
+      "forks": "553",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "channel": "Rust",
+      "channels": [
+        "Rust"
+      ],
+      "desc_zh": "用於代理編碼 CLI 的長期記憶解決方案，並促進不同代理商供應商之間的切換",
+      "is_new": false,
+      "consecutive_days": 3,
+      "growth_rate": 6.38,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "📋 memory",
+        "🛠 cli"
+      ],
+      "today_stars_num": 520,
+      "total_stars_num": 8149,
+      "description_zh": "用於代理編碼 CLI 的長期記憶解決方案，並促進不同代理商供應商之間的切換"
+    },
+    {
+      "name": "can1357/oh-my-pi",
+      "url": "https://github.com/can1357/oh-my-pi",
+      "desc": "⌥ Coding agent with the IDE wired in",
+      "total_stars": "32,918",
+      "today_stars": "405",
+      "forks": "3,483",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "⌥ 連接 IDE 的編碼代理",
+      "is_new": false,
+      "consecutive_days": 1,
+      "growth_rate": 1.23,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 coding agent"
+      ],
+      "today_stars_num": 405,
+      "total_stars_num": 32918,
+      "description_zh": "⌥ 連接 IDE 的編碼代理"
+    },
+    {
+      "name": "browserbase/stagehand",
+      "url": "https://github.com/browserbase/stagehand",
+      "desc": "The SDK to extract data and interact with any site on the web. Get started with Claude Code, Codex, Eve, Mastra, and more.",
+      "total_stars": "25,280",
+      "today_stars": "322",
+      "forks": "1,726",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "用於提取資料並與網路上的任何網站互動的 SDK。開始使用 Claude Code、Codex、Eve、Mastra 等。",
+      "is_new": false,
+      "consecutive_days": 1,
+      "growth_rate": 1.27,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 claude code",
+        "🛠 web"
+      ],
+      "today_stars_num": 322,
+      "total_stars_num": 25280,
+      "description_zh": "用於提取資料並與網路上的任何網站互動的 SDK。開始使用 Claude Code、Codex、Eve、Mastra 等。"
+    },
+    {
+      "name": "dream-num/univer",
+      "url": "https://github.com/dream-num/univer",
+      "desc": "The Office Harness for AI Agents — Spreadsheets, Docs, Slides, Canvas, Relational Tables, and PDF in one runtime.",
+      "total_stars": "16,049",
+      "today_stars": "255",
+      "forks": "1,420",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "All",
+      "channels": [
+        "All",
+        "TypeScript"
+      ],
+      "desc_zh": "AI 代理程式的 Office 工具 — 在一個執行階段中處理電子表格、文件、投影片、畫布、關係表和 PDF。",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 1.59,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 ai agent",
+        "🛠 pdf"
+      ],
+      "today_stars_num": 255,
+      "total_stars_num": 16049,
+      "description_zh": "AI 代理程式的 Office 工具 — 在一個執行階段中處理電子表格、文件、投影片、畫布、關係表和 PDF。"
+    }
+  ],
+  "new_repos": [
+    {
+      "name": "Asymptote-Labs/agent-beacon",
+      "url": "https://github.com/Asymptote-Labs/agent-beacon",
+      "desc": "The cross-harness self-improving memory layer for AI agents.",
+      "total_stars": "1,162",
+      "today_stars": "186",
+      "forks": "88",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "Go",
+      "channels": [
+        "Go"
+      ],
+      "desc_zh": "人工智慧代理的交叉利用自我改進記憶層。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 16.01,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 ai agent",
+        "📋 self-improv",
+        "📋 memory"
+      ],
+      "today_stars_num": 186,
+      "total_stars_num": 1162,
+      "description_zh": "人工智慧代理的交叉利用自我改進記憶層。"
+    },
+    {
+      "name": "flexprice/flexprice",
+      "url": "https://github.com/flexprice/flexprice",
+      "desc": "Usage-based pricing and billing for developers 🔓 Cloud or self-hosted ⚙️ No-code UI 💰 Realtime usage metering 🎟 Credits &amp; top-ups 🔑 Control feature access",
+      "total_stars": "6,356",
+      "today_stars": "157",
+      "forks": "876",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "Go",
+      "channels": [
+        "Go"
+      ],
+      "desc_zh": "為開發人員提供基於使用情況的定價和計費 🔓 雲或自託管 ⚙️ 無代碼 UI 💰 實時使用計量 🎟 積分和充值 🔑 控制功能訪問",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 2.47,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 157,
+      "total_stars_num": 6356,
+      "description_zh": "為開發人員提供基於使用情況的定價和計費 🔓 雲或自託管 ⚙️ 無代碼 UI 💰 實時使用計量 🎟 積分和充值 🔑 控制功能訪問"
+    },
+    {
+      "name": "CarterPerez-dev/Cybersecurity-Projects",
+      "url": "https://github.com/CarterPerez-dev/Cybersecurity-Projects",
+      "desc": "Building 70 Projects ranging from beginner to advanced so anyone can — learn from, build upon, use as a reference, or even copy directly. Gamified Cybersecurity learning 👇",
+      "total_stars": "7,297",
+      "today_stars": "102",
+      "forks": "1,065",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "Go",
+      "channels": [
+        "Go"
+      ],
+      "desc_zh": "建構 70 個從初級到高級的項目，以便任何人都可以學習、建構、用作參考，甚至直接複製。遊戲化網路安全學習👇",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 1.4,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 102,
+      "total_stars_num": 7297,
+      "description_zh": "建構 70 個從初級到高級的項目，以便任何人都可以學習、建構、用作參考，甚至直接複製。遊戲化網路安全學習👇"
+    },
+    {
+      "name": "DmNote-App/DmNote",
+      "url": "https://github.com/DmNote-App/DmNote",
+      "desc": "Make it yours. A customizable key viewer for DJMAX RESPECT V and any game.",
+      "total_stars": "1,655",
+      "today_stars": "100",
+      "forks": "73",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "讓它成為你的。適用於 DJMAX RESPECT V 和任何遊戲的可自訂按鍵檢視器。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 6.04,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 100,
+      "total_stars_num": 1655,
+      "description_zh": "讓它成為你的。適用於 DJMAX RESPECT V 和任何遊戲的可自訂按鍵檢視器。"
+    },
+    {
+      "name": "westpoint-io/mimik",
+      "url": "https://github.com/westpoint-io/mimik",
+      "desc": "🪄 A browser extension that captures your workflow as you click and turns it into a step-by-step guide with annotated screenshots 📸",
+      "total_stars": "1,170",
+      "today_stars": "96",
+      "forks": "155",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "🪄 一個瀏覽器擴展，可在您單擊時捕獲您的工作流程，並將其轉換為帶有註釋的屏幕截圖的分步指南 📸",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 8.21,
+      "relevance": "high",
+      "reasons": [
+        "📋 workflow",
+        "🛠 cli"
+      ],
+      "today_stars_num": 96,
+      "total_stars_num": 1170,
+      "description_zh": "🪄 一個瀏覽器擴展，可在您單擊時捕獲您的工作流程，並將其轉換為帶有註釋的屏幕截圖的分步指南 📸"
+    },
+    {
+      "name": "XiaomiMiMo/MiMo-Code",
+      "url": "https://github.com/XiaomiMiMo/MiMo-Code",
+      "desc": "MiMo Code: Where Models and Agents Co-Evolve",
+      "total_stars": "13,425",
+      "today_stars": "87",
+      "forks": "1,388",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "MiMo 程式碼：模型與智能體共同演化的地方",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.65,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "📋 evolv",
+        "🔧 model"
+      ],
+      "today_stars_num": 87,
+      "total_stars_num": 13425,
+      "description_zh": "MiMo 程式碼：模型與智能體共同演化的地方"
+    },
+    {
+      "name": "acsandmann/rift",
+      "url": "https://github.com/acsandmann/rift",
+      "desc": "a tiling window manager for macos",
+      "total_stars": "2,439",
+      "today_stars": "71",
+      "forks": "97",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "channel": "Rust",
+      "channels": [
+        "Rust"
+      ],
+      "desc_zh": "Mac 系統的平鋪視窗管理器",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 2.91,
+      "relevance": "low",
+      "reasons": [
+        "通用開源專案"
+      ],
+      "today_stars_num": 71,
+      "total_stars_num": 2439,
+      "description_zh": "Mac 系統的平鋪視窗管理器"
+    },
+    {
+      "name": "zzet/gortex",
+      "url": "https://github.com/zzet/gortex",
+      "desc": "High-performance code-intelligence engine for AI agents and IDE, supports 257 languages, multi repositories, based on graph, with access via CLI, MCP Server, and API. AI coding agents teammate - expose only needed information, cutting token usage up to 50x. 100% local. Discord: https://discord.gg/39MFHu3J5d",
+      "total_stars": "1,713",
+      "today_stars": "71",
+      "forks": "161",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "Go",
+      "channels": [
+        "Go"
+      ],
+      "desc_zh": "適用於 AI 代理和 IDE 的高效能程式碼智慧引擎，支援 257 種語言、多儲存庫、基於圖形、可透過 CLI、MCP 伺服器和 API 存取。 AI 編碼代理隊友 - 僅公開所需的信息，將代幣使用量減少高達 50 倍。 100%本地化。不和諧：https://discord.gg/39MFHu3J5d",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 4.14,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 ai agent",
+        "🤖 coding agent",
+        "🤖 mcp",
+        "🛠 cli"
+      ],
+      "today_stars_num": 71,
+      "total_stars_num": 1713,
+      "description_zh": "適用於 AI 代理和 IDE 的高效能程式碼智慧引擎，支援 257 種語言、多儲存庫、基於圖形、可透過 CLI、MCP 伺服器和 API 存取。 AI 編碼代理隊友 - 僅公開所需的信息，將代幣使用量減少高達 50 倍。 100%本地化。不和諧：https://discord.gg/39MFHu3J5d"
+    },
+    {
+      "name": "poloclub/transformer-explainer",
+      "url": "https://github.com/poloclub/transformer-explainer",
+      "desc": "Transformer Explained Visually: Learn How LLM Transformer Models Work with Interactive Visualization",
+      "total_stars": "8,718",
+      "today_stars": "54",
+      "forks": "983",
+      "language": "JavaScript",
+      "language_color": "#f1e05a",
+      "channel": "JavaScript",
+      "channels": [
+        "JavaScript"
+      ],
+      "desc_zh": "Transformer 直觀解釋：了解 LLM Transformer 模型如何與互動式視覺化結合使用",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.62,
+      "relevance": "high",
+      "reasons": [
+        "🔧 llm",
+        "🔧 model",
+        "🔧 transformer"
+      ],
+      "today_stars_num": 54,
+      "total_stars_num": 8718,
+      "description_zh": "Transformer 直觀解釋：了解 LLM Transformer 模型如何與互動式視覺化結合使用"
+    },
+    {
+      "name": "code-yeongyu/oh-my-openagent",
+      "url": "https://github.com/code-yeongyu/oh-my-openagent",
+      "desc": "OmO: Just type \"mass ulw\" keyword with your prompt. Now you are the master of graph engineering.",
+      "total_stars": "69,317",
+      "today_stars": "47",
+      "forks": "5,715",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "TypeScript",
+      "channels": [
+        "TypeScript"
+      ],
+      "desc_zh": "OmO：只需在提示中輸入「mass ulw」關鍵字即可。現在你是圖形工程的大師了。",
+      "is_new": true,
+      "consecutive_days": 1,
+      "growth_rate": 0.07,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "📋 prompt"
+      ],
+      "today_stars_num": 47,
+      "total_stars_num": 69317,
+      "description_zh": "OmO：只需在提示中輸入「mass ulw」關鍵字即可。現在你是圖形工程的大師了。"
+    }
+  ],
+  "trends": {
+    "agent_count": 39,
+    "skill_count": 6,
+    "new_count": 27
+  },
+  "top3": [
+    {
+      "name": "google/ax",
+      "url": "https://github.com/google/ax",
+      "desc": "Google's open agentic orchestration runtime",
+      "total_stars": "8,314",
+      "today_stars": "2,305",
+      "forks": "383",
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "channel": "All",
+      "channels": [
+        "All",
+        "Go"
+      ],
+      "desc_zh": "Google 的開放代理程式編排運行時",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 27.72,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 orchestrat"
+      ],
+      "today_stars_num": 2305,
+      "total_stars_num": 8314,
+      "description_zh": "Google 的開放代理程式編排運行時"
+    },
+    {
+      "name": "Nasiko-Labs/nasiko",
+      "url": "https://github.com/Nasiko-Labs/nasiko",
+      "desc": "Developer Control Plane for your AI Agents",
+      "total_stars": "7,679",
+      "today_stars": "766",
+      "forks": "1,646",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "channel": "Rust",
+      "channels": [
+        "Rust"
+      ],
+      "desc_zh": "人工智慧代理的開發者控制平面",
+      "is_new": false,
+      "consecutive_days": 2,
+      "growth_rate": 9.98,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent",
+        "🤖 ai agent"
+      ],
+      "today_stars_num": 766,
+      "total_stars_num": 7679,
+      "description_zh": "人工智慧代理的開發者控制平面"
+    },
+    {
+      "name": "BuilderIO/agent-native",
+      "url": "https://github.com/BuilderIO/agent-native",
+      "desc": "A framework for building agentic apps",
+      "total_stars": "6,364",
+      "today_stars": "609",
+      "forks": "575",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "channel": "All",
+      "channels": [
+        "All",
+        "TypeScript"
+      ],
+      "desc_zh": "用於建立代理應用程式的框架",
+      "is_new": false,
+      "consecutive_days": 3,
+      "growth_rate": 9.57,
+      "relevance": "critical",
+      "reasons": [
+        "🤖 agent"
+      ],
+      "today_stars_num": 609,
+      "total_stars_num": 6364,
+      "description_zh": "用於建立代理應用程式的框架"
+    }
+  ],
+  "markdown_report": "# 📊 每日 GitHub 開源雷達與趨勢報告\n**日期：** 2026-09-23 (Wednesday)\n**來源：** GitHub Trending 多語言子榜 (Python, TS, JS, Rust, Go, C++, Jupyter)\n**去重總計：** ✅ 本日監控 125 個不重複專案\n\n---\n\n## 💡 Dora 的精選推薦 (對 Hermes 自我進化最有價值)\n\n### 1. 🔴 [google/ax](https://github.com/google/ax) 🔥 連續 2 天\n- **Stars:** 8,314 (今日 +2,305)\n- **分類:** CRITICAL | **語言:** Go\n- **簡介:** Google 的開放代理程式編排運行時\n\n### 2. 🔴 [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) 🔥 連續 2 天\n- **Stars:** 7,679 (今日 +766)\n- **分類:** CRITICAL | **語言:** Rust\n- **簡介:** 人工智慧代理的開發者控制平面\n\n### 3. 🔴 [BuilderIO/agent-native](https://github.com/BuilderIO/agent-native) 🔥 連續 3 天\n- **Stars:** 6,364 (今日 +609)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** 用於建立代理應用程式的框架\n\n### 4. 🔴 [obra/superpowers](https://github.com/obra/superpowers) 🔥 連續 1 天\n- **Stars:** 290,429 (今日 +528)\n- **分類:** CRITICAL | **語言:** Shell\n- **簡介:** 有效的代理技能架構和軟體開發方法。\n\n### 5. 🔴 [akitaonrails/ai-memory](https://github.com/akitaonrails/ai-memory) 🔥 連續 3 天\n- **Stars:** 8,149 (今日 +520)\n- **分類:** CRITICAL | **語言:** Rust\n- **簡介:** 用於代理編碼 CLI 的長期記憶解決方案，並促進不同代理商供應商之間的切換\n\n### 6. 🔴 [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) 🔥 連續 1 天\n- **Stars:** 32,918 (今日 +405)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** ⌥ 連接 IDE 的編碼代理\n\n### 7. 🔴 [browserbase/stagehand](https://github.com/browserbase/stagehand) 🔥 連續 1 天\n- **Stars:** 25,280 (今日 +322)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** 用於提取資料並與網路上的任何網站互動的 SDK。開始使用 Claude Code、Codex、Eve、Mastra 等。\n\n### 8. 🔴 [dream-num/univer](https://github.com/dream-num/univer) 🔥 連續 2 天\n- **Stars:** 16,049 (今日 +255)\n- **分類:** CRITICAL | **語言:** TypeScript\n- **簡介:** AI 代理程式的 Office 工具 — 在一個執行階段中處理電子表格、文件、投影片、畫布、關係表和 PDF。\n\n---\n\n## ✨ 今日首發新面孔 (首次上榜，共 27 個)\n\n| # | 新進專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|----------|------|----------|----------|--------|\n| 1 | [Asymptote-Labs/agent-beacon](https://github.com/Asymptote-Labs/agent-beacon) | Go | 1,162 | +186 | 🔴 critical |\n| 2 | [flexprice/flexprice](https://github.com/flexprice/flexprice) | Go | 6,356 | +157 | ⚪ low |\n| 3 | [CarterPerez-dev/Cybersecurity-Projects](https://github.com/CarterPerez-dev/Cybersecurity-Projects) | Go | 7,297 | +102 | ⚪ low |\n| 4 | [DmNote-App/DmNote](https://github.com/DmNote-App/DmNote) | TypeScript | 1,655 | +100 | ⚪ low |\n| 5 | [westpoint-io/mimik](https://github.com/westpoint-io/mimik) | TypeScript | 1,170 | +96 | 🟠 high |\n| 6 | [XiaomiMiMo/MiMo-Code](https://github.com/XiaomiMiMo/MiMo-Code) | TypeScript | 13,425 | +87 | 🔴 critical |\n| 7 | [acsandmann/rift](https://github.com/acsandmann/rift) | Rust | 2,439 | +71 | ⚪ low |\n| 8 | [zzet/gortex](https://github.com/zzet/gortex) | Go | 1,713 | +71 | 🔴 critical |\n| 9 | [poloclub/transformer-explainer](https://github.com/poloclub/transformer-explainer) | JavaScript | 8,718 | +54 | 🟠 high |\n| 10 | [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | TypeScript | 69,317 | +47 | 🔴 critical |\n\n---\n\n## 📈 今日 GitHub Trending 全覽 TOP 20\n\n| # | 專案 | 語言 | ⭐ Total | 今日新增 | 相關性 |\n|---|------|------|----------|----------|--------|\n| 1 | [google/ax](https://github.com/google/ax) | Go | 8,314 | +2,305 | 🔴 critical |\n| 2 | [Open-Dev-Society/OpenStock](https://github.com/Open-Dev-Society/OpenStock) | TypeScript | 18,547 | +832 | ⚪ low |\n| 3 | [Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko) | Rust | 7,679 | +766 | 🔴 critical |\n| 4 | [hydra-db/hydradb](https://github.com/hydra-db/hydradb) | Rust | 4,256 | +761 | 🟡 medium |\n| 5 | [BuilderIO/agent-native](https://github.com/BuilderIO/agent-native) | TypeScript | 6,364 | +609 | 🔴 critical |\n| 6 | [zhouxiaoka/autoclip](https://github.com/zhouxiaoka/autoclip) | Python | 8,785 | +594 | 🟡 medium |\n| 7 | [obra/superpowers](https://github.com/obra/superpowers) | Shell | 290,429 | +528 | 🔴 critical |\n| 8 | [akitaonrails/ai-memory](https://github.com/akitaonrails/ai-memory) | Rust | 8,149 | +520 | 🔴 critical |\n| 9 | [laoma2053/awesome-zhuiju-free](https://github.com/laoma2053/awesome-zhuiju-free) | JavaScript | 9,995 | +445 | ⚪ low |\n| 10 | [mvt-project/mvt](https://github.com/mvt-project/mvt) | Python | 14,330 | +441 | ⚪ low |\n| 11 | [anthropics/financial-services](https://github.com/anthropics/financial-services) | Python | 36,692 | +438 | ⚪ low |\n| 12 | [can1357/oh-my-pi](https://github.com/can1357/oh-my-pi) | TypeScript | 32,918 | +405 | 🔴 critical |\n| 13 | [browserbase/stagehand](https://github.com/browserbase/stagehand) | TypeScript | 25,280 | +322 | 🔴 critical |\n| 14 | [clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) | Rust | 146,729 | +300 | 🟡 medium |\n| 15 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | JavaScript | 70,065 | +287 | ⚪ low |\n| 16 | [dream-num/univer](https://github.com/dream-num/univer) | TypeScript | 16,049 | +255 | 🔴 critical |\n| 17 | [cloudflare/quiche](https://github.com/cloudflare/quiche) | Rust | 12,520 | +250 | ⚪ low |\n| 18 | [agent-substrate/substrate](https://github.com/agent-substrate/substrate) | Go | 3,244 | +245 | 🔴 critical |\n| 19 | [superdesigndev/treg](https://github.com/superdesigndev/treg) | Python | 2,478 | +230 | 🔴 critical |\n| 20 | [yynxxxxx/Codex-X](https://github.com/yynxxxxx/Codex-X) | Rust | 3,897 | +220 | 🔴 critical |\n\n---\n\n## 🔍 Dora 的觀察與建議\n\n### 趨勢分析\n\n- **🤖 Agent 熱潮持續升溫：** 今日 39 個專案直接與 AI Agent 相關\n- **✨ 新血湧入：** 今日共有 27 個專案為首次進入觀測站雷達\n- **📋 Skill 機制成為共識：** 6 個專案聚焦於 Skills/能力模組化\n\n### 值得深入研究的 TOP 3\n\n1. **[google/ax](https://github.com/google/ax)** — Google 的開放代理程式編排運行時\n2. **[Nasiko-Labs/nasiko](https://github.com/Nasiko-Labs/nasiko)** — 人工智慧代理的開發者控制平面\n3. **[BuilderIO/agent-native](https://github.com/BuilderIO/agent-native)** — 用於建立代理應用程式的框架\n\n---\n\n*報告由 Hermes Agent Dora 自動生成 | 下次執行: 明日同一時間*\n",
+  "total_repos": 125
+}
